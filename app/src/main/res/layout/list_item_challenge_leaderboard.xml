@@ -1,0 +1,47 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="44dp"
+    android:paddingTop="7dp"
+    android:paddingBottom="7dp">
+
+    <CheckBox
+        android:id="@+id/opponent_checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"/>
+
+    <ImageView
+        android:id="@+id/leaderboard_avatar"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_toRightOf="@+id/opponent_checkbox"
+        android:src="@drawable/avatar_manager_128"/>
+
+    <TextView
+        android:id="@+id/leaderboard_rank"
+        android:textSize="20sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/leaderboard_avatar"
+        android:layout_marginLeft="7dp"
+        android:text="100"/>
+
+    <TextView
+        android:id="@+id/leaderboard_username"
+        android:textSize="20sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/leaderboard_avatar"
+        android:layout_marginLeft="45dp"
+        android:text="Username"/>
+
+    <TextView
+        android:id="@+id/leaderboard_experience"
+        android:textSize="20sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:text="9000"/>
+
+</RelativeLayout>

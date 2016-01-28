@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">StApp3</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_profile_view">Profile</string>
+    <string name="title_activity_leaderboard_view">Leaderboard</string>
+    <string name="title_activity_connection_view">Sensor Connection</string>
+    <string name="title_activity_quest_view">Quests</string>
+    <string name="title_activity_graph">Graphs</string>
+    <string name="title_activity_internet__connection">Internet Connection</string>
+    <string name="title_activity_quest_description">Solo Quest</string>
+    <string name="title_activity_stranger_view">Stranger</string>
+    <string name="title_activity_challenge_leaderboard">Opponents</string>
+    <string name="title_activity_challenge_stranger">ChallengeStranger</string>
+    <string name="title_activity_challenge_description">ChallengeDescription</string>
+    <string name="title_activity_challenge_view">Challenges</string>
+    <string name="title_activity_settings_view">Settings</string>
+    <string name="title_activity_sensor_selection">Sensors</string>
+    <string name="title_activity_account_settings">Account settings</string>
+    <string name="title_activity_open_challenge">Challenge</string>
+    <string name="title_activity_profile_view_settings">Profile activity settings</string>
+
+    <string name="graph_daily_error">There is not yet any data available for today,\nplease connect a sensor and try again</string>
+    <string name="graph_2week_error">There is note yet any data available for the last two weeks,\nplease try again tomorrow</string>
+    <string name="graph_good_time">Good behavior time</string>
+    <string name="graph_bad_time">Bad behavior time</string>
+    <string name="graph_score">Achieved score</string>
+    <string name="graph_average_score">Average score</string>
+    <string name="graph_average_connection_time">Average duration</string>
+    <string name="drawer_open">open</string>
+    <string name="drawer_close">close</string>
+    <string name="challenge_opponent"><u>Opponents</u> </string>
+
+    <string name="profile_status_ready_to_accept">Ready to Accept</string>
+    <string name="profile_status_ready_to_play">Ready to play</string>
+    <string name="profile_status_started">Challenge started</string>
+
+    <string name="profile_day_behaviour">dailyScore : %1$d%%</string>
+
+    <string name="profile_settings_graph">graph button                   </string>
+    <string name="profile_settings_open_challenges">open challenges button                   </string>
+
+    <string-array name="sideMenu">
+        <item>Profile</item>
+        <item>div</item>
+        <item>Leaderboard</item>
+        <item>Graphs</item>
+        <item>Solo Quests</item>
+        <item>Challenges</item>
+        <item>div</item>
+        <item>Settings</item>
+    </string-array>
+    <string-array name="avatar_names">
+        <item>admin</item>
+        <item>african_boss</item>
+        <item>angel</item>
+        <item>arab_boss</item>
+        <item>army_officer</item>
+        <item>asian_boss</item>
+        <item>asian_female_boss</item>
+        <item>captain</item>
+        <item>caucasian_boss</item>
+        <item>caucasian_female_boss</item>
+        <item>chief</item>
+        <item>devil</item>
+        <item>engineer</item>
+        <item>general</item>
+        <item>global_manager</item>
+        <item>head_physician</item>
+        <item>judge</item>
+        <item>king</item>
+        <item>knight</item>
+        <item>manager</item>
+        <item>mexican_boss</item>
+        <item>official</item>
+        <item>old_boss</item>
+        <item>police_officer</item>
+        <item>policeman</item>
+        <item>professor</item>
+        <item>queen</item>
+        <item>security</item>
+        <item>security_guard</item>
+        <item>sheikh</item>
+        <item>superman</item>
+        <item>supervisor</item>
+        <item>teacher</item>
+        <item>themis</item>
+        <item>uncle_sam</item>
+        <item>wizard</item>
+    </string-array>
+</resources>

@@ -1,0 +1,104 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <include layout="@layout/toolbar"/>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/activity_margin"
+        android:animateLayoutChanges="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp">
+
+            <ListView
+                android:id="@+id/open_challenge_list_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:dividerHeight="1px"
+                android:divider="@color/divider"/>
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/divider"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"/>
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.65"
+            android:scrollbars="vertical">
+            <TextView
+                android:id="@+id/open_challenge_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="description of challenge"
+                android:textSize="15sp"/>
+        </ScrollView>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <com.gc.materialdesign.views.ProgressBarDeterminate
+                android:id="@+id/open_challenge_progress"
+                android:layout_width="fill_parent"
+                android:layout_height="6dp"
+                android:background="@color/primaryColor"
+                android:gravity="center_vertical"
+                android:layout_marginTop="10dp"/>
+            <TextView
+                android:id="@+id/open_challenge_result"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/open_challenge_progress"
+                android:layout_alignParentBottom="true"
+                android:gravity="center_vertical"
+                android:textSize="15sp"/>
+        </RelativeLayout>
+        <LinearLayout
+            android:id="@+id/open_challenge_buttons"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            android:gravity="bottom">
+
+            <com.gc.materialdesign.views.ButtonRectangle
+                android:id="@+id/open_challenge_negative_btn"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="@dimen/raised_button_height"
+                android:layout_gravity="center_vertical"
+                android:background="@color/primaryColor"
+                android:text="NegativeButton"
+                android:onClick="onNegativeButton"/>
+
+            <com.gc.materialdesign.views.ButtonRectangle
+                android:id="@+id/open_challenge_positive_btn"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="@dimen/raised_button_height"
+                android:layout_gravity="center_vertical"
+                android:background="@color/primaryColor"
+                android:text="PositiveButton"
+                android:onClick="onPositiveButton"/>
+        </LinearLayout>
+
+        <com.gc.materialdesign.views.ButtonRectangle
+            android:id="@+id/open_challenge_stop"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/raised_button_height"
+            android:layout_gravity="center_vertical"
+            android:background="@color/primaryColor"
+            android:text="Stop Challenge"
+            android:visibility="invisible"
+            android:onClick="onStopButton"/>
+    </LinearLayout>
+    <include layout="@layout/drawer"/>
+</LinearLayout>

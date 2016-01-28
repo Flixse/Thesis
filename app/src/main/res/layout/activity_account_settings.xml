@@ -1,0 +1,116 @@
+<LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/toolbar"/>
+
+    <LinearLayout
+        android:id="@+id/profile_edit"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:animateLayoutChanges="true">
+
+        <ImageView
+            android:id="@+id/edit_avatar"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:src="@drawable/avatar_manager_128"/>
+
+        <GridView
+            android:id="@+id/edit_avatar_grid"
+            android:layout_marginTop="@dimen/text_separation"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:columnWidth="100dp"
+            android:gravity="center"
+            android:numColumns="4"
+            android:verticalSpacing="5dp"
+            android:drawSelectorOnTop="true"
+            android:stretchMode="columnWidth"
+            android:clickable="true"/>
+
+        <EditText
+            android:id="@+id/edit_username"
+            android:hint="Username"
+            android:textSize="@dimen/textSize"
+            android:singleLine="true"
+            android:imeOptions="actionDone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <EditText
+            android:id="@+id/edit_firstname"
+            android:hint="First Name"
+            android:textSize="@dimen/textSize"
+            android:singleLine="true"
+            android:imeOptions="actionDone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/text_separation"
+            android:inputType="textPersonName"/>
+
+        <EditText
+            android:id="@+id/edit_lastname"
+            android:hint="Last Name"
+            android:textSize="@dimen/textSize"
+            android:singleLine="true"
+            android:imeOptions="actionDone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/text_separation"
+            android:inputType="textPersonName"/>
+
+        <EditText
+            android:id="@+id/edit_email"
+            android:hint="Email"
+            android:textSize="@dimen/textSize"
+            android:singleLine="true"
+            android:imeOptions="actionDone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/text_separation"
+            android:inputType="textEmailAddress"/>
+
+        <EditText
+            android:id="@+id/edit_password"
+            android:hint="New Password"
+            android:textSize="@dimen/textSize"
+            android:singleLine="true"
+            android:imeOptions="actionDone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/text_separation"
+            android:inputType="textPassword"/>
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.gc.materialdesign.views.ButtonRectangle
+            android:layout_width="0dip"
+            android:layout_height="@dimen/raised_button_height"
+            android:layout_weight="1"
+            android:text="Cancel"
+            android:onClick="onCancel"
+            android:background="@color/primaryColor"/>
+
+        <com.gc.materialdesign.views.ButtonRectangle
+            android:layout_width="0dip"
+            android:layout_height="@dimen/raised_button_height"
+            android:layout_weight="1"
+            android:text="Confirm"
+            android:onClick="onConfirm"
+            android:background="@color/primaryColor"/>
+    </LinearLayout>
+</LinearLayout>

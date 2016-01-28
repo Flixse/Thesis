@@ -1,0 +1,56 @@
+<RelativeLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/open_challenge_avatar"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/avatar_manager_128"/>
+
+    <ImageView
+        android:id="@+id/open_challenge_rank_icon"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/icon_leaderboard"/>
+
+    <TextView
+        android:id="@+id/open_challenge_rank"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/open_challenge_rank_icon"
+        android:layout_alignRight="@id/open_challenge_rank_icon"
+        android:layout_alignTop="@id/open_challenge_rank_icon"
+        android:layout_alignBottom="@id/open_challenge_rank_icon"
+        android:textSize="10sp"
+        android:textColor="@color/background"
+        android:layout_marginTop="12dp"
+        android:gravity="center"
+        android:text="1"/>
+
+    <ImageView
+        android:id="@+id/open_challenge_opponent_status_icon"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/icon_sit_red"
+        android:layout_toLeftOf="@id/open_challenge_rank_icon"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/open_challenge_username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:layout_toRightOf="@+id/open_challenge_avatar"
+        android:layout_marginLeft="@dimen/text_separation"
+        android:layout_toLeftOf="@id/open_challenge_opponent_status_icon"
+        android:layout_marginRight="@dimen/text_separation"
+        android:layout_alignTop="@id/open_challenge_avatar"
+        android:layout_alignBottom="@id/open_challenge_avatar"
+        android:gravity="center"
+        android:text="tomsalens" />
+</RelativeLayout>

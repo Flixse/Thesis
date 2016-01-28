@@ -1,0 +1,70 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="3dp"
+    android:paddingBottom="3dp">
+
+    <ImageView
+        android:id="@+id/solo_list_difficulty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:src="@drawable/circle_green"/>
+
+    <TextView
+        android:id="@+id/solo_list_name"
+        android:textSize="20sp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/solo_list_difficulty"
+        android:layout_marginLeft="@dimen/activity_margin"
+        android:text="Quest name, this is long" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="20dp"
+        android:layout_below="@id/solo_list_name"
+        android:layout_marginTop="3dp"
+        android:layout_toRightOf="@id/solo_list_difficulty"
+        android:layout_marginLeft="@dimen/activity_margin">
+
+        <include
+            android:id="@+id/solo_list_xp_icon"
+            layout="@layout/icon_xp"/>
+
+        <TextView
+            android:id="@+id/solo_list_xp"
+            android:textSize="16sp"
+            android:layout_weight="0.2"
+            android:layout_width = "0dip"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="50" />
+        <include
+            android:id="@+id/solo_list_xp_needed_icon"
+            layout="@layout/icon_xp"/>
+        <TextView
+            android:id="@+id/solo_list_xp_needed"
+            android:textSize="16sp"
+            android:layout_weight="0.5"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="50" />
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/divider"
+    />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        />
+</RelativeLayout>

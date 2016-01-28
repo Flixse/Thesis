@@ -1,0 +1,24 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <include layout="@layout/toolbar"/>
+        <ListView
+            android:id="@+id/leaderboard_list"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:scrollbarStyle="outsideOverlay"
+            android:scrollbarThumbVertical="@drawable/custom_scrollbar"
+            android:divider="@color/divider"
+            android:dividerHeight="1dp"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"/>
+        <com.gc.materialdesign.views.ButtonRectangle
+            android:id="@+id/challenge_leaderboard_confirm"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/raised_button_height"
+            android:text="Confirm"
+            android:onClick="onConfirm"
+            android:background="@color/primaryColor"/>
+</LinearLayout>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="avatars">
+        <item>@drawable/avatar_admin_128</item>
+        <item>@drawable/avatar_african_boss_128</item>
+        <item>@drawable/avatar_angel_128</item>
+        <item>@drawable/avatar_arab_boss_128</item>
+        <item>@drawable/avatar_army_officer_128</item>
+        <item>@drawable/avatar_asian_boss_128</item>
+        <item>@drawable/avatar_asian_female_boss_128</item>
+        <item>@drawable/avatar_captain_128</item>
+        <item>@drawable/avatar_caucasian_boss_128</item>
+        <item>@drawable/avatar_caucasian_female_boss_128</item>
+        <item>@drawable/avatar_chief_128</item>
+        <item>@drawable/avatar_devil_128</item>
+        <item>@drawable/avatar_engineer_128</item>
+        <item>@drawable/avatar_general_128</item>
+        <item>@drawable/avatar_global_manager_128</item>
+        <item>@drawable/avatar_head_physician_128</item>
+        <item>@drawable/avatar_judge_128</item>
+        <item>@drawable/avatar_king_128</item>
+        <item>@drawable/avatar_knight_128</item>
+        <item>@drawable/avatar_manager_128</item>
+        <item>@drawable/avatar_mexican_boss_128</item>
+        <item>@drawable/avatar_official_128</item>
+        <item>@drawable/avatar_old_boss_128</item>
+        <item>@drawable/avatar_police_officer_128</item>
+        <item>@drawable/avatar_policeman_128</item>
+        <item>@drawable/avatar_professor_128</item>
+        <item>@drawable/avatar_queen_128</item>
+        <item>@drawable/avatar_security_128</item>
+        <item>@drawable/avatar_security_guard_128</item>
+        <item>@drawable/avatar_sheikh_128</item>
+        <item>@drawable/avatar_superman_128</item>
+        <item>@drawable/avatar_supervisor_128</item>
+        <item>@drawable/avatar_teacher_128</item>
+        <item>@drawable/avatar_themis_128</item>
+        <item>@drawable/avatar_uncle_sam_128</item>
+        <item>@drawable/avatar_wizard_128</item>
+    </array>
+</resources>

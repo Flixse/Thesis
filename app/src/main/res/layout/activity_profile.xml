@@ -1,0 +1,239 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <include layout="@layout/toolbar"/>
+    <android.support.v4.widget.DrawerLayout
+        android:id="@+id/drawer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/activity_margin"
+            android:animateLayoutChanges="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/profile_avatar"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
+                    android:src="@drawable/avatar_manager_128"/>
+
+                <TextView
+                    android:id="@+id/profile_username"
+                    android:layout_width="wrap_content"
+                    android:layout_height="75dp"
+                    android:textSize="25sp"
+                    android:layout_marginLeft="@dimen/text_separation"
+                    android:layout_marginRight="@dimen/text_separation"
+                    android:gravity="center"
+                    android:text="username"/>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
+                android:background="@color/divider"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:baselineAligned="false">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:animateLayoutChanges="true"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/profile_rank_icon"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_width="75dp"
+                        android:layout_height="75dp"
+                        android:src="@drawable/icon_leaderboard"/>
+
+                    <TextView
+                        android:id="@+id/profile_rank"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@id/profile_rank_icon"
+                        android:layout_alignRight="@id/profile_rank_icon"
+                        android:layout_alignTop="@id/profile_rank_icon"
+                        android:layout_alignBottom="@id/profile_rank_icon"
+                        android:textSize="15sp"
+                        android:textColor="@color/background"
+                        android:layout_marginTop="18dp"
+                        android:gravity="center"
+                        android:text="rank"/>
+
+                    <include
+                        android:id="@+id/profile_xp_icon"
+                        layout="@layout/icon_xp"
+                        android:layout_height="20dp"
+                        android:layout_width="20dp"
+                        android:layout_toRightOf="@id/profile_rank_icon"
+                        android:layout_alignTop="@id/profile_rank_icon"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="@dimen/text_separation"/>
+
+                    <TextView
+                        android:id="@+id/profile_xp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/profile_xp_icon"
+                        android:layout_marginLeft="@dimen/text_separation"
+                        android:layout_alignTop="@id/profile_xp_icon"
+                        android:layout_alignBottom="@id/profile_xp_icon"
+                        android:gravity="center_vertical"
+                        android:text="Experience"/>
+
+                    <include
+                        android:id="@+id/profile_xp_today_icon"
+                        layout="@layout/icon_xp_up"
+                        android:layout_height="20dp"
+                        android:layout_width="20dp"
+                        android:layout_toRightOf="@id/profile_rank_icon"
+                        android:layout_alignBottom="@id/profile_rank_icon"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginLeft="@dimen/text_separation"/>
+
+                    <TextView
+                        android:id="@+id/profile_xp_today"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/profile_xp_today_icon"
+                        android:layout_marginLeft="@dimen/text_separation"
+                        android:layout_alignTop="@id/profile_xp_today_icon"
+                        android:layout_alignBottom="@id/profile_xp_today_icon"
+                        android:gravity="center_vertical"
+                        android:text="Experience"/>
+                </RelativeLayout>
+
+                <View
+                    android:id="@+id/profile_graph_behaviour_divider"
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/divider"/>
+
+                <View
+                    android:layout_width="5dp"
+                    android:layout_height="match_parent"/>
+                <LinearLayout
+                    android:id="@+id/profile_graph_behaviour_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_weight="1">
+                    <TextView
+                        android:id="@+id/profile_graph_behaviour"
+                        android:layout_width="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:layout_height="wrap_content"/>
+
+                    <com.gc.materialdesign.views.ButtonRectangle
+                        android:id="@+id/profile_grap_to_graph_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/raised_button_height"
+                        android:onClick="onGoToGraphs"
+                        android:text="To graphs"
+                        android:background="@color/primaryColor"/>
+                </LinearLayout>
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
+                android:background="@color/divider"/>
+
+            <LinearLayout
+                android:id="@+id/profile_status"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="invisible">
+
+                <ImageView
+                    android:id="@+id/profile_status_icon"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/icon_sit_red"/>
+
+                <com.gc.materialdesign.views.ProgressBarCircularIndeterminate
+                    android:id="@+id/profile_progress"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:background="@color/primaryColor" />
+
+                <com.gc.materialdesign.views.ButtonRectangle
+                    android:id="@+id/profile_pause_button"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="@dimen/raised_button_height"
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/primaryColor"
+                    android:text="Pause/Resume"
+                    android:onClick="onPauseResume"/>
+
+                <com.gc.materialdesign.views.ButtonRectangle
+                    android:id="@+id/profile_start_stop_button"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="@dimen/raised_button_height"
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/primaryColor"
+                    android:text="Start/Stop"
+                    android:onClick="onStartStop"/>
+            </LinearLayout>
+
+            <View
+                android:id="@+id/profile_to_open_challenges_divider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
+                android:background="@color/divider"/>
+
+            <LinearLayout
+                android:id="@+id/profile_open_challenges"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:visibility="invisible">
+
+                <TextView
+                    android:id="@+id/profile_open_challenges_amount"
+                    android:layout_width="0dp"
+                    android:height="@dimen/textSize"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:layout_height="match_parent" />
+
+                <com.gc.materialdesign.views.ButtonRectangle
+                    android:id="@+id/profile_go_to_open_challenges"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="@dimen/raised_button_height"
+                    android:onClick="onGoToOpenChallenges"
+                    android:gravity="center_vertical"
+                    android:background="@color/primaryColor"
+                    android:text="open challenges"/>
+
+
+                </LinearLayout>
+
+
+        </LinearLayout>
+        <include layout="@layout/drawer"/>
+    </android.support.v4.widget.DrawerLayout>
+</LinearLayout>
