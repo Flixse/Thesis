@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">StApp3</string>
+    <string name="action_settings">Instellingen</string>
+    <string name="title_activity_profile_view">Profiel</string>
+    <string name="title_activity_leaderboard_view">Rangschikking</string>
+    <string name="title_activity_connection_view">Sensor Connection</string>
+    <string name="title_activity_quest_view">Solo opgave</string>
+    <string name="title_activity_graph">Grafieken</string>
+    <string name="title_activity_internet__connection">Internet connectie</string>
+    <string name="title_activity_quest_description">Solo opgave</string>
+    <string name="title_activity_stranger_view">Vreemde</string>
+    <string name="title_activity_challenge_leaderboard">Tegenstanders</string>
+    <string name="title_activity_challenge_stranger">Uitdaging tegenstander</string>
+    <string name="title_activity_challenge_description">Uitdaging uitleg</string>
+    <string name="title_activity_challenge_view">Uitdagingen</string>
+    <string name="title_activity_settings_view">Instellingen</string>
+    <string name="title_activity_sensor_selection">Sensoren</string>
+    <string name="title_activity_account_settings">Account instellingen</string>
+    <string name="title_activity_open_challenge">Uitdaging</string>
+    <string name="title_activity_profile_view_settings">Profiel instellingen</string>
+
+    <string name="graph_daily_error">Er is nog geen data aanwezig voor vandaag,\n connecteer een sensor en probeer opnieuw</string>
+    <string name="graph_2week_error">Er is nog geen data aanwezig voor de laatste 2 weken,\nprobeer morgen opnieuw</string>
+    <string name="graph_good_time">Tijd van goed gedrag</string>
+    <string name="graph_bad_time">Tijd van slecht gedrag</string>
+    <string name="graph_score">Verkregen score</string>
+    <string name="graph_average_score">Gemiddelde score</string>
+    <string name="graph_average_connection_time">Gemiddelde duur</string>
+    <string name="graph_today">VANDAAG</string>
+    <string name="graph_yesterday_or_older">GISTEREN OF OUDER</string>
+    <string name="graph_past_two_weeks">VORIGE 2 WEKEN</string>
+
+    <string name="quest_stand_to_win_title">Staan en win</string>
+    <string name="quest_stand_to_win_description">In de volgende %2$d minuten krijg je de opgave om %1$d minuten te staan. </string>
+    <string name="quest_random_stand_up_title">Willekeurig staan</string>
+    <string name="quest_random_stand_up_description">Gedurende een periode van %1$d minuten krijg je de opgave om recht te gaan staan voor 1 minuut na een willekeurig tijdsinterval. Start met staan wanneer je je apparaat voelt vibreren!</string>
+    <string name="quest_random_switch_title">Willekeurig wisselen</string>
+    <string name="quest_random_switch_description">Gedurende een periode van %1$d minuten krijg je de opgave om van positie te veranderen na een willekeurig tijdsinterval. Verander van positie wanneer je je apparaat voelt vibreren!</string>
+    <string name="quest_endurance_title">Uithouding</string>
+    <string name="quest_endurance_description">Tussen een periode van %1$d minuten mag je niet meer dan %2$s in één zelfde positie staan. </string>
+    <string name="quest_earn_your_sitting_time">Verdien zit tijd</string>
+    <string name="quest_earn_your_sitting_time_description">Probeer de vragen te beantwoorden. Bij elk juist antwoord verdien je 30 seconden zit tijd. Dit omdat je in het begin van de quest de totale tijd zou moeten recht staan. Dit kan een hele opgave zijn. Veel geluk!</string>
+    <string name="quest_quiz_confirm_button_text">Bevestig antwoord</string>
+    <string name="quest_complete_lost">Opgave gedaan, je hebt verloren!</string>
+    <string name="quest_complete_won">Opgave gedaan, je hebt gewonnen!</string>
+
+
+    <string name="challenge_won">Je hebt goed gewonnen! Doe zo verder!</string>
+    <string name="challenge_lost">Je hebt verloren, maar blijf proberen!</string>
+    <string name="challenge_tie">Jullie staan gelijk, volgende keer beter!</string>
+    <string name="challenge_one_on_one_title">1-tegen-1</string>
+    <string name="challenge_one_on_one_description">Sta langer recht dan je tegenstander gedurende %1$d minuten</string>
+    <string name="challenge_group_competition_title">Groep competitie</string>
+    <string name="challenge_grou_competition_description">Sta langer recht dan je tegenstanders gedurende %1$d minuten</string>
+    <string name="challenge_follow_the_track_title">Volg het spoor</string>
+    <string name="challenge_follow_the_track_description">Iedereen zal dezelfde volgorde krijgen waarin hij of zij zich moet aan houden om van positie te veranderen. De telefoon zal trillen wanneer je je positie moet veranderen. De persoon die in staat is om het langste door te gaan zonder een foute positie verandering wint.</string>
+
+
+    <string name="drawer_open">Open</string>0
+    <string name="drawer_close">Sluiten</string>
+    <string name="challenge_opponent"><u>Tegenstanders</u> </string>
+    <string name="leaderboard_load_higher_ranks">Laad 10 hogere rangen</string>
+    <string name="leaderboard_load_lower_ranks">Laad 10 lagere rangen</string>
+    <string name="choose_opponents">Kies %1$d %2$s meer</string>
+    <string name="remove_opponents">Verwijder %1$d %2$s</string>
+
+    <string name="leaderboard_no_internet_connection">Leaderboard niet laadbaar, geen internet connectie</string>
+    <string name="leaderboard_error">Het lijkt erop dat er een fout is opgetreden, geef u wachtwoord opnieuw in</string>
+    <string name="leaderboard_error_logout">Het lijkt erop dat er een fout is opgetreden, log uit en probeer opnieuw</string>
+    <string name="leaderboard_error_logout_dismiss">Sluit</string>
+    <string name="leaderboard_error_title">Wachtwoord</string>
+    <string name="leaderboard_no_internet_connection_on_error">Niet in staat om het wachtwoord te veranderen, geen internet verbinding</string>
+
+
+
+    <string name="challenge_view_page_title_list">Lijst</string>
+    <string name="challenge_view_page_title_progress">Vooruitgang</string>
+
+    <string name="settings_view_upload_frequency">Upload frequentie</string>
+    <string name="settings_view_upload_frequency_minutes">minuten</string>
+    <string name="settings_view_upload_frequency_minute">minuut</string>
+    <string name="settings_view_sensor">Sensor</string>
+    <string name="settings_view_profile_tab_settings">Personalisatie profiel tab</string>
+    <string name="settings_view_profile_tab_settings_description">Personaliseer jou profiel naar je eigen voorkeur</string>
+    <string name="settings_view_account_settings">Account instellingen</string>
+    <string name="settings_view_tutorial">Tutorials</string>
+    <string name="settings_view_tutorial_description">Zet de zelfstudie aan/uit</string>
+    <string name="settings_view_mobile_date">Mobiele data</string>
+    <string name="settings_view_mobile_date_description">Laat communicatie via mobiele data toe</string>
+    <string name="settings_view_notifications">Meldingen</string>
+    <string name="settings_view_logout">Uitloggen</string>
+    <string name="settings_view_logout_message">Ben je zeker dat je wil uitloggen?</string>
+
+
+    <string name="cancel">ANNULEER</string>
+    <string name="confirm">BEVESTIGEN</string>
+
+
+    <string name="settings_view_logout_failed">Internet connectie nodig om uit te loggen!</string>
+
+    <string name="profile_status_ready_to_accept">Accepteren mogelijk</string>
+    <string name="profile_status_ready_to_play">Klaar om te spelen</string>
+    <string name="profile_status_started">Uitdaging gestart</string>
+
+    <string name="profile_day_behaviour">dagelijkse score : %1$d%%</string>
+
+    <string name="profile_settings_graph">grafiek knop                   </string>
+    <string name="profile_settings_open_challenges">open uitdaging knop                   </string>
+
+    <string-array name="sideMenu">
+        <item>Profiel</item>
+        <item>div</item>
+        <item>Rangschikking</item>
+        <item>Grafieken</item>
+        <item>Solo opgave</item>
+        <item>Uitdagingen</item>
+        <item>div</item>
+        <item>Instellingen</item>
+    </string-array>
+    <string-array name="avatar_names">
+        <item>admin</item>
+        <item>african_boss</item>
+        <item>angel</item>
+        <item>arab_boss</item>
+        <item>army_officer</item>
+        <item>asian_boss</item>
+        <item>asian_female_boss</item>
+        <item>captain</item>
+        <item>caucasian_boss</item>
+        <item>caucasian_female_boss</item>
+        <item>chief</item>
+        <item>devil</item>
+        <item>engineer</item>
+        <item>general</item>
+        <item>global_manager</item>
+        <item>head_physician</item>
+        <item>judge</item>
+        <item>king</item>
+        <item>knight</item>
+        <item>manager</item>
+        <item>mexican_boss</item>
+        <item>official</item>
+        <item>old_boss</item>
+        <item>police_officer</item>
+        <item>policeman</item>
+        <item>professor</item>
+        <item>queen</item>
+        <item>security</item>
+        <item>security_guard</item>
+        <item>sheikh</item>
+        <item>superman</item>
+        <item>supervisor</item>
+        <item>teacher</item>
+        <item>themis</item>
+        <item>uncle_sam</item>
+        <item>wizard</item>
+    </string-array>
+</resources>

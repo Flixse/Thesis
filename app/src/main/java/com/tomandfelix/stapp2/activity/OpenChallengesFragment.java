@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.tomandfelix.stapp2.R;
 import com.tomandfelix.stapp2.application.StApp;
+import com.tomandfelix.stapp2.persistency.Challenge;
 import com.tomandfelix.stapp2.persistency.ChallengeStatus;
 import com.tomandfelix.stapp2.persistency.LiveChallenge;
 import com.tomandfelix.stapp2.persistency.Quest;
@@ -127,7 +128,7 @@ public class OpenChallengesFragment extends ListFragment {
                 TextView status = (TextView) convertView.findViewById(R.id.challenge_status);
 
                 type.setImageResource(c.getChallenge().getType().equals(Quest.Type.CHALLENGE) ? R.drawable.icon_competition : R.drawable.icon_collaboration);
-                name.setText(c.getChallenge().getName());
+                name.setText(getChallengeNameOrDescription(c.getChallenge(), true));
                 xp.setText(Integer.toString(c.getChallenge().getxp()));
                 people.setText(Integer.toString(c.getOpponents().length + 1));
                 if(c.getMyStatus() == ChallengeStatus.Status.NOT_ACCEPTED){
@@ -145,6 +146,36 @@ public class OpenChallengesFragment extends ListFragment {
             }
             return convertView;
         }
+
+        public String getChallengeNameOrDescription(Challenge challenge, boolean nameOrDescription){
+            String nameOfChallenge;
+            String descriptionOfChallenge;
+            switch (challenge.getKind()) {
+                case Challenge.ONE_ON_ONE:
+                    nameOfChallenge = getString(R.string.challenge_one_on_one_title);
+                    descriptionOfChallenge = getString(R.string.challenge_one_on_one_description, challenge.getDuration());
+                    break;
+                case Challenge.GROUP_COMPETITION:
+                    nameOfChallenge = getString(R.string.challenge_group_competition_title);
+                    descriptionOfChallenge = getString(R.string.challenge_grou_competition_description, challenge.getDuration());
+                    break;
+                case Challenge.FOLLOW_THE_TRACK:
+                    nameOfChallenge = getString(R.string.challenge_follow_the_track_title);
+                    descriptionOfChallenge =getString(R.string.challenge_follow_the_track_description);
+                    break;
+                case Challenge.ALTERNATELY_STANDING:
+                    nameOfChallenge = getString(R.string.challenge_alternately_standing_title);
+                    descriptionOfChallenge = getString(R.string.challenge_alternately_standing_description);
+                    break;
+                default:
+                    nameOfChallenge = "";
+                    descriptionOfChallenge = "";
+                    break;
+            }
+            return nameOrDescription ? nameOfChallenge : descriptionOfChallenge;
+        }
+
+
 
         @Override
         public void unregisterDataSetObserver(DataSetObserver observer) {

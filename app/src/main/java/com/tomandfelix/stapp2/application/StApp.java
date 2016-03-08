@@ -21,17 +21,16 @@ import android.widget.Toast;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.tomandfelix.stapp2.gcm.GCMMessageHandler;
-import com.tomandfelix.stapp2.persistency.DatabaseHelper;
-import com.tomandfelix.stapp2.persistency.LiveChallenge;
-import com.tomandfelix.stapp2.persistency.Profile;
-import com.tomandfelix.stapp2.persistency.ServerHelper;
-import com.tomandfelix.stapp2.persistency.Solo;
-import com.tomandfelix.stapp2.persistency.VolleyQueue;
-import com.tomandfelix.stapp2.service.ShimmerService;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
+import com.tomandfelix.stapp2.R;
+import com.tomandfelix.stapp2.gcm.GCMMessageHandler;
+import com.tomandfelix.stapp2.persistency.DatabaseHelper;
+import com.tomandfelix.stapp2.persistency.LiveChallenge;
+import com.tomandfelix.stapp2.persistency.ServerHelper;
+import com.tomandfelix.stapp2.persistency.VolleyQueue;
+import com.tomandfelix.stapp2.service.ShimmerService;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -134,7 +133,25 @@ public class StApp  extends Application {
     }
 
     public static void makeToast(String text) {
-        Toast.makeText(context, text, Toast.LENGTH_LONG).show();
+        switch (text){
+            case "CHALLENGE_WON":
+                Toast.makeText(context, context.getString(R.string.challenge_won), Toast.LENGTH_LONG).show();
+                break;
+            case "CHALLENGE_LOST":
+                Toast.makeText(context, context.getString(R.string.challenge_lost), Toast.LENGTH_LONG).show();
+                break;
+            case "CHALLENGE_TIE":
+                Toast.makeText(context, context.getString(R.string.challenge_tie), Toast.LENGTH_LONG).show();
+                break;
+            case "QUEST_WON":
+                Toast.makeText(context, context.getString(R.string.quest_complete_won), Toast.LENGTH_LONG).show();
+                break;
+            case "QUEST_LOST":
+                Toast.makeText(context, context.getString(R.string.quest_complete_lost), Toast.LENGTH_LONG).show();
+                break;
+            default:
+                break;
+        }
     }
 
     public static void vibrate(int duration) {

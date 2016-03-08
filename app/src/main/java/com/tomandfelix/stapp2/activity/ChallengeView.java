@@ -89,7 +89,7 @@ public class ChallengeView extends DrawerActivity {
 
         @Override
         public CharSequence getPageTitle(int position) {
-            return position == 0 ? "Challenges" : "Progress";
+            return position == 0 ? getString(R.string.challenge_view_page_title_list) : getString(R.string.challenge_view_page_title_progress);
         }
     }
 }

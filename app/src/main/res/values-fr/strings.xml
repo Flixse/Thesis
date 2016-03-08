@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">StApp3</string>
+    <string name="action_settings">Les réglages</string>
+    <string name="title_activity_profile_view">Le profil</string>sol
+    <string name="title_activity_leaderboard_view">Le arrangement</string>
+    <string name="title_activity_connection_view">La connexion du capteur</string>
+    <string name="title_activity_quest_view">la quête solo</string>
+    <string name="title_activity_graph">Les graphiques</string>
+    <string name="title_activity_internet__connection">La connexion internet</string>
+    <string name="title_activity_quest_description">La déclaration solo</string>
+    <string name="title_activity_stranger_view">La étrange</string>
+    <string name="title_activity_challenge_leaderboard">Les adversaires</string>
+    <string name="title_activity_challenge_stranger">défier une étrange</string>
+    <string name="title_activity_challenge_description">UitdagingUitleg</string>
+    <string name="title_activity_challenge_view">La défi explication</string>
+    <string name="title_activity_settings_view">Les réglages</string>
+    <string name="title_activity_sensor_selection">Les capteurs</string>
+    <string name="title_activity_account_settings">Les paramètres de compte</string>
+    <string name="title_activity_open_challenge">Le défi</string>
+    <string name="title_activity_profile_view_settings">Les paramètres de profil</string>
+
+    <string name="graph_daily_error">Il n\'\y a pas encore les informations pour aujourd\'\hui,\nconnecter un capteur et essayez à nouveau</string>
+    <string name="graph_2week_error">Il n\'\y a pas encore les informations pour les deux dernières semaines,\nessayer à nouveau demain</string>
+    <string name="graph_good_time">Le temps de bonne conduite</string>
+    <string name="graph_bad_time">Le temps de mauvais conduite</string>
+    <string name="graph_score">Le score obtenu</string>
+    <string name="graph_average_score">Le score moyen</string>
+    <string name="graph_average_connection_time">La durée moyenne</string>
+    <string name="graph_today">AUJOURD\'\HUI</string>
+    <string name="graph_yesterday_or_older">HIER OU MERE</string>
+    <string name="graph_past_two_weeks">LES 2 DERNIERES SEMAINES</string>
+
+    <string name="quest_stand_to_win_title">Debout et gagner</string>
+    <string name="quest_stand_to_win_description">Dans les %2$d prochaines minutes vous obtenez la tâche pour se tenir debout pendant %1$d minutes</string>
+    <string name="quest_random_stand_up_title">Position aléatoire</string>
+    <string name="quest_random_stand_up_description">Pendant une période de %1$d minutes vous obtenez la tâche pour se tenir pendant 1 minute apès un intervalle de temps aléatoire. Commencez lorsque votre appareil vibre!</string>
+    <string name="quest_random_switch_title">Arbitrairement changement</string>
+    <string name="quest_random_switch_description">Pendant une période de %1$d minutes vous obtenez la tâche pour changer votre position après un intervalle de temps aléotoir. Changez votre position lorsque votre appareil vibre!</string>
+    <string name="quest_endurance_title">La endurance</string>
+    <string name="quest_endurance_description">Entre une péruide de %1$d minutes vous ne devez pas dépasser sur %2$s dans la même position. </string>
+    <string name="quest_earn_your_sitting_time">Gagner le temps pour s\'\asseoir</string>
+    <string name="quest_earn_your_sitting_time_description">Quand vous résolvez plusieurs questions vous gagnez le temps pour s\'\asseoir. C\'\est parce que à la première vous obtenez la tâche pour se tenir debout le temps total</string>
+    <string name="quest_quiz_confirm_button_text">Bevestig antwoord</string>
+    <string name="quest_complete_lost">La tâche est accomplie, vous êtes perdu!</string>
+    <string name="quest_complete_won">La tâche est accomplie, vous avez gagné!</string>
+
+    <string name="challenge_won">Vous avez gagné bien! Maintenir la!</string>
+    <string name="challenge_lost">Vous êtes perdu, mais continuer à essayer!</string>
+    <string name="challenge_tie">Vous êtes équivalent, meilleure chance la prochaine fois!</string>
+    <string name="challenge_one_on_one_title">1-contre-1</string>
+    <string name="challenge_one_on_one_description">Suis plus à droite que votre adversaire pour %1$d minutes</string>
+    <string name="challenge_group_competition_title">Compétition de groupe</string>
+    <string name="challenge_grou_competition_description">Suis plus à droite que votre adversaires pour %1$d minutes.</string>
+    <string name="challenge_follow_the_track_title">Suivre la piste</string>
+    <string name="challenge_follow_the_track_description">Tout le monde aura la même séquence pour s\'\asseoir et se tenir debout. L\'\appareil vibre lorsque vous avez besoin de changer de position. La personne qui peut garder cette position le plus longues va gagner.</string>
+
+    <string name="drawer_open">Ouvert</string>0
+    <string name="drawer_close">Fermer</string>
+    <string name="challenge_opponent"><u>Les adversaires</u> </string>
+    <string name="leaderboard_load_higher_ranks">Charger les 10 grades supérieurs</string>
+    <string name="leaderboard_load_lower_ranks">Charger les 10 grades inférieurs</string>
+    <string name="choose_opponents">Choisissez %1$d %2$s plus</string>
+    <string name="remove_opponents">Supprimez %1$d %2$s</string>
+
+    <string name="leaderboard_no_internet_connection">Le rang n\'\est pas chargeables, vous n\'\avez pas une connexion internet</string>
+    <string name="leaderboard_error">Il y a une erreur, entrez votre mot de passe</string>
+    <string name="leaderboard_error_logout">Il y a une erreur, déconnectez-vous en essayez à nouveau</string>
+    <string name="leaderboard_error_logout_dismiss">Ferme</string>
+    <string name="leaderboard_error_title">Le mot de passe</string>
+    <string name="leaderboard_no_internet_connection_on_error">Le mot de passe n\'\a pas été changé, il n\'\y a pas de connexion internet</string>
+
+
+
+    <string name="challenge_view_page_title_list">La liste</string>
+    <string name="challenge_view_page_title_progress">Les progrès</string>
+
+    <string name="settings_view_upload_frequency">La fréquence de téléchargement</string>
+    <string name="settings_view_upload_frequency_minutes">minutes</string>
+    <string name="settings_view_upload_frequency_minute">minute</string>
+    <string name="settings_view_sensor">La capteur</string>
+    <string name="settings_view_profile_tab_settings">Transfert de profil de personnalisation</string>
+    <string name="settings_view_profile_tab_settings_description">Personnalisez votre profil à votre propre préférence</string>
+    <string name="settings_view_account_settings">Les paramètres du compte</string>
+    <string name="settings_view_tutorial">Les tutoriels</string>
+    <string name="settings_view_tutorial_description">Allumer/étendre les tutoriels</string>
+    <string name="settings_view_mobile_date">L\'\information mobiles</string>
+    <string name="settings_view_mobile_date_description">Permet la communication à l\'\information mobiles</string>
+    <string name="settings_view_notifications">Les rapports</string>
+    <string name="settings_view_logout">Déconnexion</string>
+    <string name="settings_view_logout_message">êtes-vous sûr de vouloir vous déconnecter?</string>
+
+
+    <string name="cancel">ANNULER</string>
+    <string name="confirm">CONFIRMER</string>
+
+
+    <string name="settings_view_logout_failed">Une connexion internet est nécessaire pour déconnecter!</string>
+
+    <string name="profile_status_ready_to_accept">Accepter est possible</string>
+    <string name="profile_status_ready_to_play">Prêt à jouer</string>
+    <string name="profile_status_started">Défi a été lancé</string>
+
+    <string name="profile_day_behaviour">Score du jour : %1$d%%</string>
+
+    <string name="profile_settings_graph">bouton graphique                   </string>
+    <string name="profile_settings_open_challenges">bouton défi ouver                   </string>
+
+    <string-array name="sideMenu">
+        <item>Profiel</item>
+        <item>div</item>
+        <item>Rangschikking</item>
+        <item>Grafieken</item>
+        <item>Solo opgave</item>
+        <item>Uitdagingen</item>
+        <item>div</item>
+        <item>Instellingen</item>
+    </string-array>
+    <string-array name="avatar_names">
+        <item>admin</item>
+        <item>african_boss</item>
+        <item>angel</item>
+        <item>arab_boss</item>
+        <item>army_officer</item>
+        <item>asian_boss</item>
+        <item>asian_female_boss</item>
+        <item>captain</item>
+        <item>caucasian_boss</item>
+        <item>caucasian_female_boss</item>
+        <item>chief</item>
+        <item>devil</item>
+        <item>engineer</item>
+        <item>general</item>
+        <item>global_manager</item>
+        <item>head_physician</item>
+        <item>judge</item>
+        <item>king</item>
+        <item>knight</item>
+        <item>manager</item>
+        <item>mexican_boss</item>
+        <item>official</item>
+        <item>old_boss</item>
+        <item>police_officer</item>
+        <item>policeman</item>
+        <item>professor</item>
+        <item>queen</item>
+        <item>security</item>
+        <item>security_guard</item>
+        <item>sheikh</item>
+        <item>superman</item>
+        <item>supervisor</item>
+        <item>teacher</item>
+        <item>themis</item>
+        <item>uncle_sam</item>
+        <item>wizard</item>
+    </string-array>
+</resources>

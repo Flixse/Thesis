@@ -67,11 +67,11 @@ public class ChallengeList {
                     maxOthers = Math.max(maxOthers, Long.parseLong(cs.getData()));
                 }
                 if(mine > maxOthers) {
-                    challenge.won("You won, big time!");
+                    challenge.won("CHALLENGE_WON");
                 } else if(mine == maxOthers) {
-                    challenge.lost("It's a Tie, better luck next time!");
+                    challenge.lost("CHALLENGE_TIE");
                 } else {
-                    challenge.lost("You lost, keep trying!");
+                    challenge.lost("CHALLENGE_LOST");
                 }
             }
         };
@@ -369,11 +369,15 @@ public class ChallengeList {
                 super.handleLoggingMessage(challenge, message);
             }
         };*/
+        list.add(0, new Challenge(0, Challenge.ONE_ON_ONE, 2, 2, 500,  30, Quest.Type.CHALLENGE, true, false, standMostIn30Min));
+        list.add(1, new Challenge(1, Challenge.GROUP_COMPETITION, 3, 5, 750, 30, Quest.Type.CHALLENGE, true, false, standMostIn30Min));
+        list.add(2, new Challenge(2, Challenge.FOLLOW_THE_TRACK, 2, 5, 500, 0, Quest.Type.CHALLENGE, false, false, followTheLeader));
+        list.add(3, new Challenge(3, Challenge.ALTERNATELY_STANDING, 2, 5, 1000, 60, Quest.Type.COOP, false, true, alternatelyStanding));
 
-        list.add(0, new Challenge(0, "1-on-1", "Stand longer than your opponent in a period of <duration> minutes", 2, 2, 500,  30, Quest.Type.CHALLENGE, true, false, standMostIn30Min));
+        /*list.add(0, new Challenge(0, "1-on-1", "Stand longer than your opponent in a period of <duration> minutes", 2, 2, 500,  30, Quest.Type.CHALLENGE, true, false, standMostIn30Min));
         list.add(1, new Challenge(1, "Group competition", "Stand longer than all your opponents in a period of <duration> minutes", 3, 5, 750, 30, Quest.Type.CHALLENGE, true, false, standMostIn30Min));
         list.add(2, new Challenge(2, "Follow the track", "Everybody will get the same sequence. Your phone will vibrate when you have to change position. The person that is able to endure the longest wins.", 2, 5, 500, 0, Quest.Type.CHALLENGE, false, false, followTheLeader));
-        list.add(3, new Challenge(3, "Alternately standing", "At every moment, one of the participating players should always be standing. The longer this assignment is fulfilled (max 60 minutes), the more experience is gained. Your score will depend on how long you participated and the amount of people that participated. The person that starts first should start standing up", 2, 5, 1000, 60, Quest.Type.COOP, false, true, alternatelyStanding));
+        list.add(3, new Challenge(3, "Alternately standing", "At every moment, one of the participating players should always be standing. The longer this assignment is fulfilled (max 60 minutes), the more experience is gained. Your score will depend on how long you participated and the amount of people that participated. The person that starts first should start standing up", 2, 5, 1000, 60, Quest.Type.COOP, false, true, alternatelyStanding));*/
         return list;
     }
 }

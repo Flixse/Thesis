@@ -15,7 +15,12 @@ import java.util.List;
  */
 public class Solo extends Quest{
     public enum Difficulty {EASY, MEDIUM, HARD}
-
+    static public final int STAND_TO_WIN = 1;
+    static public final int RANDOM_STAND_UP = 2;
+    static public final int RANDOM_SWITCH = 3;
+    static public final int ENDURANCE = 4;
+    static public final int EARN_YOUR_SITTING_TIME = 5;
+    private int kind;
     private int xp;
     private int xpNeeded;
     private int duration;
@@ -24,12 +29,13 @@ public class Solo extends Quest{
     private Object data;
     private Processor processor;
     private Handler handler;
-    private List<String> questions;
+    private List<Quiz> questions;
     private double multiplier;
     private int answersCorrect;
 
-    public Solo(int id, String name, String description, int xp,int xpNeeded, int duration, Difficulty difficulty, Processor processor){
-        super(id, name, description, Type.SOLO);
+    public Solo(int id,int kind, int xp,int xpNeeded, int duration, Difficulty difficulty, Processor processor){
+        super(id, Type.SOLO);
+        this.kind = kind;
         this.xp = xp;
         this.xpNeeded = xpNeeded;
         this.duration = duration;
@@ -41,14 +47,14 @@ public class Solo extends Quest{
         questions = new ArrayList<>();
     }
 
-    @Override
-    public String getDescription() {
-        return super.getDescription().replace("<duration>", Integer.toString(duration));
+    public int getKind() {
+        return kind;
     }
 
     public int getxp() {
         return xp;
     }
+
 
     public int getXpNeeded() {
         return xpNeeded;
@@ -79,11 +85,11 @@ public class Solo extends Quest{
         this.data = data;
     }
 
-    public List<String> getQuestions() {
+    public List<Quiz> getQuestions() {
         return questions;
     }
 
-    public void setQuestions(List<String> questions) {
+    public void setQuestions(List<Quiz> questions) {
         this.questions = questions;
     }
 
@@ -119,11 +125,10 @@ public class Solo extends Quest{
     }
 
     public void won() {
-        StApp.makeToast("Quest complete, you have won!");
-        data = "Quest complete, you have won!";
+        this.answersCorrect = 0;
+        StApp.makeToast("QUEST_WON");
+        data = "QUEST_WON";
         Log.d("Solo", "Quest complete, you have won!");
-        setMultiplier(getMultiplier() + 0.2 * getAnswersCorrect());
-        setAnswersCorrect(0);
         setMultiplier(1);
         ServerHelper.getInstance().updateMoneyAndExperience(0, DatabaseHelper.getInstance().getOwner().getExperience() + (int) Math.round(xp * getMultiplier()), new Response.ErrorListener() {
             @Override
@@ -135,13 +140,15 @@ public class Solo extends Quest{
     }
 
     public void lost() {
-        StApp.makeToast("Quest complete, you have lost!");
-        data = "Quest complete, you have lost!";
+        this.answersCorrect = 0;
+        StApp.makeToast("QUEST_LOST");
+        data = "QUEST_LOST";
         Log.d("Solo", "Quest complete, you have lost!");
         stop();
     }
 
     private void stop() {
+        this.answersCorrect = 0;
         handler.removeCallbacksAndMessages(null);
         handler = null;
         progress = 0;
@@ -155,8 +162,6 @@ public class Solo extends Quest{
     public String toString() {
         String info = "";
         info += "id:" + id;
-        info += (name == null ? "":" name:" + name);
-        info += (description == null ? "":" description:" + description);
         info += " experience:" + xp;
         info += " duration:" + duration;
         info += " difficulty:";

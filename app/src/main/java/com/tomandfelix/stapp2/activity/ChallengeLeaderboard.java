@@ -30,6 +30,7 @@ import com.tomandfelix.stapp2.persistency.ServerHelper;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class ChallengeLeaderboard extends ServiceActivity {
     private Profile mProfile;
@@ -68,8 +69,8 @@ public class ChallengeLeaderboard extends ServiceActivity {
                         @Override
                         public void onErrorResponse(VolleyError volleyError) {
                             final AlertDialog alertDialog = new AlertDialog.Builder(ChallengeLeaderboard.this).create();
-                            alertDialog.setMessage("It seems like an error occured, please logout and try again");
-                            alertDialog.setButton("Dismiss", new DialogInterface.OnClickListener() {
+                            alertDialog.setMessage(getString(R.string.leaderboard_error_logout));
+                            alertDialog.setButton(getString(R.string.leaderboard_error_logout_dismiss), new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     alertDialog.dismiss();
@@ -79,7 +80,7 @@ public class ChallengeLeaderboard extends ServiceActivity {
                         }
                     }, false);
         }else{
-            Toast.makeText(getApplicationContext(),"Unable to get leaderboard, no internet connection", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(),getString(R.string.leaderboard_no_internet_connection), Toast.LENGTH_SHORT).show();
         }
         checkCount();
     }
@@ -94,11 +95,11 @@ public class ChallengeLeaderboard extends ServiceActivity {
         adapter = new ChallengeLeaderboardAdapter(ChallengeLeaderboard.this, R.layout.list_item_challenge_leaderboard, list);
         View header = getLayoutInflater().inflate(R.layout.list_head_foot_leaderboard, leaderboardList, false);
         TextView head = (TextView) header.findViewById(R.id.head_foot_text);
-        head.setText("Load 10 higher ranks");
+        head.setText(getString(R.string.leaderboard_load_higher_ranks));
         leaderboardList.addHeaderView(header);
         View footer = getLayoutInflater().inflate(R.layout.list_head_foot_leaderboard, leaderboardList, false);
         TextView foot = (TextView) footer.findViewById(R.id.head_foot_text);
-        foot.setText("Load 10 lower ranks");
+        foot.setText(getString(R.string.leaderboard_load_lower_ranks));
         leaderboardList.addFooterView(footer);
         leaderboardList.setAdapter(adapter);
         leaderboardList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -131,7 +132,7 @@ public class ChallengeLeaderboard extends ServiceActivity {
                                 }, null, false);
                     }
                 } else {
-                    Toast.makeText(getApplicationContext(), "Unable to get leaderboard, no internet connection", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), getString(R.string.leaderboard_no_internet_connection), Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -167,14 +168,38 @@ public class ChallengeLeaderboard extends ServiceActivity {
     public void checkCount() {
         int min = ChallengeList.challenges.get(challengeID).getMinAmount();
         int max = ChallengeList.challenges.get(challengeID).getMaxAmount();
+        String opponentSpefLanguage ;
+        String opponentsSpefLanguage;
+        String confirmButtonText;
+        switch (Locale.getDefault().getLanguage()) {
+            case "nl":
+                opponentSpefLanguage = "tegenstander";
+                opponentsSpefLanguage = "tegenstanders";
+                confirmButtonText = "bevestigen";
+                break;
+            case "fr":
+                opponentSpefLanguage = "adversaire";
+                opponentsSpefLanguage = "adversaires";
+                confirmButtonText = "confirmer";
+                break;
+            case "en":
+                opponentSpefLanguage = "opponent";
+                opponentsSpefLanguage = "opponents";
+                confirmButtonText = "confirm";
+                break;
+            default :
+                opponentSpefLanguage = "opponent";
+                opponentsSpefLanguage = "opponents";
+                confirmButtonText = "confirm";
+        }
         if((count + 1) < min) {
-            confirmBtn.setText("Choose " + (min - (count + 1)) + " more " + (min - (count + 1) > 1 ? "opponents" : "opponent"));
+            confirmBtn.setText(getString(R.string.choose_opponents, (min - (count + 1)), (min - (count + 1) > 1 ? opponentsSpefLanguage : opponentSpefLanguage)));
             confirmBtn.setEnabled(false);
         } else if((count + 1) > max) {
-            confirmBtn.setText("Remove " + ((count + 1) - max) + ((count + 1) - max > 1 ? " opponents" : " opponent"));
+            confirmBtn.setText(getString(R.string.remove_opponents,((count + 1) - max),((count + 1) - max > 1 ? opponentsSpefLanguage : opponentSpefLanguage)));
             confirmBtn.setEnabled(false);
         } else {
-            confirmBtn.setText("Confirm");
+            confirmBtn.setText(confirmButtonText);
             confirmBtn.setEnabled(true);
         }
     }

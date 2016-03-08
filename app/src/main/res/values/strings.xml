@@ -28,9 +28,78 @@
     <string name="graph_score">Achieved score</string>
     <string name="graph_average_score">Average score</string>
     <string name="graph_average_connection_time">Average duration</string>
+    <string name="graph_today">TODAY</string>
+    <string name="graph_yesterday_or_older">YESTERDAY OR OLDER</string>
+    <string name="graph_past_two_weeks">PAST 2 WEEKS</string>
+
+    <string name="quest_stand_to_win_title">Stand to win</string>
+    <string name="quest_stand_to_win_description">Stand for more than %1$d minutes within %2$d minutes</string>
+    <string name="quest_random_stand_up_title">Random stand up</string>
+    <string name="quest_random_stand_up_description">Within a period of %1$d minutes you will get the task to stand for 1 minute after every random period of time. Start standing when you feel your phone vibrating!</string>
+    <string name="quest_random_switch_title">Random switch</string>
+    <string name="quest_random_switch_description">Within a period of %1$d minutes, you will get the task to change position after every random period of time. Switch position when you feel your phone vibrating!</string>
+    <string name="quest_endurance_title">Endurance</string>
+    <string name="quest_endurance_description">Within a period of %1$d minutes, you can\'\t stay in the same position for more than %2$s </string>
+    <string name="quest_earn_your_sitting_time">Earn your sitting time</string>
+    <string name="quest_earn_your_sitting_time_description">Try to answer the questions. When you answer a question correctly you earn 30 seconds sitting time. This is because in the beginning of this quest you need to sit the total quest duration. This can be to long. Good luck!</string>
+    <string name="quest_quiz_confirm_button_text">Confirm answer</string>
+    <string name="quest_complete_lost">Quest complete, you have lost!</string>
+    <string name="quest_complete_won">Quest complete, you have won!</string>
+
+
+    <string name="challenge_won">You won big time! Good job!</string>
+    <string name="challenge_lost">You lost, keep trying!</string>
+    <string name="challenge_tie">It\'\s a tie, better luck next time!</string>
+    <string name="challenge_one_on_one_title">1-on-1</string>
+    <string name="challenge_one_on_one_description">Stand longer than your opponent in a period of %1$d minutes</string>
+    <string name="challenge_group_competition_title">Group competition</string>
+    <string name="challenge_grou_competition_description">Stand longer than all your opponents in a period of %1$d minutes</string>
+    <string name="challenge_follow_the_track_title">Follow the track</string>
+    <string name="challenge_follow_the_track_description">Everybody will get the same sequence. Your phone will vibrate when you have to change position. The person that is able to endure the longest wins.</string>
+    <string name="challenge_alternately_standing_title">Alternately standing</string>
+    <string name="challenge_alternately_standing_description">At every moment, one of the participating players should always be standing. The longer this assignment is fulfilled (max 60 minutes), the more experience is gained. Your score will depend on how long you participated and the amount of people that participated. The person that starts first should start standing up</string>
+
     <string name="drawer_open">open</string>
     <string name="drawer_close">close</string>
     <string name="challenge_opponent"><u>Opponents</u> </string>
+    <string name="leaderboard_load_higher_ranks">Load 10 higher ranks</string>
+    <string name="leaderboard_load_lower_ranks">Load 10 lower ranks</string>
+    <string name="choose_opponents">Choose %1$d more %2$s</string>
+    <string name="remove_opponents">Remove %1$d more %2$s</string>
+
+    <string name="leaderboard_no_internet_connection">Unable to get leaderboard, no internet connection</string>
+    <string name="leaderboard_error">It seems like an error occurred, Please enter your password again</string>
+    <string name="leaderboard_error_logout">It seems like an error occurred, please logout and try again</string>
+    <string name="leaderboard_error_logout_dismiss">Dismiss</string>
+    <string name="leaderboard_error_title">Password</string>
+    <string name="leaderboard_no_internet_connection_on_error">Unable to change password, No internet connection</string>
+
+
+    <string name="challenge_view_page_title_list">List</string>
+    <string name="challenge_view_page_title_progress">Progress</string>
+
+    <string name="settings_view_upload_frequency">Upload frequency</string>
+    <string name="settings_view_upload_frequency_minutes">minutes</string>
+    <string name="settings_view_upload_frequency_message">Please enter a new value, in minutes</string>
+    <string name="settings_view_upload_frequency_minute">minute</string>
+    <string name="settings_view_sensor">Sensor</string>
+    <string name="settings_view_profile_tab_settings">Profile tab personalisation</string>
+    <string name="settings_view_profile_tab_settings_description">personalise your profile view </string>
+    <string name="settings_view_account_settings">Account settings</string>
+    <string name="settings_view_tutorial">Tutorials</string>
+    <string name="settings_view_tutorial_description">Turn on/off the tutorial toasts</string>
+    <string name="settings_view_mobile_date">Mobile data</string>
+    <string name="settings_view_mobile_date_description">Allow communications over mobile data</string>
+    <string name="settings_view_notifications">Notifications</string>
+    <string name="settings_view_logout">Logout</string>
+    <string name="settings_view_logout_message">Are you sure you want to log out?</string>
+
+
+    <string name="cancel">CANCEL</string>
+    <string name="confirm">CONFIRM</string>
+
+
+    <string name="settings_view_logout_failed">unable to logout without internet connection!</string>
 
     <string name="profile_status_ready_to_accept">Ready to Accept</string>
     <string name="profile_status_ready_to_play">Ready to play</string>

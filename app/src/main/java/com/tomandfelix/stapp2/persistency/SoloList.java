@@ -108,7 +108,7 @@ public class SoloList {
                 Date start = new Date(end.getTime() - 90000);
                 long result = Algorithms.millisecondsStood(start, end);
                 if(result < 60000) {
-                    StApp.makeToast("Quest complete, you have lost!");
+                    StApp.makeToast("QUEST_LOST");
                     solo.setData("Quest complete, you have lost!");
                     solo.lost();
                 } else {
@@ -219,7 +219,7 @@ public class SoloList {
             }
         };
 
-        Solo.Processor mathematicalGenius = new Solo.Processor(){
+        /*Solo.Processor mathematicalGenius = new Solo.Processor(){
             @Override
             public void start(final Solo solo) {
                 solo.setQuestions(getListOfQuestions(solo));
@@ -282,35 +282,61 @@ public class SoloList {
 
                 }
             }
+        };*/
+
+        Solo.Processor quizOne = new Solo.Processor() {
+            @Override
+            public void start(Solo solo) {
+                solo.setData(new Date());
+                schedule(solo);
+                OpenSoloQuest.getHandler().obtainMessage(OpenSoloQuest.MSG_REFRESH).sendToTarget();
+            }
+
+            public void checkProgress(Solo solo) {
+                Date start = null;
+                if(solo.getData() instanceof Date) {
+                    start = (Date) solo.getData();
+                }
+                if(start != null && new Date().getTime() - start.getTime() >= 1800000) {
+                    solo.lost();
+                } else {
+                    double result = (double) Algorithms.millisecondsStood(start, new Date());
+                    solo.setProgress(Math.min((result * 100d / ((double) 600000 + (1200000 - 30000 * solo.getAnswersCorrect()))), 100d));
+                    if (solo.getProgress() == 100) {
+                        solo.won();
+                    } else {
+                        schedule(solo);
+                    }
+                }
+                OpenSoloQuest.getHandler().obtainMessage(OpenSoloQuest.MSG_REFRESH).sendToTarget();
+            }
+
+            private void schedule(final Solo solo){
+                solo.getHandler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        checkProgress(solo);
+                    }
+                }, 600000/100);
+            }
+
         };
 
-        String standToWinTitle = "Stand to win";
-        String randomStandUpTitle = "Random stand up";
-        String randomSwitchTitle = "Random switch";
-        String enduranceTitle = "Endurance";
-        String mathematicalGeniusTitle = "Quiz";
-        String standToWinDescription = "Stand for more than <required> minutes within <duration> minutes";
-        String randomStandUpDescription = "Within a period of <duration> minutes you will get the task to stand for 1 minute after every random period of time. Start standing when you feel your phone vibrating!";
-        String randomSwitchDescription = "Within a period of <duration> minutes, you will get the task to change position after every random period of time. Switch position when you feel your phone vibrating!";
-        String enduranceDescription = "Within a period of <duration> minutes, you can't stay in the same position for more than <max>";
-        String mathematicalGeniusDescriptionTenQuestions = "The more questions you get right, the more xp you will get for the next <duration> minutes. First try to answer the 10 questions in 60 seconds and earn more xp when answered all right.";
-        String mathematicalGeniusDescriptionFifteenQuestions = "The more questions you get right, the more xp you will get for the next <duration> minutes. First try to answer the 15 questions in 60 seconds and earn more the xp when answered all right.";
-        String mathematicalGeniusDescriptionTwentyQuestions = "The more questions you get right, the more xp you will get for the next <duration> minutes. First try to answer the 20 questions in 60 seconds and earn more the xp when answered all right.";
-        list.add(0, new Solo(0, standToWinTitle, standToWinDescription.replace("<required>", Integer.toString(10)), 150, 0, 30, Solo.Difficulty.EASY, standToWinProcessor));
-        list.add(1, new Solo(3, randomStandUpTitle, randomStandUpDescription, 250, 1500, 30, Solo.Difficulty.EASY, randomStandUpProcessor));
-        list.add(2, new Solo(6, randomSwitchTitle, randomSwitchDescription, 250, 5000, 10, Solo.Difficulty.EASY, randomSwitchProcessor));
-        list.add(3, new Solo(9, enduranceTitle, enduranceDescription.replace("<max>", "1 minute"), 250, 3000, 10, Solo.Difficulty.EASY, enduranceProcessor));
-        list.add(4,new Solo(12,mathematicalGeniusTitle,mathematicalGeniusDescriptionTenQuestions.replace("<duration>", "10 minutes"), 250, 1500, 10, Solo.Difficulty.EASY, mathematicalGenius));
-        list.add(5, new Solo(1, standToWinTitle, standToWinDescription.replace("<required>", Integer.toString(15)), 300, 2000, 30, Solo.Difficulty.MEDIUM, standToWinProcessor));
-        list.add(6, new Solo(4, randomStandUpTitle, randomStandUpDescription, 500, 4000, 60, Solo.Difficulty.MEDIUM, randomStandUpProcessor));
-        list.add(7, new Solo(7, randomSwitchTitle, randomSwitchDescription, 500, 10000, 15, Solo.Difficulty.MEDIUM, randomSwitchProcessor));
-        list.add(8, new Solo(10, enduranceTitle, enduranceDescription.replace("<max>", "30 seconds"), 600, 5000, 10, Solo.Difficulty.MEDIUM, enduranceProcessor));
-        list.add(9, new Solo(2, standToWinTitle, standToWinDescription.replace("<required>", Integer.toString(20)), 600, 4500, 30, Solo.Difficulty.HARD, standToWinProcessor));
-        list.add(10,new Solo(13,mathematicalGeniusTitle,mathematicalGeniusDescriptionFifteenQuestions.replace("<duration>", "15 minutes"), 1000, 5000, 15, Solo.Difficulty.MEDIUM, mathematicalGenius));
-        list.add(11, new Solo(5, randomStandUpTitle, randomStandUpDescription, 750, 10000, 90, Solo.Difficulty.HARD, randomStandUpProcessor));
-        list.add(12, new Solo(8, randomSwitchTitle, randomSwitchDescription, 750, 15000, 20, Solo.Difficulty.HARD, randomSwitchProcessor));
-        list.add(13, new Solo(11, enduranceTitle, enduranceDescription.replace("<max>", "30 seconds"), 1000, 10000, 15, Solo.Difficulty.HARD, enduranceProcessor));
-        list.add(14,new Solo(14,mathematicalGeniusTitle,mathematicalGeniusDescriptionTwentyQuestions.replace("<duration>", "20 minutes"), 1700, 10000, 20, Solo.Difficulty.HARD, mathematicalGenius));
+        list.add(0, new Solo(0, Solo.STAND_TO_WIN, 150, 0, 30, Solo.Difficulty.EASY, standToWinProcessor));
+        list.add(1, new Solo(3, Solo.RANDOM_STAND_UP, 250, 1500, 30, Solo.Difficulty.EASY, randomStandUpProcessor));
+        list.add(2, new Solo(6, Solo.RANDOM_SWITCH, 250, 5000, 10, Solo.Difficulty.EASY, randomSwitchProcessor));
+        list.add(3, new Solo(9, Solo.ENDURANCE, 250, 3000, 10, Solo.Difficulty.EASY, enduranceProcessor));
+        list.add(4,new Solo(12, Solo.EARN_YOUR_SITTING_TIME,  250, 1500, 10, Solo.Difficulty.EASY, quizOne));
+        list.add(5, new Solo(1, Solo.STAND_TO_WIN, 300, 2000, 30, Solo.Difficulty.MEDIUM, standToWinProcessor));
+        list.add(6, new Solo(4, Solo.RANDOM_STAND_UP, 500, 4000, 60, Solo.Difficulty.MEDIUM, randomStandUpProcessor));
+        list.add(7, new Solo(7, Solo.RANDOM_SWITCH, 500, 10000, 15, Solo.Difficulty.MEDIUM, randomSwitchProcessor));
+        list.add(8, new Solo(10, Solo.ENDURANCE, 600, 5000, 10, Solo.Difficulty.MEDIUM, enduranceProcessor));
+        list.add(9, new Solo(2, Solo.EARN_YOUR_SITTING_TIME, 600, 4500, 30, Solo.Difficulty.HARD, standToWinProcessor));
+        list.add(10,new Solo(13, Solo.STAND_TO_WIN , 1000, 5000, 15, Solo.Difficulty.MEDIUM, quizOne));
+        list.add(11, new Solo(5, Solo.RANDOM_STAND_UP , 750, 10000, 90, Solo.Difficulty.HARD, randomStandUpProcessor));
+        list.add(12, new Solo(8, Solo.RANDOM_SWITCH, 750, 15000, 20, Solo.Difficulty.HARD, randomSwitchProcessor));
+        list.add(13, new Solo(11, Solo.ENDURANCE, 1000, 10000, 15, Solo.Difficulty.HARD, enduranceProcessor));
+        list.add(14,new Solo(14, Solo.EARN_YOUR_SITTING_TIME, 1700, 10000, 20, Solo.Difficulty.HARD, quizOne));
         return list;
     }
 

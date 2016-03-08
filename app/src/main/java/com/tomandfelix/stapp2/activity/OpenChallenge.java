@@ -75,9 +75,9 @@ public class OpenChallenge extends ServiceActivity {
         Intent intent = getIntent();
         String challengeIndex = intent.getStringExtra("challenge_unique_index");
         challenge = StApp.challenges.get(challengeIndex);
-        getSupportActionBar().setTitle(challenge.getChallenge().getName());
+        getSupportActionBar().setTitle(getChallengeNameOrDescription(challenge.getChallenge(), true));
         TextView challengeDescription = (TextView) findViewById(R.id.open_challenge_description);
-        challengeDescription.setText(challenge.getChallenge().getDescription());
+        challengeDescription.setText(getChallengeNameOrDescription(challenge.getChallenge(), false));
         if(ServerHelper.getInstance().checkInternetConnection()) {
             ServerHelper.getInstance().getProfilesByIds(challenge.getOpponents(), new ServerHelper.ResponseFunc<ArrayList<Profile>>() {
                 @Override

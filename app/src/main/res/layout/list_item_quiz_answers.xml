@@ -1,0 +1,28 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/quiz_layout"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="3dp"
+    android:paddingBottom="3dp"
+    android:background="@color/primaryColor">
+
+        <TextView
+            android:id="@+id/quiz_answer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/accentColor"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/divider"
+            />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            />
+</RelativeLayout>

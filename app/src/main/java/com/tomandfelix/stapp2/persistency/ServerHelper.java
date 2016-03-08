@@ -18,7 +18,9 @@ import org.json.JSONObject;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -97,6 +99,29 @@ public class ServerHelper {
             e.printStackTrace();
         }
         return result;
+    }
+
+    public Quiz extractQuiz(JSONObject object){
+        Quiz result = null;
+        String[] wrongAnswers =  new String[3];
+        try {
+            if (object.has("id") || object.has("languageId") || object.has("question") || object.has("correctAnswer") || object.has("wrongAnswers1") || object.has("wrongAnswer2") || object.has("wrongAnswer3")) {
+                wrongAnswers[0] = object.has("wrongAnswer1") ? object.getString("wrongAnswer1") : null;
+                wrongAnswers[1] = object.has("wrongAnswer2") ? object.getString("wrongAnswer2") : null;
+                wrongAnswers[2] = object.has("wrongAnswer3") ? object.getString("wrongAnswer3") : null;
+                result = new Quiz(
+                        object.has("id") ? object.getInt("id") : -1,
+                        object.has("languageId") ? object.getInt("languageId") : -1,
+                        object.has("question") ? object.getString("question") : null,
+                        object.has("correctAnswer") ? object.getString("correctAnswer") : null,
+                        wrongAnswers
+                );
+            }
+        }catch(JSONException e) {
+            e.printStackTrace();
+        }
+        return result;
+
     }
 
     /**
@@ -818,6 +843,37 @@ public class ServerHelper {
             }, errorListener);
             VolleyQueue.getInstance().addToRequestQueue(getProfilesByIds);
         }
+    }
+
+    /**
+     * Fetches all the quiz objects used in a few quests
+     * @param responseListener The function that is called upon success, the argument for this function will be the ArrayList of quizzes
+     * @param errorListener The function that is called upon error, Possible errors:
+     *                      * 'database' Something went wrong with the database
+     */
+    public void getQuizLIst(final ResponseFunc<List<Quiz>> responseListener, final Response.ErrorListener errorListener){
+        JsonArrayRequest getQuizList = new JsonArrayRequest(Request.Method.POST, "http://eng.studev.groept.be/thesis/a14_stapp2/getQuizList.php", null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                List<Quiz> quizList = null;
+                try{
+                    if(!response.getJSONObject(0).has("error")){
+                        for(int i = 0; i < response.length(); i++) {
+                            quizList.add(extractQuiz(response.getJSONObject(i)));
+                            Collections.shuffle(quizList);
+                        }
+                    } else {
+                        errorListener.onErrorResponse(new VolleyError(response.getJSONObject(0).getString("error")));
+                        }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                if(quizList != null){
+                    responseListener.onResponse(quizList);
+                }
+            }
+        }, errorListener);
+        VolleyQueue.getInstance().addToRequestQueue(getQuizList);
     }
     public boolean checkInternetConnection(){
         ConnectivityManager connectivityManager

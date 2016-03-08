@@ -98,7 +98,7 @@ public class SoloQuestList extends DrawerActivity {
                     xpNeeded.setVisibility(View.VISIBLE);
                     difficulty.setImageResource(R.drawable.circle_grey);
                 }
-                name.setText(s.getName());
+                name.setText(getNameOfQuest(s.getKind()));
                 xp.setText(Integer.toString(s.getxp()));
             }
             return convertView;

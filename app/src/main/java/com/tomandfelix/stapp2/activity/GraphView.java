@@ -64,7 +64,7 @@ public class GraphView extends DrawerActivity {
 
         @Override
         public CharSequence getPageTitle(int position) {
-            return position == 0 ? (DatabaseHelper.getInstance().dayStarted() == null ? "YESTERDAY OR OLDER" : "TODAY") : "Past 2 Weeks";
+            return position == 0 ? (DatabaseHelper.getInstance().dayStarted() == null ? getString(R.string.graph_yesterday_or_older) : getString(R.string.graph_today)) : getString(R.string.graph_past_two_weeks);
         }
     }
 }

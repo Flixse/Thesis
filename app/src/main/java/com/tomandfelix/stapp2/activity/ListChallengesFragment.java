@@ -107,13 +107,42 @@ public class ListChallengesFragment extends ListFragment {
                 TextView description = (TextView) convertView.findViewById(R.id.challenge_list_description);
 
                 type.setImageResource(c.getType().equals(Quest.Type.CHALLENGE) ? R.drawable.icon_competition : R.drawable.icon_collaboration);
-                name.setText(c.getName());
+                name.setText(getChallengeNameOrDescription(c,true));
                 xp.setText(Integer.toString(c.getxp()));
                 people.setText(c.getMinAmount() == c.getMaxAmount() ? Integer.toString(c.getMinAmount()) : c.getMinAmount() + " - " + c.getMaxAmount());
-                description.setText(c.getDescription());
+                description.setText(getChallengeNameOrDescription(c, false));
             }
             return convertView;
         }
+
+        public String getChallengeNameOrDescription(Challenge challenge, boolean nameOrDescription){
+            String nameOfChallenge;
+            String descriptionOfChallenge;
+            switch (challenge.getKind()) {
+                case Challenge.ONE_ON_ONE:
+                    nameOfChallenge = getString(R.string.challenge_one_on_one_title);
+                    descriptionOfChallenge = getString(R.string.challenge_one_on_one_description, challenge.getDuration());
+                    break;
+                case Challenge.GROUP_COMPETITION:
+                    nameOfChallenge = getString(R.string.challenge_group_competition_title);
+                    descriptionOfChallenge = getString(R.string.challenge_grou_competition_description, challenge.getDuration());
+                    break;
+                case Challenge.FOLLOW_THE_TRACK:
+                    nameOfChallenge = getString(R.string.challenge_follow_the_track_title);
+                    descriptionOfChallenge =getString(R.string.challenge_follow_the_track_description);
+                    break;
+                case Challenge.ALTERNATELY_STANDING:
+                    nameOfChallenge = getString(R.string.challenge_alternately_standing_title);
+                    descriptionOfChallenge = getString(R.string.challenge_alternately_standing_description);
+                    break;
+                default:
+                    nameOfChallenge = "";
+                    descriptionOfChallenge = "";
+                    break;
+            }
+            return nameOrDescription ? nameOfChallenge : descriptionOfChallenge;
+        }
+
 
         @Override
         public void unregisterDataSetObserver(DataSetObserver observer) {

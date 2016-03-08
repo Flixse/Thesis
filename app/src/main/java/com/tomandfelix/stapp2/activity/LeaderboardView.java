@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
 import android.text.method.PasswordTransformationMethod;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,13 +63,13 @@ public class LeaderboardView extends DrawerActivity {
                         }
                     }, false);
         }else{
-            Toast.makeText(getApplicationContext(),"Unable to get leaderboard, no internet connection", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(),getString(R.string.leaderboard_no_internet_connection), Toast.LENGTH_SHORT).show();
         }
     }
 
     private void askForPassword() {
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
-        alert.setMessage("It seems like an error occurred, Please enter your password again").setTitle("Password");
+        alert.setMessage(getString(R.string.leaderboard_error)).setTitle(getString(R.string.leaderboard_error_title));
         final EditText input = new EditText(this);
         input.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
         input.setTransformationMethod(PasswordTransformationMethod.getInstance());
@@ -98,14 +97,14 @@ public class LeaderboardView extends DrawerActivity {
                                         }
                                     });
                         }else{
-                            Toast.makeText(getApplicationContext(),"Unable to change password, No internet connection",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(),getString(R.string.leaderboard_no_internet_connection_on_error),Toast.LENGTH_SHORT).show();
                         }
                         break;
                 }
             }
         };
-        alert.setPositiveButton("CONFIRM", listener);
-        alert.setNegativeButton("CANCEL", listener);
+        alert.setPositiveButton(getString(R.string.confirm), listener);
+        alert.setNegativeButton(getString(R.string.cancel), listener);
         alert.show();
     }
 
@@ -113,11 +112,11 @@ public class LeaderboardView extends DrawerActivity {
         adapter = new LeaderboardListAdapter(LeaderboardView.this, R.layout.list_item_leaderboard, list);
         View header = getLayoutInflater().inflate(R.layout.list_head_foot_leaderboard, leaderboardList, false);
         TextView head = (TextView) header.findViewById(R.id.head_foot_text);
-        head.setText("Load 10 higher ranks");
+        head.setText(getString(R.string.leaderboard_load_higher_ranks));
         leaderboardList.addHeaderView(header);
         View footer = getLayoutInflater().inflate(R.layout.list_head_foot_leaderboard, leaderboardList, false);
         TextView foot = (TextView) footer.findViewById(R.id.head_foot_text);
-        foot.setText("Load 10 lower ranks");
+        foot.setText(getString(R.string.leaderboard_load_lower_ranks));
         leaderboardList.addFooterView(footer);
         leaderboardList.setAdapter(adapter);
         leaderboardList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -156,7 +155,7 @@ public class LeaderboardView extends DrawerActivity {
                         }
                     }
                 }else{
-                    Toast.makeText(getApplicationContext(),"Unable to get leaderboard, no internet connection", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),getString(R.string.leaderboard_no_internet_connection), Toast.LENGTH_SHORT).show();
                 }
             }
         });

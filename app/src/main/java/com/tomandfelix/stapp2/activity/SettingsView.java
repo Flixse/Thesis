@@ -37,32 +37,32 @@ public class SettingsView extends DrawerActivity {
 
         settings = new Setting[8];
         int freq = DatabaseHelper.getInstance().getUploadFrequency() / 60000;
-        settings[0] = new Setting("Upload frequency", freq + (freq == 1 ? " minute" : " minutes"));
-        settings[1] = new Setting("Sensor", DatabaseHelper.getInstance().getSensor());
-        settings[2] = new Setting("Profile View settings", "change the view of the profile activity");
-        settings[3] = new Setting("Account settings", DatabaseHelper.getInstance().getOwner().getUsername());
-        settings[4] = new Setting("Tutorial toasts", "Turn on/off the tutorial toasts", DatabaseHelper.getInstance().toastTutorials(),
+        settings[0] = new Setting(getString(R.string.settings_view_upload_frequency), freq + (freq == 1 ? getString(R.string.settings_view_upload_frequency_minute) :getString(R.string.settings_view_upload_frequency_minutes)));
+        settings[1] = new Setting(getString(R.string.settings_view_sensor), DatabaseHelper.getInstance().getSensor());
+        settings[2] = new Setting(getString(R.string.settings_view_profile_tab_settings),getString(R.string.settings_view_profile_tab_settings_description));
+        settings[3] = new Setting(getString(R.string.settings_view_account_settings), DatabaseHelper.getInstance().getOwner().getUsername());
+        settings[4] = new Setting(getString(R.string.settings_view_tutorial),getString(R.string.settings_view_tutorial_description) , DatabaseHelper.getInstance().toastTutorials(),
                 new CompoundButton.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
                         DatabaseHelper.getInstance().setTutorialToasts(isChecked);
                     }
                 });
-        settings[5] = new Setting("Mobile data", "Allow communications over mobile data", DatabaseHelper.getInstance().uploadOn3G(),
+        settings[5] = new Setting(getString(R.string.settings_view_mobile_date),getString(R.string.settings_view_mobile_date_description), DatabaseHelper.getInstance().uploadOn3G(),
                 new CompoundButton.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                         DatabaseHelper.getInstance().setUploadOn3G(isChecked);
                     }
                 });
-        settings[6] = new Setting("Notifications", null, DatabaseHelper.getInstance().getNotification(),
+        settings[6] = new Setting(getString(R.string.settings_view_notifications), null, DatabaseHelper.getInstance().getNotification(),
                 new CompoundButton.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                         DatabaseHelper.getInstance().setNotification(isChecked);
                     }
                 });
-        settings[7] = new Setting("Logout", null);
+        settings[7] = new Setting(getString(R.string.settings_view_logout), null);
 
         settingsList = (ListView) findViewById(R.id.settings_list);
         adapter = new SettingsAdapter(this, R.layout.list_item_settings, settings);
@@ -157,7 +157,7 @@ public class SettingsView extends DrawerActivity {
             switch(position) {
                 case 0:
                     AlertDialog.Builder alert = new AlertDialog.Builder(SettingsView.this);
-                    alert.setMessage("Please enter a new value, in minutes").setTitle("Upload frequency");
+                    alert.setMessage(getString(R.string.settings_view_upload_frequency_message)).setTitle(getString(R.string.settings_view_upload_frequency));
                     final EditText input = new EditText(SettingsView.this);
                     input.setInputType(InputType.TYPE_CLASS_NUMBER);
                     alert.setView(input);
@@ -169,7 +169,7 @@ public class SettingsView extends DrawerActivity {
                                     int newUploadFreq = Integer.parseInt(input.getText().toString());
                                     if (newUploadFreq > 0) {
                                         DatabaseHelper.getInstance().setUploadFrequency(newUploadFreq * 60000);
-                                        settings[0].subTitle = newUploadFreq + (newUploadFreq == 1 ? " minute" : " minutes");
+                                        settings[0].subTitle = newUploadFreq + (newUploadFreq == 1 ? getString(R.string.settings_view_upload_frequency_minute) : getString(R.string.settings_view_upload_frequency_minutes));
                                         adapter.notifyDataSetChanged();
                                     }
                                     break;
@@ -178,8 +178,8 @@ public class SettingsView extends DrawerActivity {
                             }
                         }
                     };
-                    alert.setPositiveButton("CONFIRM", listener);
-                    alert.setNegativeButton("CANCEL", listener);
+                    alert.setPositiveButton(getString(R.string.cancel), listener);
+                    alert.setNegativeButton(getString(R.string.confirm), listener);
                     alert.show();
                     break;
                 case 1:
@@ -213,18 +213,18 @@ public class SettingsView extends DrawerActivity {
                                         break;
                                 }
                             }else{
-                                Toast.makeText(getApplicationContext(), "unable to logout without internet connection!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), getString(R.string.settings_view_logout_failed), Toast.LENGTH_SHORT).show();
                             }
                         }
                     };
                     if(ServerHelper.getInstance().checkInternetConnection()) {
                         final AlertDialog.Builder alertDialog = new AlertDialog.Builder(SettingsView.this);
-                        alertDialog.setMessage("Are you sure you want to log out?");
-                        alertDialog.setPositiveButton("Logout", dialogListener);
-                        alertDialog.setNegativeButton("Cancel", dialogListener);
+                        alertDialog.setMessage(getString(R.string.settings_view_logout_message));
+                        alertDialog.setPositiveButton(getString(R.string.settings_view_logout), dialogListener);
+                        alertDialog.setNegativeButton(getString(R.string.cancel), dialogListener);
                         alertDialog.show();
                     }else{
-                        Toast.makeText(getApplicationContext(), "unable to logout without internet connection!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), getString(R.string.settings_view_logout_failed), Toast.LENGTH_SHORT).show();
                     }
                     break;
             }

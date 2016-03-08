@@ -7,6 +7,11 @@ import android.os.Message;
  * Created by Flixse on 27/01/2015.
  */
 public class Challenge extends Quest {
+    static public final int ONE_ON_ONE = 1;
+    static public final int GROUP_COMPETITION = 2;
+    static public final int FOLLOW_THE_TRACK = 3;
+    static public final int ALTERNATELY_STANDING = 4;
+    private int kind;
     private int minAmount;
     private int maxAmount;
     private int xp;
@@ -16,8 +21,9 @@ public class Challenge extends Quest {
     private double progress;
     private Processor processor;
 
-    public Challenge(int id, String name, String description, int minAmount, int maxAmount,int xp, int duration, Type type, boolean showProgressBar, boolean showOpponentStatusIcons, Processor validator){
-        super(id, name, description, type);
+    public Challenge(int id, int kind, int minAmount, int maxAmount,int xp, int duration, Type type, boolean showProgressBar, boolean showOpponentStatusIcons, Processor validator){
+        super(id, type);
+        this.kind = kind;
         this.progress = 0;
         this.minAmount = minAmount;
         this.maxAmount = maxAmount;
@@ -28,9 +34,8 @@ public class Challenge extends Quest {
         this.processor = validator;
     }
 
-    @Override
-    public String getDescription() {
-        return super.getDescription().replace("<duration>", Integer.toString(duration));
+    public int getKind(){
+        return kind;
     }
 
     public int getxp() {
@@ -77,8 +82,6 @@ public class Challenge extends Quest {
     public String toString() {
         String info = "";
         info += "id:" + id;
-        info += (name == null ? "":" name:" + name);
-        info += (description == null ? "":" description:" + description);
         info += " people:" + minAmount + "-" + maxAmount;
         return info;
     }
