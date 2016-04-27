@@ -123,8 +123,6 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         db.execSQL("CREATE TABLE " + TABLE_OPPONENTSTATUS + " (" + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + KEY_UNIQUE_ID + " TEXT, " + KEY_OPPONENT_ID + " INTEGER, " + KEY_STATUS + " TEXT, "
                 + KEY_DATA + " TEXT, FOREIGN KEY(" + KEY_UNIQUE_ID + ") REFERENCES " + TABLE_LC + "(" + KEY_UNIQUE_ID + "))");
-        db.execSQL("CREATE TABLE " + TABLE_QUIZ_QUESTIONS + " (" + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + KEY_QUESTION + " TEXT);");
-        db.execSQL("CREATE TABLE " + TABLE_TUTORIALS + " (" + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + KEY_TUTORIAL_TEXT + " TEXT);");
 
 
         ContentValues values = new ContentValues(2);
@@ -172,16 +170,6 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         values.put(KEY_VALUE_INT, "1");
         db.insert(TABLE_SETTINGS, null, values);
         values.clear();
-        for(int i = 0; i < getQuestionList().size(); i++){
-            values.put(KEY_QUESTION, getQuestionList().get(i));
-            db.insert(TABLE_QUIZ_QUESTIONS, null, values);
-            values.clear();
-        }
-        for(int i = 0; i < getTutorialList().size(); i++){
-            values.put(KEY_TUTORIAL_TEXT, getTutorialList().get(i));
-            db.insert(TABLE_TUTORIALS, null, values);
-            values.clear();
-        }
     }
 
     @Override
@@ -191,102 +179,11 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_SETTINGS);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_LC);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_OPPONENTSTATUS);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_QUIZ_QUESTIONS);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_TUTORIALS);
         onCreate(db);
     }
 
     private int secondsAgo(Date input) {
         return Math.round(TimeUnit.MILLISECONDS.toSeconds(new Date().getTime() - input.getTime()));
-    }
-
-    private List<String> getQuestionList(){
-        List<String> questions = new ArrayList<>();
-        questions.add("27 * 50 + 150");
-        questions.add("456 / 2 + 150 * 2");
-        questions.add("2500 / 50 + 150 + 20");
-        questions.add("5 + 3 * 5 + 5 * 3 - 15");
-        questions.add("150 + 150 / 2 + 3");
-        questions.add("24 * 150 * 1 - 23 * 150");
-        questions.add("27 * 50 + 150");
-        questions.add("456 / 2 + 150 * 2");
-        questions.add("47 * 3 +5");
-        questions.add("150 * 2 + 27 * 3");
-        questions.add("1500 / 2 + 50 * 2");
-        questions.add("10 *10 +5 *3 + 7");
-        questions.add("29 * 3 + 7");
-        questions.add("1500 * 2 + 27");
-        questions.add("7 * 9 * 3");
-        questions.add("127 * 20 + 5");
-        questions.add("180 + 5 * 7 + 1");
-        questions.add("120 + 10 * 50");
-        questions.add("27 * 5 + 11 * 2");
-        questions.add("31 - 24 * 2");
-        questions.add("2 + 3 + 4 + 5 + 6");
-        questions.add("4 + 9 + 10 + 87 +1");
-        questions.add("24 - 7 * 2 * 0 + 27");
-        questions.add("144 / 12 + 169 / 13");
-        questions.add("1000 * 10 / 100 + 25 * 3");
-        questions.add("2100 / 100 + 2200 / 50");
-        return questions;
-    }
-
-    private List<String> getTutorialList(){
-        List<String> tutorials = new ArrayList<>();
-        tutorials.add("This is the profile view. You can change the view in settings. Go to menu and than go to settings. There you can change a few things in the profile view settings section.");
-        tutorials.add("Are you competitive? Don't forget to play challenges against your friends or foes!");
-        tutorials.add("Want to see how you did it the past 2 weeks on the app? Go to the menu and click on graphs!");
-        tutorials.add("This app needs bluetooth and a shimmer sensor! Don't forget to connect to your sensor!");
-        tutorials.add("You see that crown and the number inside? Well that's your ranking. Go to leaderboard to see your friends or foes!");
-        tutorials.add("You want to change your avatar? Go to the settings tab in the menu and change your avatar in the account settings!");
-        tutorials.add("You don't want to connect to mobile data with this app? Turn it off in the settings section of the app!");
-        tutorials.add("Ow this is not your account? You can logout at the settings section of the app!");
-        tutorials.add("You don't want those awesome notifications? You can turn them off at the settings section of the app. But we don't advise it.");
-        tutorials.add("Are you ready for awesome quests? Go to the solo quest section of the app. Open the menu and click on it!");
-        tutorials.add("The more you play, the higher your ranking. Do your best!");
-        tutorials.add("This app is made to control your health. Don't sit to long. It is bad!");
-        tutorials.add("Never forget your shimmer device. It is mandatory for this app!");
-        tutorials.add("Shimmer connection not working? Make sure you connected the correct device!");
-        tutorials.add("Hard to see when someone challenged you? Go to settings and turn on the open challenges button in the Profile View settings tab of setting!");
-        return tutorials;
-    }
-
-    public List<String> getQuestionsWithDifficulty(int difficulty /*0 = EASY, 1 = MEDIUM, 2 = HARD*/){
-        String query = "SELECT " + KEY_QUESTION + " FROM " + TABLE_QUIZ_QUESTIONS + ";";
-        Cursor cursor = db.rawQuery(query, null);
-        List<String> allQuestions = new ArrayList<>();
-        List<String> randomQuestions = new ArrayList<>();
-        if(cursor != null && cursor.getCount() > 0) {
-            while(cursor.moveToNext()){
-                allQuestions.add(cursor.getString(0));
-            }
-        }
-        int amountOfQuestions;
-        Random randomQuestionGenerator = new Random();
-        if(difficulty == 0 ){
-            amountOfQuestions = 10;
-        }else if(difficulty == 1){
-            amountOfQuestions = 15;
-        }else{
-            amountOfQuestions = 20;
-        }
-        for(int j = 0; j < amountOfQuestions; j++){
-            int index = randomQuestionGenerator.nextInt(allQuestions.size());
-            randomQuestions.add(allQuestions.remove(index));
-        }
-        return randomQuestions;
-    }
-
-    public List<String> getTutorials(){
-        String query = "SELECT " + KEY_TUTORIAL_TEXT + " FROM " + TABLE_TUTORIALS + ";";
-        Cursor cursor = db.rawQuery(query, null);
-        List<String> listOfTutorials = new ArrayList<>();
-        if(cursor != null && cursor.getCount() > 0) {
-            while(cursor.moveToNext()){
-                listOfTutorials.add(cursor.getString(0));
-            }
-        }
-        return listOfTutorials;
     }
 
     public static String dateToString(Date date) {
@@ -725,18 +622,6 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 
     public void setLastEnteredUsername(String newUsername) {
         setStringSetting(LAST_ENTERED_USERNAME, newUsername);
-    }
-
-    public boolean toastTutorials(){
-        return getIntSetting(TUTORIAL_TOASTS) == 1;
-    }
-
-    public void setTutorialToasts(boolean tutorialToasts){
-        if(tutorialToasts){
-            setIntSetting(TUTORIAL_TOASTS, 1);
-        }else{
-            setIntSetting(TUTORIAL_TOASTS, 0);
-        }
     }
 
     public boolean uploadOn3G() {

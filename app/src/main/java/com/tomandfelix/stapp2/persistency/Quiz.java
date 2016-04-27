@@ -1,36 +1,26 @@
 package com.tomandfelix.stapp2.persistency;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 
 /**
  * Created by Flixse on 25/02/2016.
  */
 public class Quiz {
-    static public final int ENGLISH = 1;
-    static public final int DUTCH = 2;
-    static public final int FRENCH = 3;
     private int quizId;
     private int languageId;
     private String quizQuestion;
     private String correctAnswer;
-    private String[] wrongAnswers = new String[3];
+    private ArrayList<String> wrongAnswers;
     boolean answerCorrect = false;
 
-    public Quiz(int quizId,int languageId, String quizQuestion, String correctAnswer, String[] wrongAnswers){
+    public Quiz(int quizId,int languageId, String quizQuestion, String correctAnswer, ArrayList<String> wrongAnswers){
         this.quizId = quizId;
         this.languageId = languageId;
         this.quizQuestion = quizQuestion;
         this.correctAnswer = correctAnswer;
         this.wrongAnswers = wrongAnswers;
-    }
-
-    public int getLanguageId() {
-        return languageId;
-    }
-
-    public void setLanguageId(int languageId) {
-        this.languageId = languageId;
     }
 
     public String getQuizQuestion() {
@@ -41,7 +31,7 @@ public class Quiz {
         return correctAnswer;
     }
 
-    public String[] getWrongAnswers() {
+    public ArrayList<String> getWrongAnswers() {
         return wrongAnswers;
     }
 
@@ -49,18 +39,14 @@ public class Quiz {
         Random rnd = new Random();
         String[] possibleAnswers = new String[4];
         possibleAnswers[0] = correctAnswer;
-        possibleAnswers[1] = wrongAnswers[0];
-        possibleAnswers[2] = wrongAnswers[1];
-        possibleAnswers[3] = wrongAnswers[2];
-        for(int i = possibleAnswers.length - 1; i > 0; i --){
-            int index = rnd.nextInt(i + 1);
-            String a = possibleAnswers[index];
-            possibleAnswers[i] = a;
-        }
+        possibleAnswers[1] = wrongAnswers.get(0);
+        possibleAnswers[2] = wrongAnswers.get(1);
+        possibleAnswers[3] = wrongAnswers.get(2);
         ArrayList<String> randomAnswers = new ArrayList<>();
         for(int j = 0; j < possibleAnswers.length ; j ++ ){
             randomAnswers.add(possibleAnswers[j]);
         }
+        Collections.shuffle(randomAnswers);
         return randomAnswers;
     }
 

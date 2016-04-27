@@ -11,8 +11,6 @@
         android:padding="@dimen/activity_margin"
         android:animateLayoutChanges="true">
 
-
-
         <TextView
             android:id="@+id/solo_quest_name"
             android:layout_width="match_parent"
@@ -23,49 +21,43 @@
         <TextView
             android:id="@+id/solo_quest_description"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="2"
+            android:layout_height="wrap_content"
             android:text="Description"
             android:textSize="15sp"/>
 
-        <LinearLayout
-            android:id="@+id/solo_quest_layout"
+        <View
+            android:layout_marginTop="5dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="visible">
-            <TextView
-                android:id="@+id/solo_quest_quiz_question"
-                android:layout_gravity="center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="gone"
-                android:layout_weight="1"
-                android:textStyle="bold"
-                android:textSize="24sp" />
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@color/divider"
-                android:orientation="horizontal"
-                android:layout_margin="1dp">
-                <ListView
-                    android:id="@+id/solo_quest_quiz_answers"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+            android:layout_height="2dp"
+            android:layout_marginBottom="5dp"
+            android:background="@color/divider"/>
 
-            </LinearLayout>
+        <TextView
+            android:id="@+id/solo_quest_quiz_question"
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            android:textStyle="bold"
+            android:text="homo"
+            android:textSize="24sp" />
 
-            <com.gc.materialdesign.views.ButtonRectangle
-                android:id="@+id/solo_quest_confirm_answer_button"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/raised_button_height"
-                android:layout_gravity="center_vertical"
-                android:background="@color/primaryColor"
-                android:text="@string/quest_quiz_confirm_button_text"
-                android:visibility="invisible"/>
-        </LinearLayout>
+        <ListView
+            android:id="@+id/solo_quest_quiz_answers"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            android:clickable="true"/>
 
-
+        <com.gc.materialdesign.views.ButtonRectangle
+            android:id="@+id/solo_quest_confirm_answer_button"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/raised_button_height"
+            android:layout_gravity="center_vertical"
+            android:background="@color/primaryColor"
+            android:text="@string/quest_quiz_confirm_button_text"
+            android:onClick="onConfirmButton"
+            android:visibility="invisible"/>
 
         <com.gc.materialdesign.views.ProgressBarDeterminate
             android:id="@+id/open_solo_quest_progress"
@@ -92,7 +84,7 @@
             android:layout_gravity="center_vertical"
             android:background="@color/primaryColor"
             android:text="Start"
-            android:onClick="onButton"
+            android:onClick="onStartStopButton"
             android:visibility="invisible"/>
     </LinearLayout>
 </LinearLayout>

@@ -35,34 +35,27 @@ public class SettingsView extends DrawerActivity {
 
         mProfile = DatabaseHelper.getInstance().getOwner();
 
-        settings = new Setting[8];
+        settings = new Setting[7];
         int freq = DatabaseHelper.getInstance().getUploadFrequency() / 60000;
         settings[0] = new Setting(getString(R.string.settings_view_upload_frequency), freq + (freq == 1 ? getString(R.string.settings_view_upload_frequency_minute) :getString(R.string.settings_view_upload_frequency_minutes)));
         settings[1] = new Setting(getString(R.string.settings_view_sensor), DatabaseHelper.getInstance().getSensor());
         settings[2] = new Setting(getString(R.string.settings_view_profile_tab_settings),getString(R.string.settings_view_profile_tab_settings_description));
         settings[3] = new Setting(getString(R.string.settings_view_account_settings), DatabaseHelper.getInstance().getOwner().getUsername());
-        settings[4] = new Setting(getString(R.string.settings_view_tutorial),getString(R.string.settings_view_tutorial_description) , DatabaseHelper.getInstance().toastTutorials(),
-                new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                        DatabaseHelper.getInstance().setTutorialToasts(isChecked);
-                    }
-                });
-        settings[5] = new Setting(getString(R.string.settings_view_mobile_date),getString(R.string.settings_view_mobile_date_description), DatabaseHelper.getInstance().uploadOn3G(),
+        settings[4] = new Setting(getString(R.string.settings_view_mobile_date),getString(R.string.settings_view_mobile_date_description), DatabaseHelper.getInstance().uploadOn3G(),
                 new CompoundButton.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                         DatabaseHelper.getInstance().setUploadOn3G(isChecked);
                     }
                 });
-        settings[6] = new Setting(getString(R.string.settings_view_notifications), null, DatabaseHelper.getInstance().getNotification(),
+        settings[5] = new Setting(getString(R.string.settings_view_notifications), null, DatabaseHelper.getInstance().getNotification(),
                 new CompoundButton.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                         DatabaseHelper.getInstance().setNotification(isChecked);
                     }
                 });
-        settings[7] = new Setting(getString(R.string.settings_view_logout), null);
+        settings[6] = new Setting(getString(R.string.settings_view_logout), null);
 
         settingsList = (ListView) findViewById(R.id.settings_list);
         adapter = new SettingsAdapter(this, R.layout.list_item_settings, settings);
@@ -194,7 +187,7 @@ public class SettingsView extends DrawerActivity {
                     Intent accountIntent = new Intent(SettingsView.this, AccountSettings.class);
                     startActivityForResult(accountIntent, 3);
                     break;
-                case 7:
+                case 6:
                     DialogInterface.OnClickListener dialogListener = new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {

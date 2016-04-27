@@ -21,6 +21,18 @@
     <string name="title_activity_open_challenge">Le défi</string>
     <string name="title_activity_profile_view_settings">Les paramètres de profil</string>
 
+    <string name="profile_out_of_date">Il n\'\y a pas une connection avec l\'\internet</string>
+    <string name="profile_error">Il y a une erreur, entrer votre mot de passe</string>
+    <string name="profile_error_title">Mot de passe</string>
+    <string name="profile_no_internet_error">Il n\'\y a pas une connection avec l\'\internet</string>
+    <string name="profile_tips_title">Tips</string>
+    <string name="profile_pick_sensor">sélectionnez un capteur, C\'\est possible de changer votre capteur dans les paramètres de l\'\application.</string>
+    <string name="profile_pick_sensor_title">Sélectionnez un capteur</string>
+
+    <string name="stranger_active">%1$s has achieved an average daily score of %2$d in the past two weeks.</string>
+    <string name="stranger_not_active">%1$s is niet actief geweest de vorige twee weken.</string>
+    <string name="stranger_no_internet_connection">Pas du connection d\'\internet</string>
+
     <string name="graph_daily_error">Il n\'\y a pas encore les informations pour aujourd\'\hui,\nconnecter un capteur et essayez à nouveau</string>
     <string name="graph_2week_error">Il n\'\y a pas encore les informations pour les deux dernières semaines,\nessayer à nouveau demain</string>
     <string name="graph_good_time">Le temps de bonne conduite</string>
@@ -45,6 +57,9 @@
     <string name="quest_quiz_confirm_button_text">Bevestig antwoord</string>
     <string name="quest_complete_lost">La tâche est accomplie, vous êtes perdu!</string>
     <string name="quest_complete_won">La tâche est accomplie, vous avez gagné!</string>
+    <string name="quest_connect_sensor">Connecter un capteur!</string>
+    <string name="quest_start">Commence</string>
+    <string name="quest_end">Termine</string>
 
     <string name="challenge_won">Vous avez gagné bien! Maintenir la!</string>
     <string name="challenge_lost">Vous êtes perdu, mais continuer à essayer!</string>

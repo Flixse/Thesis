@@ -21,6 +21,18 @@
     <string name="title_activity_open_challenge">Uitdaging</string>
     <string name="title_activity_profile_view_settings">Profiel instellingen</string>
 
+    <string name="profile_out_of_date">Profile could be out of date, no Internet connection</string>
+    <string name="profile_error">It seems like an error occured, Please enter your password again</string>
+    <string name="profile_error_title">Password</string>
+    <string name="profile_no_internet_error">Unable to login again, no internet connection</string>
+    <string name="profile_tips_title">Tips</string>
+    <string name="profile_pick_sensor">Selecteer een sensor, later kan je deze weizigen in de instellingen van de app.</string>
+    <string name="profile_pick_sensor_title">Selecteerd een sensor</string>
+
+    <string name="stranger_active">%1$s heeft een gemiddelde dagelijkse score van %2$d behaald de laatste twee weken.</string>
+    <string name="stranger_not_active">%1$s is niet actief geweest de vorige twee weken.</string>
+    <string name="stranger_no_internet_connection">Geen internet connectie</string>
+
     <string name="graph_daily_error">Er is nog geen data aanwezig voor vandaag,\n connecteer een sensor en probeer opnieuw</string>
     <string name="graph_2week_error">Er is nog geen data aanwezig voor de laatste 2 weken,\nprobeer morgen opnieuw</string>
     <string name="graph_good_time">Tijd van goed gedrag</string>
@@ -45,6 +57,9 @@
     <string name="quest_quiz_confirm_button_text">Bevestig antwoord</string>
     <string name="quest_complete_lost">Opgave gedaan, je hebt verloren!</string>
     <string name="quest_complete_won">Opgave gedaan, je hebt gewonnen!</string>
+    <string name="quest_connect_sensor">Connecteer eerst een sensor!</string>
+    <string name="quest_start">Start</string>
+    <string name="quest_end">Eindig</string>
 
 
     <string name="challenge_won">Je hebt goed gewonnen! Doe zo verder!</string>

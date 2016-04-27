@@ -71,9 +71,9 @@ public class StrangerView extends ServiceActivity {
                     Log.d("StrangerView", response + "");
                     if (response > 0) {
                         float roundedFloat = (float) Math.round(response);
-                        progress.setText(profile.getUsername() + " has achieved an average daily score of " + roundedFloat + "% in the past two weeks.");
+                        progress.setText(getString(R.string.stranger_active, profile.getUsername(), roundedFloat));
                     } else {
-                        progress.setText(profile.getUsername() + " has not been active in the past 2 weeks.");
+                        progress.setText(getString(R.string.stranger_not_active,profile.getUsername()));
                     }
                 }
             }, new Response.ErrorListener() {

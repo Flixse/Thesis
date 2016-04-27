@@ -18,7 +18,6 @@ import org.json.JSONObject;
 
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -100,20 +99,33 @@ public class ServerHelper {
         }
         return result;
     }
-
+    /**
+     * Extracts as much information from a json object as it can to build a quiz
+     * Not all data has to present
+     * If there is no usable data, returns null
+     * @param object The JSON object
+     * @return The extracted quiz
+     */
     public Quiz extractQuiz(JSONObject object){
         Quiz result = null;
-        String[] wrongAnswers =  new String[3];
+        ArrayList<String> wrongAnswers = new ArrayList<>();
+        String wrongAnswer1;
+        String wrongAnswer2;
+        String wrongAnswer3;
         try {
-            if (object.has("id") || object.has("languageId") || object.has("question") || object.has("correctAnswer") || object.has("wrongAnswers1") || object.has("wrongAnswer2") || object.has("wrongAnswer3")) {
-                wrongAnswers[0] = object.has("wrongAnswer1") ? object.getString("wrongAnswer1") : null;
-                wrongAnswers[1] = object.has("wrongAnswer2") ? object.getString("wrongAnswer2") : null;
-                wrongAnswers[2] = object.has("wrongAnswer3") ? object.getString("wrongAnswer3") : null;
+            if (object.has("quiz_id") || object.has("language_id") || object.has("question") || object.has("correct_answer") || object.has("wrong_answer_one") || object.has("wrong_answer_two") || object.has("wrong_answer_three")) {
+                wrongAnswer1 = object.has("wrong_answer_one") ? object.getString("wrong_answer_one") : null;
+                Log.d("antwoord",object.getString("wrong_answer_one"));
+                wrongAnswer2 = object.has("wrong_answer_two") ? object.getString("wrong_answer_two") : null;
+                wrongAnswer3 = object.has("wrong_answer_three") ? object.getString("wrong_answer_three") : null;
+                wrongAnswers.add(wrongAnswer1);
+                wrongAnswers.add(wrongAnswer2);
+                wrongAnswers.add(wrongAnswer3);
                 result = new Quiz(
-                        object.has("id") ? object.getInt("id") : -1,
-                        object.has("languageId") ? object.getInt("languageId") : -1,
+                        object.has("quiz_id") ? object.getInt("quiz_id") : -1,
+                        object.has("language_id") ? object.getInt("language_id") : -1,
                         object.has("question") ? object.getString("question") : null,
-                        object.has("correctAnswer") ? object.getString("correctAnswer") : null,
+                        object.has("correct_answer") ? object.getString("correct_answer") : null,
                         wrongAnswers
                 );
             }
@@ -154,7 +166,7 @@ public class ServerHelper {
 
         Log.d("ServerHelper", request.toString());
 
-        JsonObjectRequest createProfile = new JsonObjectRequest(Request.Method.POST, "http://eng.studev.groept.be/thesis/a14_stapp2/createProfile.php", request, new Response.Listener<JSONObject>() {
+        JsonObjectRequest createProfile = new JsonObjectRequest(Request.Method.POST, "http://a15_stapp2.studev.groept.be/createProfile.php", request, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 if(!response.has("error")) {
@@ -204,7 +216,7 @@ public class ServerHelper {
             e.printStackTrace();
         }
 
-        JsonObjectRequest login = new JsonObjectRequest(Request.Method.POST, "http://eng.studev.groept.be/thesis/a14_stapp2/login.php", request, new Response.Listener<JSONObject>() {
+        JsonObjectRequest login = new JsonObjectRequest(Request.Method.POST, "http://a15_stapp2.studev.groept.be/login.php", request, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 if(!response.has("error")) {
@@ -242,7 +254,7 @@ public class ServerHelper {
             e.printStackTrace();
         }
 
-        JsonObjectRequest logout = new JsonObjectRequest(Request.Method.POST, "http://eng.studev.groept.be/thesis/a14_stapp2/logout.php", request, new Response.Listener<JSONObject>() {
+        JsonObjectRequest logout = new JsonObjectRequest(Request.Method.POST, "http://a15_stapp2.studev.groept.be/logout.php", request, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject jsonObject) {
             }
@@ -279,7 +291,7 @@ public class ServerHelper {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            JsonObjectRequest getProfile = new JsonObjectRequest(Request.Method.POST, "http://eng.studev.groept.be/thesis/a14_stapp2/getProfile.php", request, new Response.Listener<JSONObject>() {
+            JsonObjectRequest getProfile = new JsonObjectRequest(Request.Method.POST, "http://a15_stapp2.studev.groept.be/getProfile.php", request, new Response.Listener<JSONObject>() {
                 @Override
                 public void onResponse(JSONObject response) {
                     if(!response.has("error")) {
@@ -323,7 +335,7 @@ public class ServerHelper {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            JsonObjectRequest getOtherProfile = new JsonObjectRequest(Request.Method.POST, "http://eng.studev.groept.be/thesis/a14_stapp2/getOtherProfile.php", request, new Response.Listener<JSONObject>() {
+            JsonObjectRequest getOtherProfile = new JsonObjectRequest(Request.Method.POST, "http://a15_stapp2.studev.groept.be/getOtherProfile.php", request, new Response.Listener<JSONObject>() {
                 @Override
                 public void onResponse(JSONObject response) {
                     if(!response.has("error")) {
@@ -375,7 +387,7 @@ public class ServerHelper {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            JsonArrayRequest getLeaderBoardById = new JsonArrayRequest(Request.Method.POST, "http://eng.studev.groept.be/thesis/a14_stapp2/getLeaderboard.php", request, new Response.Listener<JSONArray>() {
+            JsonArrayRequest getLeaderBoardById = new JsonArrayRequest(Request.Method.POST, "http://a15_stapp2.studev.groept.be/getLeaderboard.php", request, new Response.Listener<JSONArray>() {
                 @Override
                 public void onResponse(JSONArray response) {
                     ArrayList<Profile> result = null;
@@ -429,7 +441,7 @@ public class ServerHelper {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            JsonArrayRequest getLeaderBoardByRank = new JsonArrayRequest(Request.Method.POST, "http://eng.studev.groept.be/thesis/a14_stapp2/getLeaderboard.php", request, new Response.Listener<JSONArray>() {
+            JsonArrayRequest getLeaderBoardByRank = new JsonArrayRequest(Request.Method.POST, "http://a15_stapp2.studev.groept.be/getLeaderboard.php", request, new Response.Listener<JSONArray>() {
                 @Override
                 public void onResponse(JSONArray response) {
                     ArrayList<Profile> result = null;
@@ -473,7 +485,7 @@ public class ServerHelper {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        JsonObjectRequest deleteProfile = new JsonObjectRequest(Request.Method.POST, "http://eng.studev.groept.be/thesis/a14_stapp2/deleteProfile.php", request, new Response.Listener<JSONObject>() {
+        JsonObjectRequest deleteProfile = new JsonObjectRequest(Request.Method.POST, "http://a15_stapp2.studev.groept.be/deleteProfile.php", request, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 if(response.has("error")) {
@@ -508,7 +520,7 @@ public class ServerHelper {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        JsonObjectRequest updateMXP = new JsonObjectRequest(Request.Method.POST, "http://eng.studev.groept.be/thesis/a14_stapp2/updateMoneyAndExperience.php", request, new Response.Listener<JSONObject>() {
+        JsonObjectRequest updateMXP = new JsonObjectRequest(Request.Method.POST, "http://a15_stapp2.studev.groept.be/updateMoneyAndExperience.php", request, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 if(!response.has("error")) {
@@ -564,7 +576,7 @@ public class ServerHelper {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        JsonObjectRequest updateProf = new JsonObjectRequest(Request.Method.POST, "http://eng.studev.groept.be/thesis/a14_stapp2/updateProfileSettings.php", request, new Response.Listener<JSONObject>() {
+        JsonObjectRequest updateProf = new JsonObjectRequest(Request.Method.POST, "http://a15_stapp2.studev.groept.be/updateProfileSettings.php", request, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 if(response.has("error")) {
@@ -609,7 +621,7 @@ public class ServerHelper {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        JsonObjectRequest updateProf = new JsonObjectRequest(Request.Method.POST, "http://eng.studev.groept.be/thesis/a14_stapp2/updateProfileSettings.php", request, new Response.Listener<JSONObject>() {
+        JsonObjectRequest updateProf = new JsonObjectRequest(Request.Method.POST, "http://a15_stapp2.studev.groept.be/updateProfileSettings.php", request, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 if(response.has("error")) {
@@ -649,7 +661,7 @@ public class ServerHelper {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        JsonObjectRequest uploadLogs = new JsonObjectRequest(Request.Method.POST, "http://eng.studev.groept.be/thesis/a14_stapp2/uploadLogs.php", request, new Response.Listener<JSONObject>() {
+        JsonObjectRequest uploadLogs = new JsonObjectRequest(Request.Method.POST, "http://a15_stapp2.studev.groept.be/uploadLogs.php", request, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try{
@@ -684,7 +696,7 @@ public class ServerHelper {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        JsonArrayRequest downloadLogs = new JsonArrayRequest(Request.Method.POST, "http://eng.studev.groept.be/thesis/a14_stapp2/downloadLogs.php", request, new Response.Listener<JSONArray>() {
+        JsonArrayRequest downloadLogs = new JsonArrayRequest(Request.Method.POST, "http://a15_stapp2.studev.groept.be/downloadLogs.php", request, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
                 ArrayList<IdLog> result = null;
@@ -736,7 +748,7 @@ public class ServerHelper {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        JsonObjectRequest uploadLogs = new JsonObjectRequest(Request.Method.POST, "http://eng.studev.groept.be/thesis/a14_stapp2/sendGCMMessage.php", request, new Response.Listener<JSONObject>() {
+        JsonObjectRequest uploadLogs = new JsonObjectRequest(Request.Method.POST, "http://a15_stapp2.studev.groept.be/sendGCMMessage.php", request, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try{
@@ -768,7 +780,7 @@ public class ServerHelper {
             e.printStackTrace();
         }
         final JsonObjectRequest getProgressOfOther = new JsonObjectRequest(Request.Method.POST,
-                    "http://eng.studev.groept.be/thesis/a14_stapp2/getProgressOfOther.php", request, new Response.Listener<JSONObject>() {
+                    "http://a15_stapp2.studev.groept.be/getProgressOfOther.php", request, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try{
@@ -817,7 +829,7 @@ public class ServerHelper {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            JsonArrayRequest getProfilesByIds = new JsonArrayRequest(Request.Method.POST, "http://eng.studev.groept.be/thesis/a14_stapp2/getProfilesByIds.php", request, new Response.Listener<JSONArray>() {
+            JsonArrayRequest getProfilesByIds = new JsonArrayRequest(Request.Method.POST, "http://a15_stapp2.studev.groept.be/getProfilesByIds.php", request, new Response.Listener<JSONArray>() {
                 @Override
                 public void onResponse(JSONArray response) {
                     ArrayList<Profile> result = null;
@@ -851,16 +863,22 @@ public class ServerHelper {
      * @param errorListener The function that is called upon error, Possible errors:
      *                      * 'database' Something went wrong with the database
      */
-    public void getQuizLIst(final ResponseFunc<List<Quiz>> responseListener, final Response.ErrorListener errorListener){
-        JsonArrayRequest getQuizList = new JsonArrayRequest(Request.Method.POST, "http://eng.studev.groept.be/thesis/a14_stapp2/getQuizList.php", null, new Response.Listener<JSONArray>() {
+    public void getQuizLIst(int profileId, int languageId, final ResponseFunc<List<Quiz>> responseListener, final Response.ErrorListener errorListener){
+        JSONObject request = new JSONObject();
+        try {
+            request.put("profile_id", profileId);
+            request.put("language_id", languageId);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        JsonArrayRequest getQuizList = new JsonArrayRequest(Request.Method.POST, "http://a15_stapp2.studev.groept.be/getQuizList.php", request, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
-                List<Quiz> quizList = null;
+                List<Quiz> quizList = new ArrayList<>();
                 try{
                     if(!response.getJSONObject(0).has("error")){
                         for(int i = 0; i < response.length(); i++) {
                             quizList.add(extractQuiz(response.getJSONObject(i)));
-                            Collections.shuffle(quizList);
                         }
                     } else {
                         errorListener.onErrorResponse(new VolleyError(response.getJSONObject(0).getString("error")));
@@ -875,6 +893,85 @@ public class ServerHelper {
         }, errorListener);
         VolleyQueue.getInstance().addToRequestQueue(getQuizList);
     }
+
+    public void incrementQuizByProfileIdLanguageId(int profileId, int quizId,  final ResponseFunc<JSONObject> responseListener, final Response.ErrorListener errorListener){
+        JSONObject request = new JSONObject();
+        try {
+            request.put("profile_id", profileId);
+            request.put("quiz_id", quizId);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        JsonObjectRequest incrementQuizByProfileIdLanguageId = new JsonObjectRequest(Request.Method.POST, "http://a15_stapp2.studev.groept.be/incrementQuizAmount.php", request, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try{
+                    if(response.has("error")){
+                        errorListener.onErrorResponse(new VolleyError(response.getString("error")));
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                responseListener.onResponse(response);
+            }
+        }, errorListener);
+        VolleyQueue.getInstance().addToRequestQueue(incrementQuizByProfileIdLanguageId);
+    }
+
+    public void getTipByProfileIdLanguageId(int profileId, int languageId, final ResponseFunc<Tip> responseListener, final Response.ErrorListener errorListener){
+        JSONObject request = new JSONObject();
+        try {
+            request.put("profile_id", profileId);
+            request.put("language_id", languageId);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        JsonObjectRequest getTipByProfileIdLanguageId = new JsonObjectRequest(Request.Method.POST, "http://a15_stapp2.studev.groept.be/getTip.php", request, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                Tip tip = null;
+                try{
+                    if(!response.has("error")){
+                        tip = new Tip(response.getInt("tips_id"), response.getString("text"));
+                    } else {
+                        errorListener.onErrorResponse(new VolleyError(response.getString("error")));
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                if(tip != null){
+                    Log.d("in here","e");
+                    responseListener.onResponse(tip);
+                }
+            }
+        }, errorListener);
+        VolleyQueue.getInstance().addToRequestQueue(getTipByProfileIdLanguageId);
+    }
+
+    public void incrementTipsByProfileIdLanguageId(int profileId, int languageId,  final ResponseFunc<JSONObject> responseListener, final Response.ErrorListener errorListener){
+        JSONObject request = new JSONObject();
+        try {
+            request.put("profile_id", profileId);
+            request.put("tips_id", languageId);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        JsonObjectRequest incrementTipsByProfileIdLanguageId = new JsonObjectRequest(Request.Method.POST, "http://a15_stapp2.studev.groept.be/incrementTipsAmount.php", request, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try{
+                    if(response.has("error")){
+                        errorListener.onErrorResponse(new VolleyError(response.getString("error")));
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                responseListener.onResponse(response);
+            }
+        }, errorListener);
+        VolleyQueue.getInstance().addToRequestQueue(incrementTipsByProfileIdLanguageId);
+    }
+
     public boolean checkInternetConnection(){
         ConnectivityManager connectivityManager
                 = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);

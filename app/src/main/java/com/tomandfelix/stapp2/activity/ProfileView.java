@@ -35,12 +35,17 @@ import com.tomandfelix.stapp2.persistency.DatabaseHelper;
 import com.tomandfelix.stapp2.persistency.LiveChallenge;
 import com.tomandfelix.stapp2.persistency.Profile;
 import com.tomandfelix.stapp2.persistency.ServerHelper;
+import com.tomandfelix.stapp2.persistency.Tip;
 import com.tomandfelix.stapp2.service.ShimmerService;
 import com.tomandfelix.stapp2.tools.Logging;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
@@ -55,20 +60,19 @@ public class ProfileView extends DrawerActivity {
     private static ImageView statusIcon;
     private Handler loggingMessageHandler = new ProfileHandler(this);
     private Handler dailyDataHandler;
-    private Handler tutorialToastHandler;
     private TextView username;
     private TextView rank;
     private TextView experience;
     private TextView todayExperience;
     private TextView openChallengesAmount;
     private TextView graphDailyProgress;
+    private TextView tips;
     private ImageView avatar;
     private ButtonRectangle pauseButton;
     private ButtonRectangle startStopButton;
     private LinearLayout openChallenges;
     private LinearLayout graphBehaviour;
     private ProgressBarCircularIndeterminate connecting;
-    private List<String> tutorialList = new ArrayList<>();
     private static final String PAUSE = "Pause";
     private static final String RESUME = "Resume";
     private static final String START = "Start";
@@ -100,34 +104,6 @@ public class ProfileView extends DrawerActivity {
             }
         }
     };
-    private Runnable updateTutorialToast = new Runnable() {
-        @Override
-        public void run() {
-            if(!tutorialList.isEmpty()) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Random random = new Random();
-                        int randomNumber = random.nextInt(tutorialList.size());
-
-                        Toast toast1 = Toast.makeText(getApplicationContext(), tutorialList.get(randomNumber), Toast.LENGTH_LONG);
-                        Toast toast2 = Toast.makeText(getApplicationContext(), tutorialList.remove(randomNumber), Toast.LENGTH_LONG);
-                        View v1 = toast1.getView();
-                        View v2 = toast2.getView();
-                        v1.setBackgroundResource(R.color.accentColor);
-                        v2.setBackgroundResource(R.color.accentColor);
-                        toast1.show();
-                        toast2.show();
-                    }
-                });
-                tutorialToastHandler.postDelayed(this, 1000 * 60);
-            }else{
-                tutorialList = DatabaseHelper.getInstance().getTutorials();
-                tutorialToastHandler.postDelayed(this, 1000);
-            }
-
-        }
-    };
     private GraphParser.DailyGraphData dailydata;
 
     @Override
@@ -146,15 +122,14 @@ public class ProfileView extends DrawerActivity {
         todayExperience = (TextView) findViewById(R.id.profile_xp_today);
         openChallengesAmount = (TextView) findViewById(R.id.profile_open_challenges_amount);
         graphDailyProgress = (TextView) findViewById(R.id.profile_graph_behaviour);
+        tips = (TextView) findViewById(R.id.profile_tips_textview);
         avatar = (ImageView) findViewById(R.id.profile_avatar);
         pauseButton = (ButtonRectangle) findViewById(R.id.profile_pause_button);
         startStopButton = (ButtonRectangle) findViewById(R.id.profile_start_stop_button);
         connecting = (ProgressBarCircularIndeterminate) findViewById(R.id.profile_progress);
         openChallenges = (LinearLayout) findViewById(R.id.profile_open_challenges);
         graphBehaviour = (LinearLayout) findViewById(R.id.profile_graph_behaviour_layout);
-        tutorialToastHandler = new Handler();
 
-        tutorialList = DatabaseHelper.getInstance().getTutorials();
         Profile profile = getIntent().getParcelableExtra("profile");
         if (profile != null) {
             DatabaseHelper.getInstance().updateProfile(profile);
@@ -178,7 +153,7 @@ public class ProfileView extends DrawerActivity {
                     }
                 }, true);
             }else{
-                Toast.makeText(getApplicationContext(),"Profile could be out of date, no Internet connection", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),getString(R.string.profile_out_of_date), Toast.LENGTH_SHORT).show();
             }
         }
 
@@ -190,7 +165,7 @@ public class ProfileView extends DrawerActivity {
 
     private void askForPassword() {
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
-        alert.setMessage("It seems like an error occured, Please enter your password again").setTitle("Password");
+        alert.setMessage(R.string.profile_error).setTitle(R.string.profile_error_title);
         final EditText input = new EditText(this);
         input.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
         input.setTransformationMethod(PasswordTransformationMethod.getInstance());
@@ -218,14 +193,14 @@ public class ProfileView extends DrawerActivity {
                                         }
                                     });
                         }else{
-                            Toast.makeText(getApplicationContext(), "Unable to login again, no internet connection", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), R.string.profile_no_internet_error, Toast.LENGTH_SHORT).show();
                         }
                         break;
                 }
             }
         };
-        alert.setPositiveButton("CONFIRM", listener);
-        alert.setNegativeButton("CANCEL", listener);
+        alert.setPositiveButton(R.string.confirm, listener);
+        alert.setNegativeButton(R.string.cancel, listener);
         alert.show();
     }
 
@@ -236,12 +211,10 @@ public class ProfileView extends DrawerActivity {
         StApp.setHandler(loggingMessageHandler);
         app.commandService(ShimmerService.REQUEST_STATE);
         loggingMessageHandler.post(updateXP);
-        if(DatabaseHelper.getInstance().toastTutorials()) {
-            tutorialToastHandler.postDelayed(updateTutorialToast, 1000);
-        }
         dailyDataHandler.post(updateDailyData);
         updateProfileViaSettingsView();
         updateToOpenChallengeView();
+        updateTipsTextview();
     }
 
     @Override
@@ -249,14 +222,11 @@ public class ProfileView extends DrawerActivity {
         super.onPause();
         StApp.setHandler(null);
         loggingMessageHandler.removeCallbacks(updateXP);
-        if(DatabaseHelper.getInstance().toastTutorials()) {
-            tutorialToastHandler.removeCallbacks(updateTutorialToast);
-        }
         dailyDataHandler.removeCallbacks(updateDailyData);
     }
 
     private void updateVisual() {
-        Profile profile = DatabaseHelper.getInstance().getOwner();
+        final Profile profile = DatabaseHelper.getInstance().getOwner();
         getSupportActionBar().setTitle(profile.getFirstName() + " " + profile.getLastName());
         rank.setText(Integer.toString(profile.getRank()));
         experience.setText(Integer.toString(profile.getExperience()));
@@ -310,10 +280,6 @@ public class ProfileView extends DrawerActivity {
         StApp.setHandler(null);
         loggingMessageHandler.removeCallbacks(updateXP);
         startActivity(intent);
-    }
-
-    public void tutorialToastRunnable(){
-
     }
 
     private void updateState(int state) {
@@ -408,6 +374,52 @@ public class ProfileView extends DrawerActivity {
         }
     }
 
+    public void updateTipsTextview(){
+        final Profile profile = DatabaseHelper.getInstance().getOwner();
+        int languageId = 0;
+        switch (Locale.getDefault().getLanguage()) {
+            case "nl":
+                languageId = 1;
+                break;
+            case "fr":
+                languageId = 2;
+                break;
+            case "en":
+                languageId = 0;
+                break;
+            default :
+                languageId = 0;
+        }
+        ServerHelper.getInstance().getTipByProfileIdLanguageId(profile.getId(), languageId, new ServerHelper.ResponseFunc<Tip>() {
+            @Override
+            public void onResponse(final Tip response) {
+                tips.setText(response.getText());
+                ServerHelper.getInstance().incrementTipsByProfileIdLanguageId(profile.getId(), response.getTipsId(), new ServerHelper.ResponseFunc<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            Log.d("response", response.getString("error"));
+                        }catch(JSONException e){
+                            e.printStackTrace();
+                        }
+                    }
+                } ,new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        if(!ServerHelper.getInstance().checkInternetConnection()) {
+                            //askForPassword();
+                        }
+                    }
+                });
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                askForPassword();
+            }
+        });
+    }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 1) {
@@ -424,7 +436,7 @@ public class ProfileView extends DrawerActivity {
 
     private Dialog createSensorDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Please Select a sensor, you can change this later in the settings").setTitle("Select a sensor");
+        builder.setMessage(getString(R.string.profile_pick_sensor)).setTitle(getString(R.string.profile_pick_sensor_title));
         ListView listView = new ListView(this);
         builder.setView(listView);
 

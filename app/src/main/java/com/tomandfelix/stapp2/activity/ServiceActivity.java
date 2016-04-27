@@ -125,13 +125,13 @@ public abstract class ServiceActivity extends ActionBarActivity {
             case Solo.EARN_YOUR_SITTING_TIME:
                 switch(solo.getDifficulty()){
                     case EASY:
-                        descriptionOfQuest = getString(R.string.quest_earn_your_sitting_time_description, solo.getDuration(), 10);
+                        descriptionOfQuest = getString(R.string.quest_earn_your_sitting_time_description);
                         break;
                     case MEDIUM:
-                        descriptionOfQuest = getString(R.string.quest_earn_your_sitting_time_description, solo.getDuration(), 15);
+                        descriptionOfQuest = getString(R.string.quest_earn_your_sitting_time_description);
                         break;
                     case HARD:
-                        descriptionOfQuest = getString(R.string.quest_earn_your_sitting_time_description, solo.getDuration(), 20);
+                        descriptionOfQuest = getString(R.string.quest_earn_your_sitting_time_description);
                         break;
                     default:
                         descriptionOfQuest = "";

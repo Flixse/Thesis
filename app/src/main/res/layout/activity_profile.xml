@@ -230,7 +230,27 @@
                     android:text="open challenges"/>
 
 
-                </LinearLayout>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/accentColor"/>
+            <TextView
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:text="@string/profile_tips_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="21dp"/>
+
+            <TextView
+                android:layout_marginTop="5dp"
+                android:id="@+id/profile_tips_textview"
+                android:layout_width="match_parent"
+                android:height="@dimen/textSize"
+                android:gravity="center_vertical"
+                android:layout_height="match_parent" />
 
 
         </LinearLayout>
