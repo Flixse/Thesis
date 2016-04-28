@@ -52,9 +52,14 @@
     <string name="quest_random_switch_description">Pendant une période de %1$d minutes vous obtenez la tâche pour changer votre position après un intervalle de temps aléotoir. Changez votre position lorsque votre appareil vibre!</string>
     <string name="quest_endurance_title">La endurance</string>
     <string name="quest_endurance_description">Entre une péruide de %1$d minutes vous ne devez pas dépasser sur %2$s dans la même position. </string>
-    <string name="quest_earn_your_sitting_time">Gagner le temps pour s\'\asseoir</string>
-    <string name="quest_earn_your_sitting_time_description">Quand vous résolvez plusieurs questions vous gagnez le temps pour s\'\asseoir. C\'\est parce que à la première vous obtenez la tâche pour se tenir debout le temps total</string>
+    <string name="quest_earn_your_sitting_time_title">Gagner le temps pour s\'\asseoir</string>
+    <string name="quest_earn_your_sitting_time_description">Quand vous résolvez plusieurs questions vous gagnez %1$d de temps pour s\'\asseoir. C\'\est parce que à la première vous obtenez la tâche pour se tenir debout le temps total</string>
+    <string name="quest_solve_questions_for_more_xp_title">Debout et gagner</string>
+    <string name="quest_solve_questions_for_more_xp_description">Dans les %2$d prochaines minutes vous obtenez la tâche pour se tenir debout pendant %1$d minutes</string>
     <string name="quest_quiz_confirm_button_text">Bevestig antwoord</string>
+    <string name="quest_toast_correct_answer">The answer was correct. In total you have solved %1$s correctly</string>
+    <string name="quest_toast_wrong_answer">The answer was wrong. In total you have solved %1$s correctly</string>
+    <string name="quest_no_more_questions">Tout les questions sont terminé</string>
     <string name="quest_complete_lost">La tâche est accomplie, vous êtes perdu!</string>
     <string name="quest_complete_won">La tâche est accomplie, vous avez gagné!</string>
     <string name="quest_connect_sensor">Connecter un capteur!</string>

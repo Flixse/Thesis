@@ -20,6 +20,8 @@ public class Solo extends Quest{
     static public final int RANDOM_SWITCH = 3;
     static public final int ENDURANCE = 4;
     static public final int EARN_YOUR_SITTING_TIME = 5;
+    static public final int EARN_DURATION_TIME = 6;
+    static public final int SOLVE_QUESTION_FOR_MORE_XP = 7;
     private int kind;
     private int xp;
     private int xpNeeded;
@@ -41,7 +43,7 @@ public class Solo extends Quest{
         this.duration = duration;
         this.difficulty = difficulty;
         this.progress = 0.0;
-        this.multiplier = 1;
+        this.multiplier = 0.8;
         this.answersCorrect = 0;
         this.processor = processor;
         questions = new ArrayList<>();
@@ -94,19 +96,16 @@ public class Solo extends Quest{
     }
 
     public double getMultiplier() {
-        return multiplier;
-    }
-
-    public void setMultiplier(double multiplier) {
-        this.multiplier = multiplier;
+        return multiplier + 0.02 * getAnswersCorrect();
     }
 
     public int getAnswersCorrect() {
         return answersCorrect;
     }
 
-    public void setAnswersCorrect(int answersCorrect) {
-        this.answersCorrect = answersCorrect;
+    public void incrementAnswersCorrect() {
+        this.answersCorrect ++;
+
     }
 
     public Handler getHandler() {
@@ -129,7 +128,6 @@ public class Solo extends Quest{
         StApp.makeToast("QUEST_WON");
         data = "QUEST_WON";
         Log.d("Solo", "Quest complete, you have won!");
-        setMultiplier(1);
         ServerHelper.getInstance().updateMoneyAndExperience(0, DatabaseHelper.getInstance().getOwner().getExperience() + (int) Math.round(xp * getMultiplier()), new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError volleyError) {

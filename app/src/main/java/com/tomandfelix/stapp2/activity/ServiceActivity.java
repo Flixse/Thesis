@@ -46,7 +46,13 @@ public abstract class ServiceActivity extends ActionBarActivity {
                 nameOfQuest = getString(R.string.quest_endurance_title);
                 break;
             case Solo.EARN_YOUR_SITTING_TIME:
-                nameOfQuest = getString(R.string.quest_earn_your_sitting_time);
+                nameOfQuest = getString(R.string.quest_earn_your_sitting_time_title);
+                break;
+            case Solo.EARN_DURATION_TIME:
+                nameOfQuest = getString(R.string.quest_earn_duration_time);
+                break;
+            case Solo.SOLVE_QUESTION_FOR_MORE_XP:
+                nameOfQuest = getString(R.string.quest_solve_questions_for_more_xp_title);
                 break;
             default:
                 nameOfQuest = "";
@@ -59,7 +65,6 @@ public abstract class ServiceActivity extends ActionBarActivity {
 
         switch(solo.getKind()){
             case Solo.STAND_TO_WIN:
-                String temp;
                 switch(solo.getDifficulty()){
                     case EASY:
                         descriptionOfQuest = getString(R.string.quest_stand_to_win_description, 10, solo.getDuration());
@@ -125,13 +130,45 @@ public abstract class ServiceActivity extends ActionBarActivity {
             case Solo.EARN_YOUR_SITTING_TIME:
                 switch(solo.getDifficulty()){
                     case EASY:
-                        descriptionOfQuest = getString(R.string.quest_earn_your_sitting_time_description);
+                        descriptionOfQuest = getString(R.string.quest_earn_your_sitting_time_description, 60);
                         break;
                     case MEDIUM:
-                        descriptionOfQuest = getString(R.string.quest_earn_your_sitting_time_description);
+                        descriptionOfQuest = getString(R.string.quest_earn_your_sitting_time_description, 50);
                         break;
                     case HARD:
-                        descriptionOfQuest = getString(R.string.quest_earn_your_sitting_time_description);
+                        descriptionOfQuest = getString(R.string.quest_earn_your_sitting_time_description, 40);
+                        break;
+                    default:
+                        descriptionOfQuest = "";
+                        break;
+                }
+                break;
+            case Solo.EARN_DURATION_TIME:
+                switch(solo.getDifficulty()){
+                    case EASY:
+                        descriptionOfQuest = getString(R.string.quest_earn_your_sitting_time_description, 60);
+                        break;
+                    case MEDIUM:
+                        descriptionOfQuest = getString(R.string.quest_earn_your_sitting_time_description, 50);
+                        break;
+                    case HARD:
+                        descriptionOfQuest = getString(R.string.quest_earn_your_sitting_time_description, 40);
+                        break;
+                    default:
+                        descriptionOfQuest = "";
+                        break;
+                }
+                break;
+            case Solo.SOLVE_QUESTION_FOR_MORE_XP:
+                switch(solo.getDifficulty()){
+                    case EASY:
+                        descriptionOfQuest = getString(R.string.quest_solve_questions_for_more_xp_description, 10, solo.getDuration());
+                        break;
+                    case MEDIUM:
+                        descriptionOfQuest = getString(R.string.quest_solve_questions_for_more_xp_description, 15, solo.getDuration());
+                        break;
+                    case HARD:
+                        descriptionOfQuest = getString(R.string.quest_solve_questions_for_more_xp_description, 20, solo.getDuration());
                         break;
                     default:
                         descriptionOfQuest = "";

@@ -27,6 +27,10 @@ public class Quiz {
         return quizQuestion;
     }
 
+    public int getQuizId(){
+        return this.quizId;
+    }
+
     public String getCorrectAnswer() {
         return correctAnswer;
     }

@@ -284,7 +284,7 @@ public class SoloList {
             }
         };*/
 
-        Solo.Processor quizOne = new Solo.Processor() {
+        Solo.Processor EarnSittingTime = new Solo.Processor() {
             @Override
             public void start(Solo solo) {
                 solo.setData(new Date());
@@ -301,7 +301,7 @@ public class SoloList {
                     solo.lost();
                 } else {
                     double result = (double) Algorithms.millisecondsStood(start, new Date());
-                    solo.setProgress(Math.min((result * 100d / ((double) 600000 + (1200000 - 30000 * solo.getAnswersCorrect()))), 100d));
+                    solo.setProgress(Math.min((result * 100d / ((double) 600000 + (1200000 - getNeeded(solo) * solo.getAnswersCorrect()))), 100d));
                     if (solo.getProgress() == 100) {
                         solo.won();
                     } else {
@@ -320,23 +320,95 @@ public class SoloList {
                 }, 600000/100);
             }
 
+            private long getNeeded(Solo solo) {
+                switch(solo.getDifficulty()) {
+                    case EASY:
+                        return 60000;
+                    case MEDIUM:
+                        return 50000;
+                    case HARD:
+                        return 40000;
+                    default :
+                        return 0;
+                }
+            }
+
+        };
+
+        Solo.Processor EarningDuration = new Solo.Processor() {
+            @Override
+            public void start(Solo solo) {
+                solo.setData(new Date());
+                schedule(solo);
+                OpenSoloQuest.getHandler().obtainMessage(OpenSoloQuest.MSG_REFRESH).sendToTarget();
+            }
+
+            public void checkProgress(Solo solo) {
+                Date start = null;
+                if(solo.getData() instanceof Date) {
+                    start = (Date) solo.getData();
+                }
+                if(start != null && new Date().getTime() - start.getTime() >= solo.getDuration() + 30000 * solo.getAnswersCorrect() ) {
+                    solo.lost();
+                } else {
+                    double result = (double) Algorithms.millisecondsStood(start, new Date());
+                    solo.setProgress(Math.min((result * 100d / ((double) getNeeded(solo))), 100d));
+                    if (solo.getProgress() == 100) {
+                        solo.won();
+                    } else {
+                        schedule(solo);
+                    }
+                }
+                OpenSoloQuest.getHandler().obtainMessage(OpenSoloQuest.MSG_REFRESH).sendToTarget();
+            }
+
+            private void schedule(final Solo solo){
+                solo.getHandler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        checkProgress(solo);
+                    }
+                }, 600000/100);
+            }
+
+            private long getNeeded(Solo solo) {
+                switch(solo.getDifficulty()) {
+                    case EASY:
+                        return 600000;
+                    case MEDIUM:
+                        return 720000;
+                    case HARD:
+                        return 840000;
+                    default :
+                        return 0;
+                }
+            }
+
         };
 
         list.add(0, new Solo(0, Solo.STAND_TO_WIN, 150, 0, 30, Solo.Difficulty.EASY, standToWinProcessor));
-        list.add(1, new Solo(3, Solo.RANDOM_STAND_UP, 250, 1500, 30, Solo.Difficulty.EASY, randomStandUpProcessor));
-        list.add(2, new Solo(6, Solo.RANDOM_SWITCH, 250, 5000, 10, Solo.Difficulty.EASY, randomSwitchProcessor));
-        list.add(3, new Solo(9, Solo.ENDURANCE, 250, 3000, 10, Solo.Difficulty.EASY, enduranceProcessor));
-        list.add(4,new Solo(12, Solo.EARN_YOUR_SITTING_TIME,  250, 1500, 10, Solo.Difficulty.EASY, quizOne));
-        list.add(5, new Solo(1, Solo.STAND_TO_WIN, 300, 2000, 30, Solo.Difficulty.MEDIUM, standToWinProcessor));
-        list.add(6, new Solo(4, Solo.RANDOM_STAND_UP, 500, 4000, 60, Solo.Difficulty.MEDIUM, randomStandUpProcessor));
+        list.add(1, new Solo(1, Solo.STAND_TO_WIN, 300, 2000, 30, Solo.Difficulty.MEDIUM, standToWinProcessor));
+        list.add(2, new Solo(2, Solo.STAND_TO_WIN, 600, 4500, 30, Solo.Difficulty.HARD, standToWinProcessor));
+        list.add(3, new Solo(3, Solo.RANDOM_STAND_UP, 250, 1500, 30, Solo.Difficulty.EASY, randomStandUpProcessor));
+        list.add(4, new Solo(4, Solo.RANDOM_STAND_UP, 500, 4000, 60, Solo.Difficulty.MEDIUM, randomStandUpProcessor));
+        list.add(5, new Solo(5, Solo.RANDOM_STAND_UP , 750, 10000, 90, Solo.Difficulty.HARD, randomStandUpProcessor));
+        list.add(6, new Solo(6, Solo.RANDOM_SWITCH, 250, 5000, 10, Solo.Difficulty.EASY, randomSwitchProcessor));
         list.add(7, new Solo(7, Solo.RANDOM_SWITCH, 500, 10000, 15, Solo.Difficulty.MEDIUM, randomSwitchProcessor));
-        list.add(8, new Solo(10, Solo.ENDURANCE, 600, 5000, 10, Solo.Difficulty.MEDIUM, enduranceProcessor));
-        list.add(9, new Solo(2, Solo.EARN_YOUR_SITTING_TIME, 600, 4500, 30, Solo.Difficulty.HARD, standToWinProcessor));
-        list.add(10,new Solo(13, Solo.STAND_TO_WIN , 1000, 5000, 15, Solo.Difficulty.MEDIUM, quizOne));
-        list.add(11, new Solo(5, Solo.RANDOM_STAND_UP , 750, 10000, 90, Solo.Difficulty.HARD, randomStandUpProcessor));
-        list.add(12, new Solo(8, Solo.RANDOM_SWITCH, 750, 15000, 20, Solo.Difficulty.HARD, randomSwitchProcessor));
-        list.add(13, new Solo(11, Solo.ENDURANCE, 1000, 10000, 15, Solo.Difficulty.HARD, enduranceProcessor));
-        list.add(14,new Solo(14, Solo.EARN_YOUR_SITTING_TIME, 1700, 10000, 20, Solo.Difficulty.HARD, quizOne));
+        list.add(8, new Solo(8, Solo.RANDOM_SWITCH, 750, 15000, 20, Solo.Difficulty.HARD, randomSwitchProcessor));
+        list.add(9, new Solo(9, Solo.ENDURANCE, 250, 3000, 10, Solo.Difficulty.EASY, enduranceProcessor));
+        list.add(10, new Solo(10, Solo.ENDURANCE, 600, 5000, 10, Solo.Difficulty.MEDIUM, enduranceProcessor));
+        list.add(11, new Solo(11, Solo.ENDURANCE, 1000, 10000, 15, Solo.Difficulty.HARD, enduranceProcessor));
+        list.add(12,new Solo(12, Solo.EARN_YOUR_SITTING_TIME,  250, 1500, 10, Solo.Difficulty.EASY, EarnSittingTime));
+        list.add(13,new Solo(13, Solo.EARN_YOUR_SITTING_TIME , 1000, 5000, 15, Solo.Difficulty.MEDIUM, EarnSittingTime));
+        list.add(14,new Solo(14, Solo.EARN_YOUR_SITTING_TIME, 1700, 10000, 20, Solo.Difficulty.HARD, EarnSittingTime));
+        list.add(15, new Solo(15, Solo.EARN_DURATION_TIME, 300, 1750, 450000, Solo.Difficulty.EASY, EarningDuration));
+        list.add(16, new Solo(15, Solo.EARN_DURATION_TIME, 1200, 6000, 450000, Solo.Difficulty.MEDIUM, EarningDuration));
+        list.add(17, new Solo(15, Solo.EARN_DURATION_TIME, 1800, 12000, 450000, Solo.Difficulty.HARD, EarningDuration));
+        list.add(18, new Solo(0, Solo.SOLVE_QUESTION_FOR_MORE_XP, 150, 0, 30, Solo.Difficulty.EASY, standToWinProcessor));
+        list.add(19, new Solo(1, Solo.SOLVE_QUESTION_FOR_MORE_XP, 300, 2000, 30, Solo.Difficulty.MEDIUM, standToWinProcessor));
+        list.add(20, new Solo(2, Solo.SOLVE_QUESTION_FOR_MORE_XP, 600, 4500, 30, Solo.Difficulty.HARD, standToWinProcessor));
+
+
         return list;
     }
 

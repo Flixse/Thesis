@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -28,6 +29,9 @@ import com.tomandfelix.stapp2.persistency.Solo;
 import com.tomandfelix.stapp2.persistency.SoloList;
 import com.tomandfelix.stapp2.service.ShimmerService;
 import com.tomandfelix.stapp2.tools.Logging;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.lang.ref.WeakReference;
 import java.util.Arrays;
@@ -57,10 +61,9 @@ public class OpenSoloQuest extends ServiceActivity {
         if(id == -1)
             finish();
         solo = SoloList.getSolo(id);
-        if(solo.getKind() == Solo.EARN_YOUR_SITTING_TIME) {
+        if(solo.getKind() == Solo.EARN_YOUR_SITTING_TIME || solo.getKind() == Solo.EARN_DURATION_TIME || solo.getKind() == Solo.SOLVE_QUESTION_FOR_MORE_XP) {
             viewPicker = true;
             setContentView(R.layout.activity_open_solo_quest_quiz);
-            solo.setMultiplier(0.8);
         }else{
             viewPicker = false;
             setContentView(R.layout.activity_open_solo_quest);
@@ -81,7 +84,6 @@ public class OpenSoloQuest extends ServiceActivity {
             answers = (ListView) findViewById(R.id.solo_quest_quiz_answers);
             question = (TextView) findViewById(R.id.solo_quest_quiz_question);
             confirmButton = (ButtonRectangle) findViewById(R.id.solo_quest_confirm_answer_button);
-            //quizLayout = (LinearLayout) findViewById(R.id.solo_quest_layout);
             }
         updateViews();
 
@@ -112,7 +114,7 @@ public class OpenSoloQuest extends ServiceActivity {
         if(solo.getData() == null) {
             solo.start();
             if(viewPicker){
-                solo.setAnswersCorrect(0);
+                selectedItem = -1;
                 switch (Locale.getDefault().getLanguage()) {
                     case "nl":
                         languageId = 1;
@@ -131,13 +133,9 @@ public class OpenSoloQuest extends ServiceActivity {
                     public void onResponse(List<Quiz> response) {
                         solo.setQuestions(response);
                         setQuiz();
-                        Log.d("in response","true");
-                        if(quiz.getRandomizedPossibleAnswers().isEmpty()) {
-                            Log.d("getrandomize","empty");
-                        }
-                        Log.d("grootte",quiz.getRandomizedPossibleAnswers().size() + "");
                         answerAdapter = new AnswersAdapter(OpenSoloQuest.this, R.layout.list_item_quiz_answers, quiz.getRandomizedPossibleAnswers());
                         confirmButton.setVisibility(View.VISIBLE);
+                        question.setVisibility(View.VISIBLE);
                         answers.setAdapter(answerAdapter);
                         answers.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                             @Override
@@ -145,6 +143,7 @@ public class OpenSoloQuest extends ServiceActivity {
                                 view.setSelected(true);
                                 confirmButton.setEnabled(true);
                                 selectedItem = position;
+                                answerAdapter.notifyDataSetChanged();
                             }
                         });
                         confirmButton.setVisibility(View.VISIBLE);
@@ -155,8 +154,6 @@ public class OpenSoloQuest extends ServiceActivity {
                         Log.e("error",volleyError.toString());
                     }
                 });
-                //quizLayout.setVisibility(View.VISIBLE);
-
             }
         } else {
             solo.clear();
@@ -166,17 +163,97 @@ public class OpenSoloQuest extends ServiceActivity {
 
     public void onConfirmButton(View v){
         if(answers.getItemAtPosition(selectedItem).toString().equals(quiz.getCorrectAnswer())){
-            Log.d("answer","correct");
-            solo.setAnswersCorrect(solo.getAnswersCorrect() + 1);
+            solo.incrementAnswersCorrect();
+            switch (languageId){
+                case 0:
+                    if(solo.getAnswersCorrect() == 1){
+                        Toast.makeText(getApplicationContext(), getString(R.string.quest_toast_correct_answer, solo.getAnswersCorrect() + " question "), Toast.LENGTH_LONG).show();
+                    }else {
+                        Toast.makeText(getApplicationContext(), getString(R.string.quest_toast_correct_answer, solo.getAnswersCorrect() + " questions "), Toast.LENGTH_LONG).show();
+                    }
+                    break;
+                case 1:
+                    if(solo.getAnswersCorrect() == 1){
+                        Toast.makeText(getApplicationContext(), getString(R.string.quest_toast_correct_answer, solo.getAnswersCorrect() + " vraag "), Toast.LENGTH_LONG).show();
+                    }else {
+                        Toast.makeText(getApplicationContext(), getString(R.string.quest_toast_correct_answer, solo.getAnswersCorrect() + " vragen "), Toast.LENGTH_LONG).show();
+                    }
+                    break;
+                case 2:
+                    if(solo.getAnswersCorrect() == 1){
+                        Toast.makeText(getApplicationContext(), getString(R.string.quest_toast_correct_answer, solo.getAnswersCorrect() + " question "), Toast.LENGTH_LONG).show();
+                    }else {
+                        Toast.makeText(getApplicationContext(), getString(R.string.quest_toast_correct_answer, solo.getAnswersCorrect() + " questions "), Toast.LENGTH_LONG).show();
+                    }
+                    break;
+                default:
+                    if(solo.getAnswersCorrect() == 1){
+                        Toast.makeText(getApplicationContext(), getString(R.string.quest_toast_correct_answer, solo.getAnswersCorrect() + " question "), Toast.LENGTH_LONG).show();
+                    }else {
+                        Toast.makeText(getApplicationContext(), getString(R.string.quest_toast_correct_answer, solo.getAnswersCorrect() + " questions "), Toast.LENGTH_LONG).show();
+                    }
+            }
+
         }else{
-            Log.d("answer","false");
+            switch (languageId){
+                case 0:
+                    if(solo.getAnswersCorrect() == 1){
+                        Toast.makeText(getApplicationContext(), getString(R.string.quest_toast_wrong_answer, solo.getAnswersCorrect() + " question "), Toast.LENGTH_LONG).show();
+                    }else {
+                        Toast.makeText(getApplicationContext(), getString(R.string.quest_toast_wrong_answer, solo.getAnswersCorrect() + " questions "), Toast.LENGTH_LONG).show();
+                    }
+                    break;
+                case 1:
+                    if(solo.getAnswersCorrect() == 1){
+                        Toast.makeText(getApplicationContext(), getString(R.string.quest_toast_wrong_answer, solo.getAnswersCorrect() + " vraag "), Toast.LENGTH_LONG).show();
+                    }else {
+                        Toast.makeText(getApplicationContext(), getString(R.string.quest_toast_wrong_answer, solo.getAnswersCorrect() + " vragen "), Toast.LENGTH_LONG).show();
+                    }
+                    break;
+                case 2:
+                    if(solo.getAnswersCorrect() == 1){
+                        Toast.makeText(getApplicationContext(), getString(R.string.quest_toast_wrong_answer, solo.getAnswersCorrect() + " question "), Toast.LENGTH_LONG).show();
+                    }else {
+                        Toast.makeText(getApplicationContext(), getString(R.string.quest_toast_wrong_answer, solo.getAnswersCorrect() + " questions "), Toast.LENGTH_LONG).show();
+                    }
+                    break;
+                default:
+                    if(solo.getAnswersCorrect() == 1){
+                        Toast.makeText(getApplicationContext(), getString(R.string.quest_toast_wrong_answer, solo.getAnswersCorrect() + " question "), Toast.LENGTH_LONG).show();
+                    }else {
+                        Toast.makeText(getApplicationContext(), getString(R.string.quest_toast_wrong_answer, solo.getAnswersCorrect() + " questions "), Toast.LENGTH_LONG).show();
+                    }
+            }
         }
+        ServerHelper.getInstance().incrementQuizByProfileIdLanguageId(mProfile.getId(), quiz.getQuizId() , new ServerHelper.ResponseFunc<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    Log.d("response", response.getString("error"));
+                }catch(JSONException e){
+                    e.printStackTrace();
+                }
+            }
+        } ,new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                if(!ServerHelper.getInstance().checkInternetConnection()) {
+                    //askForPassword();
+                }
+            }
+        });
         confirmButton.setEnabled(false);
+        selectedItem = -1;
         answers.clearChoices();
         if(!solo.getQuestions().isEmpty()) {
             setQuiz();
-            answerAdapter.notifyDataSetChanged();
+            answerAdapter = new AnswersAdapter(OpenSoloQuest.this, R.layout.list_item_quiz_answers, quiz.getRandomizedPossibleAnswers());
+            answers.setAdapter(answerAdapter);
+        }else{
+            answers.setVisibility(View.INVISIBLE);
+            question.setText(getString(R.string.quest_no_more_questions));
         }
+
     }
 
     public void setQuiz(){
