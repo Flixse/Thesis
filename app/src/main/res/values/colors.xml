@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="primaryColor">#3F51B5</color>
+    <color name="primaryColorTransparent">#993F51B5</color>
+    <color name="titleTextColorTransparent">#FFFFFF</color>
+    <color name="TextColorTransparent">#FFFFFF</color>
     <color name="primaryColorDark">#303F9F</color>
     <color name="primaryColorLight">#C5CAE9</color>
     <color name="accentColor">#FF4081</color>

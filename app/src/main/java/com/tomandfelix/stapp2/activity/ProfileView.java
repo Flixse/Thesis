@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v7.widget.Toolbar;
 import android.text.InputType;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
@@ -20,6 +21,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,6 +29,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.gc.materialdesign.views.ButtonRectangle;
 import com.gc.materialdesign.views.ProgressBarCircularIndeterminate;
+import com.github.amlcurran.showcaseview.ShowcaseView;
+import com.github.amlcurran.showcaseview.targets.ViewTarget;
 import com.tomandfelix.stapp2.R;
 import com.tomandfelix.stapp2.application.StApp;
 import com.tomandfelix.stapp2.graphtools.GraphParser;
@@ -43,11 +47,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.lang.ref.WeakReference;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Random;
 import java.util.Set;
 
 /**
@@ -77,6 +80,7 @@ public class ProfileView extends DrawerActivity {
     private static final String RESUME = "Resume";
     private static final String START = "Start";
     private static final String STOP = "Stop";
+    private int ordre = 0;
     private Runnable updateXP = new Runnable() {
         @Override
         public void run() {
@@ -105,6 +109,10 @@ public class ProfileView extends DrawerActivity {
         }
     };
     private GraphParser.DailyGraphData dailydata;
+    private LinearLayout profileStatus;
+    private RelativeLayout profileRank;
+    private ShowcaseView mShowcaseView;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,7 +121,6 @@ public class ProfileView extends DrawerActivity {
         super.onCreate(savedInstanceState);
 
         dailyDataHandler = new Handler();
-
         graphBehaviourDivider = findViewById(R.id.profile_graph_behaviour_divider);
         toOpenChallengeDivider = findViewById(R.id.profile_to_open_challenges_divider);
         username = (TextView) findViewById(R.id.profile_username);
@@ -129,6 +136,9 @@ public class ProfileView extends DrawerActivity {
         connecting = (ProgressBarCircularIndeterminate) findViewById(R.id.profile_progress);
         openChallenges = (LinearLayout) findViewById(R.id.profile_open_challenges);
         graphBehaviour = (LinearLayout) findViewById(R.id.profile_graph_behaviour_layout);
+        profileStatus = (LinearLayout) findViewById(R.id.profile_status);
+        profileRank = (RelativeLayout) findViewById(R.id.rank_layout);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
 
         Profile profile = getIntent().getParcelableExtra("profile");
         if (profile != null) {
@@ -161,6 +171,76 @@ public class ProfileView extends DrawerActivity {
         updateProfileViaSettingsView();
         updateToOpenChallengeView();
         dailydata = GraphParser.formatDailyData(DatabaseHelper.getInstance().getTodaysLogs(), DatabaseHelper.getInstance().getTodaysConnectionLogs());
+
+        tutorialShowCase();
+    }
+
+    private void tutorialShowCase(){
+        final Profile profile = DatabaseHelper.getInstance().getOwner();
+        ServerHelper.getInstance().isTutorialOfViewOn(profile.getId(), PROFILE_VIEW_TUTORIAL, new ServerHelper.ResponseFunc<Boolean>() {
+            @Override
+            public void onResponse(Boolean response) {
+                if(response){
+                    mShowcaseView = new ShowcaseView.Builder(ProfileView.this)
+                            .setStyle(R.style.CustomShowcaseTheme2)
+                            .setContentTitle(getString(R.string.tutorial_profile_view_title))
+                            .setContentText(getString(R.string.tutorial_profile_view))
+                            .setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    switch(ordre){
+                                        case 0:
+                                            changeTutorialShowcaseView(new ViewTarget(profileRank),getString(R.string.tutorial_profile_view_ranking_title), getString(R.string.tutorial_profile_view_ranking));
+                                            ordre++;
+                                            break;
+                                        case 1:
+                                            changeTutorialShowcaseView(new ViewTarget(profileStatus),getString(R.string.tutorial_profile_view_sensor_title), getString(R.string.tutorial_profile_view_sensor));
+                                            ordre++;
+                                            break;
+                                        case 2:
+                                            changeTutorialShowcaseView(new ViewTarget(tips),getString(R.string.tutorial_profile_view_tips_title), getString(R.string.tutorial_profile_view_tips));
+                                            ordre++;
+                                            break;
+                                        case 3:
+                                            try {
+                                                Field field = Toolbar.class.getDeclaredField("mNavButtonView");
+                                                field.setAccessible(true);
+                                                View navigationView = (View) field.get(toolbar);
+                                                changeTutorialShowcaseView(new ViewTarget(navigationView),getString(R.string.tutorial_home_button_title), getString(R.string.tutorial_home_button));
+                                            } catch (NoSuchFieldException e) {
+                                                e.printStackTrace();
+                                            } catch (IllegalAccessException e) {
+                                                e.printStackTrace();
+                                            }
+                                            mShowcaseView.setButtonText(getString(R.string.tutorial_close));
+                                            ordre++;
+                                            break;
+                                        case 4:
+                                            mShowcaseView.hide();
+                                            break;
+                                        default:
+                                            break;
+                                    }
+
+                                }
+                            })
+                            .build();
+                    mShowcaseView.setButtonText(getString(R.string.tutorial_next));
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                Toast.makeText(ProfileView.this, R.string.tutorial_error, Toast.LENGTH_LONG).show();
+            }
+        });
+
+    }
+
+    private void changeTutorialShowcaseView(ViewTarget viewTarget, String contentTitle, String contentText){
+        mShowcaseView.setTarget(viewTarget);
+        mShowcaseView.setContentTitle(contentTitle);
+        mShowcaseView.setContentText(contentText);
     }
 
     private void askForPassword() {
@@ -187,8 +267,10 @@ public class ProfileView extends DrawerActivity {
                                     }, new Response.ErrorListener() {
                                         @Override
                                         public void onErrorResponse(VolleyError volleyError) {
-                                            if (volleyError.getMessage().equals("wrong")) {
-                                                askForPassword();
+                                            if(volleyError.getMessage() != null) {
+                                                if (volleyError.getMessage().equals("wrong")) {
+                                                    askForPassword();
+                                                }
                                             }
                                         }
                                     });
@@ -285,6 +367,7 @@ public class ProfileView extends DrawerActivity {
     private void updateState(int state) {
         switch(state) {
             case Logging.STATE_CONNECTING:
+                Log.d("StateZ connecting!","?");
                 statusIcon.setVisibility(View.GONE);
                 connecting.setVisibility(View.VISIBLE);
                 pauseButton.setVisibility(View.VISIBLE);
@@ -292,6 +375,7 @@ public class ProfileView extends DrawerActivity {
                 startStopButton.setText(STOP);
                 break;
             case Logging.STATE_DISCONNECTED:
+                Log.d("StateZ disconnected!","?");
                 statusIcon.setVisibility(View.VISIBLE);
                 statusIcon.setImageResource(R.drawable.icon_disconnected);
                 connecting.setVisibility(View.GONE);
@@ -300,6 +384,7 @@ public class ProfileView extends DrawerActivity {
                 startStopButton.setText(STOP);
                 break;
             case Logging.STATE_DAY_STOPPED:
+                Log.d("StateZ state day stoppe","?");
                 statusIcon.setVisibility(View.VISIBLE);
                 statusIcon.setImageResource(R.drawable.icon_no_day_started);
                 connecting.setVisibility(View.GONE);
@@ -309,6 +394,7 @@ public class ProfileView extends DrawerActivity {
                 break;
             case Logging.STATE_CONNECTED:
             case Logging.STATE_SIT:
+                Log.d("StateZ connected+ sit!","?");
                 statusIcon.setVisibility(View.VISIBLE);
                 statusIcon.setImageResource(R.drawable.icon_sit_green);
                 connecting.setVisibility(View.GONE);
@@ -317,6 +403,7 @@ public class ProfileView extends DrawerActivity {
                 startStopButton.setText(STOP);
                 break;
             case Logging.STATE_STAND:
+                Log.d("StateZ stand!","?");
                 statusIcon.setVisibility(View.VISIBLE);
                 statusIcon.setImageResource(R.drawable.icon_stand);
                 connecting.setVisibility(View.GONE);
@@ -325,6 +412,7 @@ public class ProfileView extends DrawerActivity {
                 startStopButton.setText(STOP);
                 break;
             case Logging.STATE_OVERTIME:
+                Log.d("StateZ overtime!","?");
                 statusIcon.setVisibility(View.VISIBLE);
                 statusIcon.setImageResource(R.drawable.icon_sit_red);
                 connecting.setVisibility(View.GONE);

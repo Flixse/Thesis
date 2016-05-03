@@ -17,9 +17,17 @@ import com.tomandfelix.stapp2.persistency.Solo;
 import java.util.Locale;
 
 public abstract class ServiceActivity extends ActionBarActivity {
+
     protected Toolbar toolbar;
     protected StApp app;
-
+    static public final String PROFILE_VIEW_TUTORIAL = "profile_view_tutorial";
+    static public final String LEADERBOARD_VIEW_TUTORIAL = "leaderboard_view_tutorial";
+    static public final String GRAPH_VIEW_TUTORIAL = "graph_view_tutorial";
+    static public final String SOLO_QUEST_VIEW_TUTORIAL = "solo_quest_view_tutorial";
+    static public final String OPEN_SOLO_QUEST_VIEW_TUTORIAL = "open_solo_quest_view_tutorial";
+    static public final String CHALLENGE_VIEW_TUTORIAL = "challenge_view_tutorial";
+    static public final String CHALLENGE_LEADERBOARD_VIEW_TUTORIAL = "challenge_leaderboard_view_tutorial";
+    static public final String SETTINGS_VIEW_TUTORIAL = "settings_view_tutorial";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -209,4 +217,8 @@ public abstract class ServiceActivity extends ActionBarActivity {
         }
         return nameOrDescription ? nameOfChallenge : descriptionOfChallenge;
     }
+
+
+
+
 }

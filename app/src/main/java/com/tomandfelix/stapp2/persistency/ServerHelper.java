@@ -972,6 +972,94 @@ public class ServerHelper {
         VolleyQueue.getInstance().addToRequestQueue(incrementTipsByProfileIdLanguageId);
     }
 
+    public void isTutorialOfViewOn(int profileId, final String viewSelector, final ResponseFunc<Boolean> responseListener, final Response.ErrorListener errorListener){
+        JSONObject request = new JSONObject();
+        try{
+            request.put("profile_id",profileId);
+            request.put("view_selector",viewSelector);
+        }catch (JSONException e) {
+            e.printStackTrace();
+        }JsonObjectRequest isTutorialOfViewOn = new JsonObjectRequest(Request.Method.POST, "http://a15_stapp2.studev.groept.be/isTutorialOfViewOn.php", request, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                boolean tutorialState = false;
+                try{
+                    if(!response.has("error")){
+                        if(response.getInt(viewSelector) == 0){
+                            tutorialState = true;
+                        }else{
+                            tutorialState = false;
+                        }
+                    }else{
+                        errorListener.onErrorResponse(new VolleyError(response.getString("error")));
+                     }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                responseListener.onResponse(tutorialState);
+            }
+        }, errorListener);
+        VolleyQueue.getInstance().addToRequestQueue(isTutorialOfViewOn);
+    }
+
+    /*public void areTutorialsOn(int profileId, final ResponseFunc<Boolean> responseListener, final Response.ErrorListener errorListener){
+        JSONObject request = new JSONObject();
+        try{
+            request.put("profile_id",profileId);
+        }catch (JSONException e) {
+            e.printStackTrace();
+        }JsonObjectRequest areTutorialsOn = new JsonObjectRequest(Request.Method.POST, "http://a15_stapp2.studev.groept.be/areTutorialsOnOff.php", request, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                boolean tutorialState = false;
+                try{
+                    if(!response.has("error")){
+                        if(response.getInt("profile_view_tutorial") == 0){
+                            tutorialState = true;
+                        }else{
+                            tutorialState = false;
+                        }
+                    }else{
+                        errorListener.onErrorResponse(new VolleyError(response.getString("error")));
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                responseListener.onResponse(tutorialState);
+            }
+        }, errorListener);
+        VolleyQueue.getInstance().addToRequestQueue(areTutorialsOn);
+    }
+
+    public void turnTutorialsOnOff(int profileId, int tutorialStatusValue, final ResponseFunc<Boolean> responseListener, final Response.ErrorListener errorListener){
+        JSONObject request = new JSONObject();
+        try{
+            request.put("profile_id",profileId);
+            request.put("tutorial_status",tutorialStatusValue);
+        }catch (JSONException e) {
+            e.printStackTrace();
+        }JsonObjectRequest turnTutorialsOnOff = new JsonObjectRequest(Request.Method.POST, "http://a15_stapp2.studev.groept.be/isTutorialOfViewOn.php", request, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                boolean tutorialState = false;
+                try{
+                    if(response.has("error")){
+                        if(response.getString("error").equals("none")){
+                            tutorialState = true;
+                        }else{
+                            tutorialState = false;
+                            errorListener.onErrorResponse(new VolleyError(response.getString("error")));
+                        }
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                responseListener.onResponse(tutorialState);
+            }
+        }, errorListener);
+        VolleyQueue.getInstance().addToRequestQueue(turnTutorialsOnOff);
+    }*/
+
     public boolean checkInternetConnection(){
         ConnectivityManager connectivityManager
                 = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);

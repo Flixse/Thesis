@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +20,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.gc.materialdesign.views.ButtonRectangle;
 import com.gc.materialdesign.views.ProgressBarDeterminate;
+import com.github.amlcurran.showcaseview.ShowcaseView;
+import com.github.amlcurran.showcaseview.targets.ViewTarget;
 import com.tomandfelix.stapp2.R;
 import com.tomandfelix.stapp2.application.StApp;
 import com.tomandfelix.stapp2.persistency.DatabaseHelper;
@@ -34,6 +37,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.lang.ref.WeakReference;
+import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
@@ -50,10 +54,13 @@ public class OpenSoloQuest extends ServiceActivity {
     private AnswersAdapter answerAdapter;
     private ButtonRectangle confirmButton;
     private TextView result;
+    private TextView description;
     private TextView question;
+    private ShowcaseView mShowcaseView;
     private int state;
     private int languageId;
     private int selectedItem;
+    private int ordre = 0;
     private boolean viewPicker;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +80,7 @@ public class OpenSoloQuest extends ServiceActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         handler.setInstance(this);
         TextView name = (TextView) findViewById(R.id.solo_quest_name);
-        final TextView description = (TextView) findViewById(R.id.solo_quest_description);
+        description = (TextView) findViewById(R.id.solo_quest_description);
         name.setText(getNameOfQuest(solo.getKind()));
         Log.d("text",getDescriptionOfQuest(solo));
         description.setText(getDescriptionOfQuest(solo));
@@ -86,6 +93,7 @@ public class OpenSoloQuest extends ServiceActivity {
             confirmButton = (ButtonRectangle) findViewById(R.id.solo_quest_confirm_answer_button);
             }
         updateViews();
+        tutorialShowCase();
 
     }
 
@@ -108,6 +116,56 @@ public class OpenSoloQuest extends ServiceActivity {
         if(StApp.getHandler() == handler) {
             StApp.setHandler(null);
         }
+    }
+
+    private void tutorialShowCase(){
+        ServerHelper.getInstance().isTutorialOfViewOn(mProfile.getId(), OPEN_SOLO_QUEST_VIEW_TUTORIAL, new ServerHelper.ResponseFunc<Boolean>() {
+            @Override
+            public void onResponse(Boolean response) {
+                if (response) {
+                    mShowcaseView = new ShowcaseView.Builder(OpenSoloQuest.this)
+                            .setStyle(R.style.CustomShowcaseTheme2)
+                            .setContentTitle(getString(R.string.tutorial_open_solo_quest_view_title))
+                            .setContentText(getString(R.string.tutorial_open_solo_quest_view))
+                            .setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    switch (ordre) {
+                                        case 0:
+                                            changeTutorialShowcaseView(new ViewTarget(description), getString(R.string.tutorial_open_solo_quest_view_description_title), getString(R.string.tutorial_open_solo_quest_view_description));
+                                            ordre++;
+                                            break;
+                                        case 1:
+                                            changeTutorialShowcaseView(new ViewTarget(button), getString(R.string.tutorial_open_solo_quest_view_button_title), getString(R.string.tutorial_open_solo_quest_view_button));
+                                            mShowcaseView.setButtonText(getString(R.string.tutorial_close));
+                                            ordre++;
+                                            break;
+                                        case 2:
+                                            mShowcaseView.hide();
+                                            break;
+                                        default:
+                                            break;
+                                    }
+
+                                }
+                            })
+                            .build();
+                    mShowcaseView.setButtonText(getString(R.string.tutorial_next));
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                Toast.makeText(OpenSoloQuest.this, R.string.tutorial_error, Toast.LENGTH_LONG).show();
+            }
+        });
+
+    }
+
+    private void changeTutorialShowcaseView(ViewTarget viewTarget, String contentTitle, String contentText){
+        mShowcaseView.setTarget(viewTarget);
+        mShowcaseView.setContentTitle(contentTitle);
+        mShowcaseView.setContentText(contentText);
     }
 
     public void onStartStopButton(View v) {
@@ -276,7 +334,9 @@ public class OpenSoloQuest extends ServiceActivity {
                     button.setText(getString(R.string.quest_connect_sensor));
                     button.setEnabled(false);
                 }
-                confirmButton.setEnabled(false);
+                if(viewPicker) {
+                    confirmButton.setEnabled(false);
+                }
                 button.setVisibility(View.VISIBLE);
                 progress.setVisibility(View.INVISIBLE);
                 result.setVisibility(View.INVISIBLE);

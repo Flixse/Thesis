@@ -20,6 +20,8 @@ import android.widget.Toast;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.gc.materialdesign.views.ButtonRectangle;
+import com.github.amlcurran.showcaseview.ShowcaseView;
+import com.github.amlcurran.showcaseview.targets.ViewTarget;
 import com.tomandfelix.stapp2.R;
 import com.tomandfelix.stapp2.application.StApp;
 import com.tomandfelix.stapp2.persistency.ChallengeList;
@@ -42,6 +44,8 @@ public class ChallengeLeaderboard extends ServiceActivity {
     private int count = 0;
     private int challengeID;
     private List<Integer> opponentsIds;
+    private ShowcaseView mShowcaseView;
+    private int ordre = 0;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -83,6 +87,7 @@ public class ChallengeLeaderboard extends ServiceActivity {
             Toast.makeText(getApplicationContext(),getString(R.string.leaderboard_no_internet_connection), Toast.LENGTH_SHORT).show();
         }
         checkCount();
+        tutorialShowCase();
     }
 
     @Override
@@ -91,6 +96,48 @@ public class ChallengeLeaderboard extends ServiceActivity {
         opponentsIds = DatabaseHelper.getInstance().getOpponentIds();
     }
 
+    private void tutorialShowCase(){
+        ServerHelper.getInstance().isTutorialOfViewOn(mProfile.getId(), CHALLENGE_LEADERBOARD_VIEW_TUTORIAL, new ServerHelper.ResponseFunc<Boolean>() {
+            @Override
+            public void onResponse(Boolean response) {
+                if(response) {
+                    mShowcaseView = new ShowcaseView.Builder(ChallengeLeaderboard.this)
+                            .setStyle(R.style.CustomShowcaseTheme2)
+                            .setContentTitle(getString(R.string.tutorial_challenge_leaderboard_view_title))
+                            .setContentText(getString(R.string.tutorial_challenge_leaderboard_view))
+                            .setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    switch (ordre) {
+                                        case 0:
+                                            changeTutorialShowcaseView(new ViewTarget(confirmBtn), getString(R.string.tutorial_challenge_leaderboard_view_button_title), getString(R.string.tutorial_challenge_leaderboard_view_button));
+                                            ordre++;
+                                            break;
+                                        case 1:
+                                            mShowcaseView.hide();
+                                            break;
+                                        default:
+                                            break;
+                                    }
+                                }
+                            })
+                            .build();
+                    mShowcaseView.setButtonText(getString(R.string.tutorial_next));
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                Toast.makeText(ChallengeLeaderboard.this, R.string.tutorial_error, Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    private void changeTutorialShowcaseView(ViewTarget viewTarget, String contentTitle, String contentText){
+        mShowcaseView.setTarget(viewTarget);
+        mShowcaseView.setContentTitle(contentTitle);
+        mShowcaseView.setContentText(contentText);
+    }
     private void setupList() {
         adapter = new ChallengeLeaderboardAdapter(ChallengeLeaderboard.this, R.layout.list_item_challenge_leaderboard, list);
         View header = getLayoutInflater().inflate(R.layout.list_head_foot_leaderboard, leaderboardList, false);

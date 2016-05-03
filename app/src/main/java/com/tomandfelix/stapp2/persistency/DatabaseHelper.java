@@ -41,8 +41,6 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     private static final String TABLE_SETTINGS = "settings";
     private static final String TABLE_LC = "livechallenges";
     private static final String TABLE_OPPONENTSTATUS = "opponentstatus";
-    private static final String TABLE_QUIZ_QUESTIONS = "questions";
-    private static final String TABLE_TUTORIALS = "tutorials";
     private static final String KEY_ID = "id";
     private static final String KEY_ACTION = "action";
     private static final String KEY_DATETIME = "datetime";
@@ -64,8 +62,6 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     private static final String KEY_STATUS = "status";
     private static final String KEY_OPPONENT_ID = "opponent_id";
     private static final String KEY_STATUS_MESSAGE = "status_message";
-    private static final String KEY_QUESTION = "quiz_question";
-    private static final String KEY_TUTORIAL_TEXT = "tutorial_text";
     public static final String OWNER = "owner";
     public static final String NOTIF = "notification";
     public static final String TOKEN = "token";
@@ -76,7 +72,6 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     public static final String LAST_USED_SENSOR = "last_used_sensor";
     public static final String PROFILE_GRAPH = "profile_graph";
     public static final String PROFILE_OPEN_CHALLENGE = "profile_open_challenge";
-    public static final String TUTORIAL_TOASTS = "tutorial_toasts";
     public static final String LOG_SIT = "sit";
     public static final String LOG_OVERTIME = "sit_overtime";
     public static final String LOG_STAND = "stand";
@@ -166,8 +161,6 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         values.put(KEY_VALUE_INT, "1");
         db.insert(TABLE_SETTINGS, null, values);
         values.clear();
-        values.put(KEY_SETTING, TUTORIAL_TOASTS);
-        values.put(KEY_VALUE_INT, "1");
         db.insert(TABLE_SETTINGS, null, values);
         values.clear();
     }

@@ -40,7 +40,6 @@ public class Quiz {
     }
 
     public ArrayList<String> getRandomizedPossibleAnswers(){
-        Random rnd = new Random();
         String[] possibleAnswers = new String[4];
         possibleAnswers[0] = correctAnswer;
         possibleAnswers[1] = wrongAnswers.get(0);

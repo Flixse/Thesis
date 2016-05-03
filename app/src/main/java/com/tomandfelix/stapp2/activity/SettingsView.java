@@ -17,6 +17,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.github.amlcurran.showcaseview.ShowcaseView;
+import com.github.amlcurran.showcaseview.targets.ViewTarget;
 import com.tomandfelix.stapp2.R;
 import com.tomandfelix.stapp2.persistency.DatabaseHelper;
 import com.tomandfelix.stapp2.persistency.Profile;
@@ -27,6 +31,8 @@ public class SettingsView extends DrawerActivity {
     private ListView settingsList;
     private SettingsAdapter adapter;
     private Setting[] settings;
+    private ShowcaseView mShowcaseView;
+    private int ordre = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +67,7 @@ public class SettingsView extends DrawerActivity {
         adapter = new SettingsAdapter(this, R.layout.list_item_settings, settings);
         settingsList.setAdapter(adapter);
         settingsList.setOnItemClickListener(new SettingsListener());
+        tutorialShowCase();
     }
 
     @Override
@@ -81,6 +88,75 @@ public class SettingsView extends DrawerActivity {
             default:
                 super.onActivityResult(requestCode, resultCode, data);
         }
+    }
+
+    private void tutorialShowCase(){
+        ServerHelper.getInstance().isTutorialOfViewOn(mProfile.getId(), SETTINGS_VIEW_TUTORIAL, new ServerHelper.ResponseFunc<Boolean>() {
+            @Override
+            public void onResponse(Boolean response) {
+                if(response) {
+                    mShowcaseView = new ShowcaseView.Builder(SettingsView.this)
+                            .setStyle(R.style.CustomShowcaseTheme2)
+                            .setContentTitle(getString(R.string.tutorial_settings_view_title))
+                            .setContentText(getString(R.string.tutorial_settings_view))
+                            .setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    switch (ordre) {
+                                        case 0:
+                                            changeTutorialShowcaseView(new ViewTarget(settingsList.getChildAt(0).findViewById(R.id.setting_title)), getString(R.string.tutorial_settings_view_upload_frequency_title), getString(R.string.tutorial_settings_view_upload_frequency));
+                                            ordre++;
+                                            break;
+                                        case 1:
+                                            changeTutorialShowcaseView(new ViewTarget(settingsList.getChildAt(1).findViewById(R.id.setting_title)), getString(R.string.tutorial_settings_view_sensor_title), getString(R.string.tutorial_settings_view_sensor));
+                                            ordre++;
+                                            break;
+                                        case 2:
+                                            changeTutorialShowcaseView(new ViewTarget(settingsList.getChildAt(2).findViewById(R.id.setting_title)), getString(R.string.tutorial_settings_view_personalisation_title), getString(R.string.tutorial_settings_view_personalisation));
+                                            ordre++;
+                                            break;
+                                        case 3:
+                                            changeTutorialShowcaseView(new ViewTarget(settingsList.getChildAt(3).findViewById(R.id.setting_title)), getString(R.string.tutorial_settings_view_account_settings_title), getString(R.string.tutorial_settings_view_account_settings));
+                                            ordre++;
+                                            break;
+                                        case 4:
+                                            changeTutorialShowcaseView(new ViewTarget(settingsList.getChildAt(4).findViewById(R.id.setting_title)), getString(R.string.tutorial_settings_view_mobile_data_title), getString(R.string.tutorial_settings_view_mobile_data));
+                                            ordre++;
+                                            break;
+                                        case 5:
+                                            changeTutorialShowcaseView(new ViewTarget(settingsList.getChildAt(5).findViewById(R.id.setting_title)), getString(R.string.tutorial_settings_view_notifications_title), getString(R.string.tutorial_settings_view_notifications));
+                                            ordre++;
+                                            break;
+                                        case 6:
+                                            changeTutorialShowcaseView(new ViewTarget(settingsList.getChildAt(6).findViewById(R.id.setting_title)), getString(R.string.tutorial_settings_view_log_off_title), getString(R.string.tutorial_settings_view_log_off));
+                                            ordre++;
+                                            break;
+                                        case 7:
+                                            mShowcaseView.hide();
+                                            break;
+                                        default:
+                                            break;
+                                    }
+
+                                }
+                            })
+                            .build();
+                    mShowcaseView.setButtonText(getString(R.string.tutorial_next));
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                Toast.makeText(SettingsView.this, R.string.tutorial_error, Toast.LENGTH_LONG).show();
+            }
+        });
+
+    }
+
+    private void changeTutorialShowcaseView(ViewTarget viewTarget, String contentTitle, String contentText){
+        mShowcaseView.setTarget(viewTarget);
+        mShowcaseView.setContentTitle(contentTitle);
+        mShowcaseView.setContentText(contentText);
     }
 
     private class Setting {

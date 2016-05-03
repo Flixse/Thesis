@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.github.amlcurran.showcaseview.ShowcaseView;
 import com.tomandfelix.stapp2.R;
 import com.tomandfelix.stapp2.persistency.DatabaseHelper;
 import com.tomandfelix.stapp2.persistency.Profile;
@@ -37,6 +38,7 @@ public class LeaderboardView extends DrawerActivity {
     private ListView leaderboardList;
     private LeaderboardListAdapter adapter;
     private ArrayList<Profile> list;
+    private ShowcaseView mShowcaseView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +47,7 @@ public class LeaderboardView extends DrawerActivity {
         mProfile = DatabaseHelper.getInstance().getOwner();
         leaderboardList = (ListView) findViewById(R.id.leaderboard_list);
         getLeaderboard();
+        tutorialShowCase();
     }
 
     private void getLeaderboard() {
@@ -66,6 +69,29 @@ public class LeaderboardView extends DrawerActivity {
             Toast.makeText(getApplicationContext(),getString(R.string.leaderboard_no_internet_connection), Toast.LENGTH_SHORT).show();
         }
     }
+
+    private void tutorialShowCase(){
+        ServerHelper.getInstance().isTutorialOfViewOn(mProfile.getId(), LEADERBOARD_VIEW_TUTORIAL, new ServerHelper.ResponseFunc<Boolean>() {
+            @Override
+            public void onResponse(Boolean response) {
+                if(response) {
+                    mShowcaseView = new ShowcaseView.Builder(LeaderboardView.this)
+                            .setStyle(R.style.CustomShowcaseTheme2)
+                            .setContentTitle(getString(R.string.tutorial_leaderboard_view_title))
+                            .setContentText(getString(R.string.tutorial_leaderboard_view))
+                            .build();
+                    mShowcaseView.setButtonText(getString(R.string.tutorial_close));
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                Toast.makeText(LeaderboardView.this, R.string.tutorial_error, Toast.LENGTH_LONG).show();
+            }
+        });
+
+    }
+
 
     private void askForPassword() {
         AlertDialog.Builder alert = new AlertDialog.Builder(this);

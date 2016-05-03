@@ -21,13 +21,62 @@
     <string name="title_activity_open_challenge">Uitdaging</string>
     <string name="title_activity_profile_view_settings">Profiel instellingen</string>
 
-    <string name="profile_out_of_date">Profile could be out of date, no Internet connection</string>
-    <string name="profile_error">It seems like an error occured, Please enter your password again</string>
-    <string name="profile_error_title">Password</string>
-    <string name="profile_no_internet_error">Unable to login again, no internet connection</string>
+    <string name="tutorial_profile_view_title">Profiel</string>
+    <string name="tutorial_profile_view">Deze tutorial zal je gidsen doorheen de applicatie. Beginnede met dit scherm, het profiel.</string>
+    <string name="tutorial_profile_view_ranking_title">Ranking en experience punten</string>
+    <string name="tutorial_profile_view_ranking">Midden in de kroon is je ranking. Experience punten verdien je door goed sta gedrag te tonen of door solo opgaven of uitdagingen te spelen.</string>
+    <string name="tutorial_profile_view_sensor_title">Sensor</string>
+    <string name="tutorial_profile_view_sensor">Deze applicatie maakt gebruik van een Shimmer sensor. Druk start om te connecteren met een sensor. Als je bent geconnecteerd dan zal een groen mannetje je sta/zit status duidelijk maken. Veranderen van sensor kan in de instellingen van de app.</string>
+    <string name="tutorial_profile_view_tips_title">Tips</string>.
+    <string name="tutorial_profile_view_tips">Aan de onderkant zie je de tips. Deze tips geven je een mogelijkheid om door een makkelijke manier je sedentair gedrag te verbteren.</string>
+    <string name="tutorial_home_button_title">Thuis knop</string>
+    <string name="tutorial_home_button">Druk of schuif van links naar rechts om het menu te openen. Druk op "Sluit" om de tutorial van het profiel te beëindigen.</string>
+    <string name="tutorial_leaderboard_view_title">Leaderboard</string>
+    <string name="tutorial_leaderboard_view">Dit is het leaderboard. Jou profiel staat in de accent kleur. Hier zie je jou ranking in relatie met andere spelers. Door op een andere speler te klikken kom je op zijn profiel terecht.</string>
+    <string name="tutorial_graph_view_title">Grafieken</string>
+    <string name="tutorial_graph_view">Hier zie je je vooruitgang in grafiek vorm. Twee grafieken zijn geïmplementeerd. De ene met de vorige actieve dag en de andere een vooruitgang van de vorige 2 weken.</string>
+    <string name="tutorial_solo_quest_view_title">Solo opgaven</string>
+    <string name="tutorial_solo_quest_view">Hier zie je een lijst met solo opgaven. Deze zijn wel anders dan de "uitdagingen". Solo opgaven speel je met jezelf, wanneer uitdagingen tegen andere spelers is. De moeilijkheid is zichtbaar door de de bolletjes aan de linker kant. Groen is makkelijk, oranje gemiddel en rood moeilijk. De kleur van het bolletje verandert naar blauw als je een solo opgave start. Druk op een opgave die je wilt doen! </string>
+    <string name="tutorial_open_solo_quest_view_title">Open solo opgave</string>
+    <string name="tutorial_open_solo_quest_view">Je hebt nu op een solo opgave geklikt.</string>
+    <string name="tutorial_open_solo_quest_view_description_title">Beschrijving</string>
+    <string name="tutorial_open_solo_quest_view_description">Lees de beschrijving van elke opgave die je start! Deze vertelt wat de opgave inhoudt!</string>
+    <string name="tutorial_open_solo_quest_view_button_title">Knop</string>
+    <string name="tutorial_open_solo_quest_view_button">Deze knop vertelt of je de opgave kan starten. Als deze grijs is betekent het dat je nog niet geconnecteerd bent met een sensor. Anders kan je weldegelijk eentje starten!</string>
+    <string name="tutorial_challenge_view_title">Uitdagingen</string>
+    <string name="tutorial_challenge_view">Hier zie je de uitdagingen. Als je iemand wilt uitdagen dan moet je hier zijn. 4 verschillende uitdagingen zijn mogelijk. In de vooruitgang tab zie je alle challenges die oftewel bezig zijn of reactie nodig hebben van jou of andere speler(s).</string>
+    <string name="tutorial_challenge_leaderboard_view_title">Leaderboard van de uitdagingen</string>
+    <string name="tutorial_challenge_leaderboard_view">Jou profiel is zichtbaar in de accent kleur. Hier ze je, net zoals bij het normale leaderboard, jou ranking in relatie met andere spelers. Klik op de checkbox aan de linkerkant van elk profiel om hem of haar uit te dagen.</string>
+    <string name="tutorial_challenge_leaderboard_view_button_title">Zend invitaties voor een uitdaging</string>
+    <string name="tutorial_challenge_leaderboard_view_button">Deze knop zal je vertellen hoeveel personen je extra moet uitdagen voor je de uitdaging kan starten. Je zal zien als je het correcte aantal hebt aangeduid dat de knop actief wordt. Dan kan je invitaties voor een uitdaging starten!</string>
+    <string name="tutorial_settings_view_title">Intstellingen</string>
+    <string name="tutorial_settings_view">Hier kan je instellingen veranderen van de applicatie.</string>
+    <string name="tutorial_settings_view_upload_frequency_title">Verander upload frequentie</string>
+    <string name="tutorial_settings_view_upload_frequency">De applicatie moet data versturen via internet. Als je deze wilt vertragen dan verander je dit veld.</string>
+    <string name="tutorial_settings_view_sensor_title">Verander sensor</string>
+    <string name="tutorial_settings_view_sensor">Heb je een nieuwe sensor? Verander hem hier!</string>
+    <string name="tutorial_settings_view_personalisation_title">Personalisatie van de profiel tab</string>
+    <string name="tutorial_settings_view_personalisation">Sommige zaken kunnen toegevoegd aan of verwijdert worden uit je profiel tab.</string>
+    <string name="tutorial_settings_view_account_settings_title">Verander account instellingen</string>
+    <string name="tutorial_settings_view_account_settings">Als je instellingen van je profiel wilt veranderen zoals nickname, wachtwoord, email adres,&#8230; Dan moet je hier zijn.</string>
+    <string name="tutorial_settings_view_mobile_data_title">Aan/uit zetten van mobiele data</string>
+    <string name="tutorial_settings_view_mobile_data">Als je niet gebruik wilt maken van 4G, 3G,&#8230; in deze app, dan moet je de checkbox uitzetten.</string>
+    <string name="tutorial_settings_view_notifications_title">Aan/uit zetten van de notificaties</string>
+    <string name="tutorial_settings_view_notifications">Als je geen notificaties wilt van deze app moet je het vinkje hier uitzetten.</string>
+    <string name="tutorial_settings_view_log_off_title">Uitloggen</string>
+    <string name="tutorial_settings_view_log_off">Als het account dat ingelogd is niet van jouw is kan je hier uitloggen.</string>
+    <string name="tutorial_error">Er is een fout opgetreden met je internet, probeer opnieuw!</string>
+    <string name="tutorial_next">Volgende</string>
+    <string name="tutorial_close">Sluit</string>
+
+    <string name="profile_out_of_date">Profiel kan verouderd zijn, geen internet connectie</string>
+    <string name="profile_error">Er is een fout opgetreden, vul je wachtwoord terug in</string>
+    <string name="profile_error_title">Wachtwoord</string>
+    <string name="profile_no_internet_error">Niet mogelijk om terug in te loggen, geen internet connectie</string>
     <string name="profile_tips_title">Tips</string>
     <string name="profile_pick_sensor">Selecteer een sensor, later kan je deze weizigen in de instellingen van de app.</string>
     <string name="profile_pick_sensor_title">Selecteerd een sensor</string>
+    <string name="profile_bluetooth_not_enabled">Bluetooth staat niet aan\nAan het verlaten&#8230;</string>
 
     <string name="stranger_active">%1$s heeft een gemiddelde dagelijkse score van %2$d behaald de laatste twee weken.</string>
     <string name="stranger_not_active">%1$s is niet actief geweest de vorige twee weken.</string>
@@ -68,19 +117,19 @@
     <string name="quest_start">Start</string>
     <string name="quest_end">Eindig</string>
 
-
     <string name="challenge_won">Je hebt goed gewonnen! Doe zo verder!</string>
     <string name="challenge_lost">Je hebt verloren, maar blijf proberen!</string>
     <string name="challenge_tie">Jullie staan gelijk, volgende keer beter!</string>
     <string name="challenge_one_on_one_title">1-tegen-1</string>
     <string name="challenge_one_on_one_description">Sta langer recht dan je tegenstander gedurende %1$d minuten</string>
     <string name="challenge_group_competition_title">Groep competitie</string>
-    <string name="challenge_grou_competition_description">Sta langer recht dan je tegenstanders gedurende %1$d minuten</string>
+    <string name="challenge_group_competition_description">Sta langer recht dan je tegenstanders gedurende %1$d minuten</string>
     <string name="challenge_follow_the_track_title">Volg het spoor</string>
     <string name="challenge_follow_the_track_description">Iedereen zal dezelfde volgorde krijgen waarin hij of zij zich moet aan houden om van positie te veranderen. De telefoon zal trillen wanneer je je positie moet veranderen. De persoon die in staat is om het langste door te gaan zonder een foute positie verandering wint.</string>
+    <string name="challenge_alternately_standing_title">Afwisselend staan</string>
+    <string name="challenge_alternately_standing_description">Op ieder moment moet één van de deelnemers staan. Hoe langer deze opgave lukt, hoe meer xp er uiteindelijk wordt verkregen (max 60 minuten). De score hangt af van hoe lang jij hebt deel genomen en het aantal deelnemers! De persoon die start zal eerst moeten staan!</string>
 
-
-    <string name="drawer_open">Open</string>0
+    <string name="drawer_open">Open</string>
     <string name="drawer_close">Sluiten</string>
     <string name="challenge_opponent"><u>Tegenstanders</u> </string>
     <string name="leaderboard_load_higher_ranks">Laad 10 hogere rangen</string>

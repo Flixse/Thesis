@@ -11,10 +11,15 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.github.amlcurran.showcaseview.ShowcaseView;
 import com.tomandfelix.stapp2.R;
 import com.tomandfelix.stapp2.persistency.DatabaseHelper;
 import com.tomandfelix.stapp2.persistency.Profile;
+import com.tomandfelix.stapp2.persistency.ServerHelper;
 import com.tomandfelix.stapp2.persistency.Solo;
 import com.tomandfelix.stapp2.persistency.SoloList;
 
@@ -24,6 +29,7 @@ public class SoloQuestList extends DrawerActivity {
     private Profile mProfile;
     SoloQuestListAdapter soloAdapter;
     AdapterView.OnItemClickListener listener;
+    private ShowcaseView mShowcaseView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -45,12 +51,35 @@ public class SoloQuestList extends DrawerActivity {
             }
         };
         questList.setOnItemClickListener(listener);
+        tutorialShowCase();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         soloAdapter.notifyDataSetChanged();
+    }
+
+    private void tutorialShowCase(){
+        ServerHelper.getInstance().isTutorialOfViewOn(mProfile.getId(), SOLO_QUEST_VIEW_TUTORIAL, new ServerHelper.ResponseFunc<Boolean>() {
+            @Override
+            public void onResponse(Boolean response) {
+                if(response) {
+                    mShowcaseView = new ShowcaseView.Builder(SoloQuestList.this)
+                            .setStyle(R.style.CustomShowcaseTheme2)
+                            .setContentTitle(getString(R.string.tutorial_solo_quest_view_title))
+                            .setContentText(getString(R.string.tutorial_solo_quest_view))
+                            .build();
+                    mShowcaseView.setButtonText(getString(R.string.tutorial_close));
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                Toast.makeText(SoloQuestList.this, R.string.tutorial_error, Toast.LENGTH_LONG).show();
+            }
+        });
+
     }
 
     private class SoloQuestListAdapter extends ArrayAdapter<Solo> {

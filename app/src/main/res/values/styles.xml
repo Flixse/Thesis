@@ -7,4 +7,25 @@
         <item name="android:textColor">@color/secondaryText</item>
         <item name="colorControlActivated">@color/primaryColor</item>
     </style>
+    <style name="CustomShowcaseTheme2" parent="ShowcaseView">
+        <item name="sv_backgroundColor">@color/primaryColorTransparent</item>
+        <item name="sv_showcaseColor">@color/primaryColor</item>
+        <item name="sv_titleTextAppearance">@style/CustomTitle2</item>
+        <item name="sv_detailTextAppearance">@style/CustomText2</item>
+    </style>
+
+    <style name="CustomTitle2" parent="TextAppearance.ShowcaseView.Title.Light">
+        <item name="android:textColor">@color/TextColorTransparent</item>
+        <item name="android:textSize">20sp</item>
+
+    </style>
+
+    <style name="CustomText2" parent="TextAppearance.ShowcaseView.Detail.Light">
+        <item name="android:textColor">@color/titleTextColorTransparent</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="ButtonBackground" parent="ButtonBackground">
+        <item name="android:background">@color/accentColor</item>
+    </style>
 </resources>

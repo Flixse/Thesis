@@ -15,9 +15,16 @@ import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.github.amlcurran.showcaseview.ShowcaseView;
 import com.tomandfelix.stapp2.R;
 import com.tomandfelix.stapp2.persistency.Challenge;
+import com.tomandfelix.stapp2.persistency.DatabaseHelper;
+import com.tomandfelix.stapp2.persistency.Profile;
+import com.tomandfelix.stapp2.persistency.ServerHelper;
 import com.tomandfelix.stapp2.tabs.SlidingTabLayout;
 
 public class ChallengeView extends DrawerActivity {
@@ -25,6 +32,7 @@ public class ChallengeView extends DrawerActivity {
     private ViewPager viewPager;
     private ChallengePagerAdapter adapter;
     private NotificationManager notificationManager;
+    private ShowcaseView mShowcaseView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -38,6 +46,7 @@ public class ChallengeView extends DrawerActivity {
         tabLayout = (SlidingTabLayout) findViewById(R.id.tabs_challenge_bar);
         tabLayout.setViewPager(viewPager);
         tabLayout.setSelectedIndicatorColors(R.color.primaryColor);
+        tutorialShowCase();
     }
 
     @Override
@@ -54,6 +63,29 @@ public class ChallengeView extends DrawerActivity {
         findViewById(R.id.tabs_bar).setVisibility(View.VISIBLE);
         else
         findViewById(R.id.tabs_bar).setVisibility(View.GONE);
+    }
+
+    private void tutorialShowCase(){
+        Profile profile = DatabaseHelper.getInstance().getOwner();
+        ServerHelper.getInstance().isTutorialOfViewOn(profile.getId(), CHALLENGE_VIEW_TUTORIAL, new ServerHelper.ResponseFunc<Boolean>() {
+            @Override
+            public void onResponse(Boolean response) {
+                if(response) {
+                    mShowcaseView = new ShowcaseView.Builder(ChallengeView.this)
+                            .setStyle(R.style.CustomShowcaseTheme2)
+                            .setContentTitle(getString(R.string.tutorial_challenge_view_title))
+                            .setContentText(getString(R.string.tutorial_challenge_view))
+                            .build();
+                    mShowcaseView.setButtonText(getString(R.string.tutorial_close));
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                Toast.makeText(ChallengeView.this, R.string.tutorial_error, Toast.LENGTH_LONG).show();
+            }
+        });
+
     }
 
     public void onInviteButton(View v) {
