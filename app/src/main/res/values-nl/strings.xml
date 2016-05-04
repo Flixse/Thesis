@@ -21,6 +21,9 @@
     <string name="title_activity_open_challenge">Uitdaging</string>
     <string name="title_activity_profile_view_settings">Profiel instellingen</string>
 
+    <string name="login_error">Het profiel bestaat niet, probeer opnieuw!</string>
+    <string name="login_profile_loaded">Het profiel wordt opgehaald.</string>
+
     <string name="tutorial_profile_view_title">Profiel</string>
     <string name="tutorial_profile_view">Deze tutorial zal je gidsen doorheen de applicatie. Beginnede met dit scherm, het profiel.</string>
     <string name="tutorial_profile_view_ranking_title">Ranking en experience punten</string>

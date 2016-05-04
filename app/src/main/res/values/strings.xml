@@ -21,6 +21,9 @@
     <string name="title_activity_open_challenge">Challenge</string>
     <string name="title_activity_profile_view_settings">Profile activity settings</string>
 
+    <string name="login_error">No such profile exists, please try again</string>
+    <string name="login_profile_loaded">profile is being loaded</string>
+
     <string name="tutorial_profile_view_title">Profile view</string>
     <string name="tutorial_profile_view">This tutorial will guide you through the application. Beginning with the profile view.</string>
     <string name="tutorial_profile_view_ranking_title">Ranking and experience points</string>

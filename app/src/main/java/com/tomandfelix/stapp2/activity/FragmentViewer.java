@@ -116,11 +116,12 @@ public class FragmentViewer extends FragmentActivity implements FragmentProvider
             final EditText password = (EditText) findViewById(R.id.login_password);
             final TextView txtView = (TextView) findViewById(R.id.succes);
             DatabaseHelper.getInstance().setLastEnteredUsername(username.getText().toString());
+            Log.d("username + pass",username.getText().toString() + "   ,   " +  password.getText().toString());
             ServerHelper.getInstance().login(username.getText().toString(), password.getText().toString(), new ServerHelper.ResponseFunc<Profile>() {
                 @Override
                 public void onResponse(Profile response) {
                     if (response != null) {
-                        txtView.setText("profile is being loaded");
+                        txtView.setText(R.string.login_profile_loaded);
                         Intent intent = new Intent(FragmentViewer.this, ProfileView.class);
                         intent.putExtra("profile", response);
                         startActivity(intent);
@@ -134,12 +135,14 @@ public class FragmentViewer extends FragmentActivity implements FragmentProvider
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     if (error != null && error.getMessage() != null && error.getMessage().equals("wrong")) {
-                        txtView.setText("No such profile exists, please try again");
+                        txtView.setText(R.string.login_error);
                         password.setText(null);
                         v.setEnabled(true);
                     } else {
-                        Log.e("loginBtn", "Something went wrong, we don't know exactly what.");
-                        loginBtn(v);
+                        if(error == null) {
+                            Log.e("loginBtn", "Something went wrong, we don't know exactly what.");
+                            loginBtn(v);
+                        }
                     }
                 }
             });

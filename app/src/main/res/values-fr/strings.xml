@@ -21,6 +21,9 @@
     <string name="title_activity_open_challenge">Le défi</string>
     <string name="title_activity_profile_view_settings">Les paramètres de profil</string>
 
+    <string name="login_error">On n\'\a pas trouvé ce profil</string>
+    <string name="login_profile_loaded">Le profil est récupéré</string>
+
     <string name="tutorial_profile_view_title">Profile view</string>
     <string name="tutorial_profile_view">This tutorial will guide you through the application. Beginning with the profile view.</string>
     <string name="tutorial_profile_view_ranking_title">Ranking and experience points</string>

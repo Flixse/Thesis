@@ -200,7 +200,7 @@ public abstract class ServiceActivity extends ActionBarActivity {
                 break;
             case Challenge.GROUP_COMPETITION:
                 nameOfChallenge = getString(R.string.challenge_group_competition_title);
-                descriptionOfChallenge = getString(R.string.challenge_grou_competition_description, challenge.getDuration());
+                descriptionOfChallenge = getString(R.string.challenge_group_competition_description, challenge.getDuration());
                 break;
             case Challenge.FOLLOW_THE_TRACK:
                 nameOfChallenge = getString(R.string.challenge_follow_the_track_title);
