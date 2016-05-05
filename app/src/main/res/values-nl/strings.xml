@@ -25,7 +25,7 @@
     <string name="login_profile_loaded">Het profiel wordt opgehaald.</string>
 
     <string name="tutorial_profile_view_title">Profiel</string>
-    <string name="tutorial_profile_view">Deze tutorial zal je gidsen doorheen de applicatie. Beginnede met dit scherm, het profiel.</string>
+    <string name="tutorial_profile_view">Deze tutorial zal je gidsen doorheen de applicatie. Beginnende met dit scherm, het profiel.</string>
     <string name="tutorial_profile_view_ranking_title">Ranking en experience punten</string>
     <string name="tutorial_profile_view_ranking_one">Midden in de kroon is je ranking.</string>
     <string name="tutorial_profile_view_ranking_two">Experience punten verdien je door goed sta gedrag te tonen of door solo opgaven of uitdagingen te spelen.</string>
