@@ -149,6 +149,7 @@ public class Solo extends Quest{
         this.answersCorrect = 0;
         handler.removeCallbacksAndMessages(null);
         handler = null;
+        this.multiplier = 0.8;
         progress = 0;
     }
 

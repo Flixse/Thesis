@@ -296,7 +296,7 @@ public class OpenSoloQuest extends ServiceActivity {
             @Override
             public void onErrorResponse(VolleyError volleyError) {
                 if(!ServerHelper.getInstance().checkInternetConnection()) {
-                    //askForPassword();
+                    //ask ForPassword();
                 }
             }
         });

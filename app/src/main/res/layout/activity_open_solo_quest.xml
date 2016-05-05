@@ -51,7 +51,7 @@
             android:layout_gravity="center_vertical"
             android:background="@color/primaryColor"
             android:text="Start"
-            android:onClick="onButton"
+            android:onClick="onStartStopButton"
             android:visibility="invisible"/>
     </LinearLayout>
 </LinearLayout>

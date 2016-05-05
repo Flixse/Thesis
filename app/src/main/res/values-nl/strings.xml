@@ -27,9 +27,11 @@
     <string name="tutorial_profile_view_title">Profiel</string>
     <string name="tutorial_profile_view">Deze tutorial zal je gidsen doorheen de applicatie. Beginnede met dit scherm, het profiel.</string>
     <string name="tutorial_profile_view_ranking_title">Ranking en experience punten</string>
-    <string name="tutorial_profile_view_ranking">Midden in de kroon is je ranking. Experience punten verdien je door goed sta gedrag te tonen of door solo opgaven of uitdagingen te spelen.</string>
+    <string name="tutorial_profile_view_ranking_one">Midden in de kroon is je ranking.</string>
+    <string name="tutorial_profile_view_ranking_two">Experience punten verdien je door goed sta gedrag te tonen of door solo opgaven of uitdagingen te spelen.</string>
     <string name="tutorial_profile_view_sensor_title">Sensor</string>
-    <string name="tutorial_profile_view_sensor">Deze applicatie maakt gebruik van een Shimmer sensor. Druk start om te connecteren met een sensor. Als je bent geconnecteerd dan zal een groen mannetje je sta/zit status duidelijk maken. Veranderen van sensor kan in de instellingen van de app.</string>
+    <string name="tutorial_profile_view_sensor_one">Deze applicatie maakt gebruik van een Shimmer sensor. Druk start om te connecteren met een sensor. Als je bent geconnecteerd dan zal een groen mannetje je sta/zit status duidelijk maken. Veranderen van sensor kan in de instellingen van de app.</string>
+    <string name="tutorial_profile_view_sensor_two">Deze applicatie maakt gebruik van een Shimmer sensor. Druk start om te connecteren met een sensor. Als je bent geconnecteerd dan zal een groen mannetje je sta/zit status duidelijk maken. Veranderen van sensor kan in de instellingen van de app.</string>
     <string name="tutorial_profile_view_tips_title">Tips</string>.
     <string name="tutorial_profile_view_tips">Aan de onderkant zie je de tips. Deze tips geven je een mogelijkheid om door een makkelijke manier je sedentair gedrag te verbteren.</string>
     <string name="tutorial_home_button_title">Thuis knop</string>
