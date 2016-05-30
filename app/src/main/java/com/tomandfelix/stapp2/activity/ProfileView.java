@@ -184,24 +184,56 @@ public class ProfileView extends DrawerActivity {
                     mShowcaseView = new ShowcaseView.Builder(ProfileView.this)
                             .setStyle(R.style.CustomShowcaseTheme2)
                             .setContentTitle(getString(R.string.tutorial_profile_view_title))
-                            .setContentText(getString(R.string.tutorial_profile_view))
+                            .setContentText(getString(R.string.tutorial_profile_view_one))
                             .setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
                                     switch(ordre){
                                         case 0:
-                                            changeTutorialShowcaseView(new ViewTarget(profileRank),getString(R.string.tutorial_profile_view_ranking_title), getString(R.string.tutorial_profile_view_ranking));
+                                            changeTutorialShowcaseView(new ViewTarget(profileRank),getString(R.string.tutorial_profile_view_title), getString(R.string.tutorial_profile_view_two));
                                             ordre++;
                                             break;
                                         case 1:
-                                            changeTutorialShowcaseView(new ViewTarget(profileStatus),getString(R.string.tutorial_profile_view_sensor_title), getString(R.string.tutorial_profile_view_sensor));
+                                            changeTutorialShowcaseView(new ViewTarget(profileRank),getString(R.string.tutorial_profile_view_ranking_title), getString(R.string.tutorial_profile_view_ranking_one));
                                             ordre++;
                                             break;
                                         case 2:
-                                            changeTutorialShowcaseView(new ViewTarget(tips),getString(R.string.tutorial_profile_view_tips_title), getString(R.string.tutorial_profile_view_tips));
+                                            changeTutorialShowcaseView(new ViewTarget(profileRank),getString(R.string.tutorial_profile_view_ranking_title), getString(R.string.tutorial_profile_view_ranking_two));
                                             ordre++;
                                             break;
                                         case 3:
+                                            changeTutorialShowcaseView(new ViewTarget(profileStatus),getString(R.string.tutorial_profile_view_sensor_title), getString(R.string.tutorial_profile_view_sensor_one));
+                                            ordre++;
+                                            break;
+                                        case 4:
+                                            changeTutorialShowcaseView(new ViewTarget(profileStatus),getString(R.string.tutorial_profile_view_sensor_title), getString(R.string.tutorial_profile_view_sensor_two));
+                                            ordre++;
+                                            break;
+                                        case 5:
+                                            changeTutorialShowcaseView(new ViewTarget(profileStatus),getString(R.string.tutorial_profile_view_sensor_title), getString(R.string.tutorial_profile_view_sensor_three));
+                                            ordre++;
+                                            break;
+                                        case 6:
+                                            changeTutorialShowcaseView(new ViewTarget(profileStatus),getString(R.string.tutorial_profile_view_sensor_title), getString(R.string.tutorial_profile_view_sensor_four));
+                                            ordre++;
+                                            break;
+                                        case 7:
+                                            changeTutorialShowcaseView(new ViewTarget(profileStatus),getString(R.string.tutorial_profile_view_sensor_title), getString(R.string.tutorial_profile_view_sensor_five));
+                                            ordre++;
+                                            break;
+                                        case 8:
+                                            changeTutorialShowcaseView(new ViewTarget(profileStatus),getString(R.string.tutorial_profile_view_sensor_title), getString(R.string.tutorial_profile_view_sensor_six));
+                                            ordre++;
+                                            break;
+                                        case 9:
+                                            changeTutorialShowcaseView(new ViewTarget(profileStatus),getString(R.string.tutorial_profile_view_sensor_title), getString(R.string.tutorial_profile_view_sensor_seven));
+                                            ordre++;
+                                            break;
+                                        case 10:
+                                            changeTutorialShowcaseView(new ViewTarget(tips),getString(R.string.tutorial_profile_view_tips_title), getString(R.string.tutorial_profile_view_tips));
+                                            ordre++;
+                                            break;
+                                        case 11:
                                             try {
                                                 Field field = Toolbar.class.getDeclaredField("mNavButtonView");
                                                 field.setAccessible(true);
@@ -215,7 +247,7 @@ public class ProfileView extends DrawerActivity {
                                             mShowcaseView.setButtonText(getString(R.string.tutorial_close));
                                             ordre++;
                                             break;
-                                        case 4:
+                                        case 12:
                                             mShowcaseView.hide();
                                             break;
                                         default:
@@ -432,8 +464,8 @@ public class ProfileView extends DrawerActivity {
             }
         }
         if(countChallenges>0){
-            openChallenges.setVisibility(View.VISIBLE);
-            toOpenChallengeDivider.setVisibility(View.VISIBLE);
+            //openChallenges.setVisibility(View.VISIBLE);
+            //toOpenChallengeDivider.setVisibility(View.VISIBLE);
             if(countChallenges ==1){
                 openChallengesAmount.setText("1 open challenge!");
             }else{

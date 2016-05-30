@@ -147,7 +147,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/raised_button_height"
                         android:onClick="onGoToGraphs"
-                        android:text="To graphs"
+                        android:text="@string/profile_to_graph"
                         android:background="@color/primaryColor"/>
                 </LinearLayout>
             </LinearLayout>
@@ -228,7 +228,7 @@
                     android:onClick="onGoToOpenChallenges"
                     android:gravity="center_vertical"
                     android:background="@color/primaryColor"
-                    android:text="open challenges"/>
+                    android:text="@string/profile_open_challenges"/>
 
 
             </LinearLayout>

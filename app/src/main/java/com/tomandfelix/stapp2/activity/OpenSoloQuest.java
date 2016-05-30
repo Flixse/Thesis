@@ -101,7 +101,70 @@ public class OpenSoloQuest extends ServiceActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
+        int tempLanguageId;
+        switch (Locale.getDefault().getLanguage()) {
+            case "nl":
+                tempLanguageId = 1;
+                break;
+            case "fr":
+                tempLanguageId = 2;
+                break;
+            case "en":
+                tempLanguageId = 0;
+                break;
+            default:
+                tempLanguageId = 0;
+        }
+        if(tempLanguageId != languageId){
+            languageId = tempLanguageId;
+            if(solo.isSoloStarted()) {
+                ServerHelper.getInstance().getQuizLIst(mProfile.getId(), languageId, new ServerHelper.ResponseFunc<List<Quiz>>() {
+                    @Override
+                    public void onResponse(List<Quiz> response) {
+                        solo.setQuestions(response);
+                        if(solo.getQuestions().size() == 0){
+                            question.setText(R.string.quest_error);
+                        }else {
+                            setQuiz();
+                            answerAdapter = new AnswersAdapter(OpenSoloQuest.this, R.layout.list_item_quiz_answers, quiz.getRandomizedPossibleAnswers());
+                            confirmButton.setVisibility(View.VISIBLE);
+                            question.setVisibility(View.VISIBLE);
+                            answers.setAdapter(answerAdapter);
+                            answers.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                @Override
+                                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                    view.setSelected(true);
+                                    confirmButton.setEnabled(true);
+                                    selectedItem = position;
+                                    answerAdapter.notifyDataSetChanged();
+                                }
+                            });
+                            confirmButton.setVisibility(View.VISIBLE);
+                        }
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        Log.e("error", volleyError.toString());
+                    }
+                });
+            }
+        }else{
+            answerAdapter = new AnswersAdapter(OpenSoloQuest.this, R.layout.list_item_quiz_answers, quiz.getRandomizedPossibleAnswers());
+            confirmButton.setVisibility(View.VISIBLE);
+            question.setVisibility(View.VISIBLE);
+            answers.setAdapter(answerAdapter);
+            answers.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    view.setSelected(true);
+                    confirmButton.setEnabled(true);
+                    selectedItem = position;
+                    answerAdapter.notifyDataSetChanged();
+                }
+            });
+            confirmButton.setVisibility(View.VISIBLE);
+        }
         handler.setInstance(this);
         if(StApp.getHandler() != handler) {
             StApp.setHandler(handler);
@@ -190,21 +253,25 @@ public class OpenSoloQuest extends ServiceActivity {
                     @Override
                     public void onResponse(List<Quiz> response) {
                         solo.setQuestions(response);
-                        setQuiz();
-                        answerAdapter = new AnswersAdapter(OpenSoloQuest.this, R.layout.list_item_quiz_answers, quiz.getRandomizedPossibleAnswers());
-                        confirmButton.setVisibility(View.VISIBLE);
-                        question.setVisibility(View.VISIBLE);
-                        answers.setAdapter(answerAdapter);
-                        answers.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                            @Override
-                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                view.setSelected(true);
-                                confirmButton.setEnabled(true);
-                                selectedItem = position;
-                                answerAdapter.notifyDataSetChanged();
-                            }
-                        });
-                        confirmButton.setVisibility(View.VISIBLE);
+                        if(solo.getQuestions().size() == 0){
+                            question.setText(R.string.quest_error);
+                        }else {
+                            setQuiz();
+                            answerAdapter = new AnswersAdapter(OpenSoloQuest.this, R.layout.list_item_quiz_answers, quiz.getRandomizedPossibleAnswers());
+                            confirmButton.setVisibility(View.VISIBLE);
+                            question.setVisibility(View.VISIBLE);
+                            answers.setAdapter(answerAdapter);
+                            answers.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                @Override
+                                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                    view.setSelected(true);
+                                    confirmButton.setEnabled(true);
+                                    selectedItem = position;
+                                    answerAdapter.notifyDataSetChanged();
+                                }
+                            });
+                            confirmButton.setVisibility(View.VISIBLE);
+                        }
                     }
                 }, new Response.ErrorListener() {
                     @Override
@@ -303,15 +370,47 @@ public class OpenSoloQuest extends ServiceActivity {
         confirmButton.setEnabled(false);
         selectedItem = -1;
         answers.clearChoices();
+        getQuiz();
+
+    }
+
+    public void getQuiz(){
         if(!solo.getQuestions().isEmpty()) {
             setQuiz();
             answerAdapter = new AnswersAdapter(OpenSoloQuest.this, R.layout.list_item_quiz_answers, quiz.getRandomizedPossibleAnswers());
             answers.setAdapter(answerAdapter);
         }else{
-            answers.setVisibility(View.INVISIBLE);
-            question.setText(getString(R.string.quest_no_more_questions));
+            ServerHelper.getInstance().getQuizLIst(mProfile.getId(),languageId,new ServerHelper.ResponseFunc<List<Quiz>>() {
+                @Override
+                public void onResponse(List<Quiz> response) {
+                    solo.setQuestions(response);
+                    if(solo.getQuestions().size() == 0){
+                        question.setText(R.string.quest_error);
+                    }else {
+                        setQuiz();
+                        answerAdapter = new AnswersAdapter(OpenSoloQuest.this, R.layout.list_item_quiz_answers, quiz.getRandomizedPossibleAnswers());
+                        confirmButton.setVisibility(View.VISIBLE);
+                        question.setVisibility(View.VISIBLE);
+                        answers.setAdapter(answerAdapter);
+                        answers.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                view.setSelected(true);
+                                confirmButton.setEnabled(true);
+                                selectedItem = position;
+                                answerAdapter.notifyDataSetChanged();
+                            }
+                        });
+                        confirmButton.setVisibility(View.VISIBLE);
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError volleyError) {
+                    Log.e("error",volleyError.toString());
+                }
+            });
         }
-
     }
 
     public void setQuiz(){

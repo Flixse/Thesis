@@ -262,11 +262,13 @@ public class LiveChallenge extends Handler {
         final GCMMessage msg = new GCMMessage(getOpponents(), uniqueId, messageType, -1, message);
         ServerHelper.getInstance().sendMessage(msg, new Response.ErrorListener() {
             @Override
-            public void onErrorResponse(VolleyError volleyError) {
-                if(volleyError.getMessage().equals("none")) {
-                    Log.d(TAG, "Sent: " + msg.toString());
-                } else {
-                    Log.e(TAG, volleyError.getMessage());
+            public void onErrorResponse(VolleyError volleyError){
+                if(volleyError != null && volleyError.getMessage() != null) {
+                    if (volleyError.getMessage().equals("none")) {
+                        Log.d(TAG, "Sent: " + msg.toString());
+                    } else {
+                        Log.e(TAG, volleyError.getMessage());
+                    }
                 }
             }
         });

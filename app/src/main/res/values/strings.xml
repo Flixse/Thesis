@@ -25,11 +25,19 @@
     <string name="login_profile_loaded">profile is being loaded</string>
 
     <string name="tutorial_profile_view_title">Profile view</string>
-    <string name="tutorial_profile_view">This tutorial will guide you through the application. Beginning with the profile view.</string>
+    <string name="tutorial_profile_view_one">This tutorial will guide you through the application. Beginning with the profile view.</string>
+    <string name="tutorial_profile_view_two">This application needs an internet connection to work well!</string>
     <string name="tutorial_profile_view_ranking_title">Ranking and experience points</string>
-    <string name="tutorial_profile_view_ranking">Here you see your ranking in the crown. You earn experience points by standing or by doing quests and challenges. </string>
+    <string name="tutorial_profile_view_ranking_one">Here you see your ranking in the crown.</string>
+    <string name="tutorial_profile_view_ranking_two">You earn experience points by standing or by doing quests and challenges.</string>
     <string name="tutorial_profile_view_sensor_title">Sensor</string>
-    <string name="tutorial_profile_view_sensor">This application needs a Shimmer sensor. To connect with your sensor click start. If connected a green guy will tell you if you stand or sit. Changing your sensor can be done in the settings of the app.</string>
+    <string name="tutorial_profile_view_sensor_one">This application needs a Shimmer sensor.</string>
+    <string name="tutorial_profile_view_sensor_two">First pair with a Shimmer sensor in the Bluetooth settings of the device.</string>
+    <string name="tutorial_profile_view_sensor_three">To connect with your sensor click start.</string>
+    <string name="tutorial_profile_view_sensor_four">If connected a green guy will tell you if you stand or sit.</string>
+    <string name="tutorial_profile_view_sensor_five">If the color changes of the guy this means your sedentary behaviour is changing.</string>
+    <string name="tutorial_profile_view_sensor_six">Sitting for longer than 30 minutes is bad. The guy will turn red!</string>
+    <string name="tutorial_profile_view_sensor_seven">You want to change sensor? Go to the settings of the app!</string>
     <string name="tutorial_profile_view_tips_title">Tips</string>.
     <string name="tutorial_profile_view_tips">On the bottom you see tips. These tips are here to try to lower your sedentary behaviour doing simple things.</string>
     <string name="tutorial_home_button_title">Home button</string>
@@ -61,7 +69,7 @@
     <string name="tutorial_settings_view_personalisation_title">Personalisation of the profile view</string>
     <string name="tutorial_settings_view_personalisation">Some things can be added or deleted from the profile view tab.</string>
     <string name="tutorial_settings_view_account_settings_title">Change account settings</string>
-    <string name="tutorial_settings_view_account_settings">If you want to change your account settings like nickname, password, email address,&#8230; You need to click here!</string>
+    <string name="tutorial_settings_view_account_settings">If you want to change your account settings like nickname, password,&#8230; You need to click here!</string>
     <string name="tutorial_settings_view_mobile_data_title">Enable/disable mobile data</string>
     <string name="tutorial_settings_view_mobile_data">If you don\'\t want data transfer over 4G, 3G,&#8230; Just uncheck the box here.</string>
     <string name="tutorial_settings_view_notifications_title">Enable/disable notifications</string>
@@ -80,6 +88,8 @@
     <string name="profile_pick_sensor">Please Select a sensor, you can change this later in the settings of the app.</string>
     <string name="profile_pick_sensor_title">Select a sensor</string>
     <string name="profile_bluetooth_not_enabled">Bluetooth not enabled\nExiting&#8230;</string>
+    <string name="profile_to_graph">To graphs</string>
+    <string name="profile_open_challenges">Open challenges</string>
 
     <string name="stranger_active">%1$s has achieved an average daily score of %2$d in the past two weeks.</string>
     <string name="stranger_not_active">%1$s has not been active in the past 2 weeks.</string>
@@ -116,6 +126,7 @@
     <string name="quest_no_more_questions">All the questions have been solved!</string>
     <string name="quest_complete_lost">Quest complete, you have lost!</string>
     <string name="quest_complete_won">Quest complete, you have won!</string>
+    <string name="quest_error">Error loading question. Please make sure you have an internet connection!</string>
     <string name="quest_connect_sensor">Please connect a sensor first!</string>
     <string name="quest_start">Start</string>
     <string name="quest_end">Dismiss</string>

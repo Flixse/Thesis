@@ -301,7 +301,13 @@ public class SoloList {
                     solo.lost();
                 } else {
                     double result = (double) Algorithms.millisecondsStood(start, new Date());
-                    solo.setProgress(Math.min((result * 100d / ((double) 600000 + (1200000 - getNeeded(solo) * solo.getAnswersCorrect()))), 100d));
+                    long temp;
+                    if(getNeeded(solo) * solo.getAnswersCorrect() >= 120000){
+                        temp = 1200000;
+                    }else {
+                        temp = getNeeded(solo) * solo.getAnswersCorrect();
+                    }
+                    solo.setProgress(Math.min((result * 100d / ((double) 600000 + (1200000 - temp))), 100d));
                     if (solo.getProgress() == 100) {
                         solo.won();
                     } else {
@@ -348,7 +354,13 @@ public class SoloList {
                 if(solo.getData() instanceof Date) {
                     start = (Date) solo.getData();
                 }
-                if(start != null && new Date().getTime() - start.getTime() >= solo.getDuration() + 30000 * solo.getAnswersCorrect() ) {
+                int duration;
+                if(solo.getDuration() +  30000 * solo.getAnswersCorrect() >= 1800000){
+                    duration = 1800000;
+                }else{
+                    duration = solo.getDuration() + 30000 * solo.getAnswersCorrect();
+                }
+                if(start != null && new Date().getTime() - start.getTime() >= duration ) {
                     solo.lost();
                 } else {
                     double result = (double) Algorithms.millisecondsStood(start, new Date());

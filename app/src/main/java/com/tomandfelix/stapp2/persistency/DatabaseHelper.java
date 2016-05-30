@@ -654,7 +654,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     }
 
     public int getProfileActivityOpenChallengeSetting(){
-        return getIntSetting(PROFILE_GRAPH);
+        return getIntSetting(PROFILE_OPEN_CHALLENGE);
     }
 
     public String getSensor() {

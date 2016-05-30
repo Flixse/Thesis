@@ -4,7 +4,7 @@
     <string name="app_name">StApp3</string>
     <string name="action_settings">Les réglages</string>
     <string name="title_activity_profile_view">Le profil</string>sol
-    <string name="title_activity_leaderboard_view">L'arrangement</string>
+    <string name="title_activity_leaderboard_view">L\'\arrangement</string>
     <string name="title_activity_connection_view">La connexion du capteur</string>
     <string name="title_activity_quest_view">la quête solo</string>
     <string name="title_activity_graph">Les graphiques</string>
@@ -186,7 +186,7 @@
     <string-array name="sideMenu">
         <item>Le profil</item>
         <item>div</item>
-        <item>L'arrangement</item>
+        <item>L\'\arrangement</item>
         <item>Les graphiques</item>
         <item>La quête solo</item>
         <item>Les défis</item>

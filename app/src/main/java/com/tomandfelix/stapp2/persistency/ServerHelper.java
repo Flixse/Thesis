@@ -862,6 +862,7 @@ public class ServerHelper {
      * @param responseListener The function that is called upon success, the argument for this function will be the ArrayList of quizzes
      * @param errorListener The function that is called upon error, Possible errors:
      *                      * 'database' Something went wrong with the database
+     *                      * 'input' wrong input
      */
     public void getQuizLIst(int profileId, int languageId, final ResponseFunc<List<Quiz>> responseListener, final Response.ErrorListener errorListener){
         JSONObject request = new JSONObject();
@@ -893,7 +894,13 @@ public class ServerHelper {
         }, errorListener);
         VolleyQueue.getInstance().addToRequestQueue(getQuizList);
     }
-
+    /**
+     * Increment the quiz in the database that has been answered
+     * @param responseListener The function that is called upon success, the argument for this function will be the ArrayList of quizzes
+     * @param errorListener The function that is called upon error, Possible errors:
+     *                      * 'database' Something went wrong with the database
+     *                      * 'input' Wrong input
+     */
     public void incrementQuizByProfileIdLanguageId(int profileId, int quizId,  final ResponseFunc<JSONObject> responseListener, final Response.ErrorListener errorListener){
         JSONObject request = new JSONObject();
         try {
@@ -917,7 +924,13 @@ public class ServerHelper {
         }, errorListener);
         VolleyQueue.getInstance().addToRequestQueue(incrementQuizByProfileIdLanguageId);
     }
-
+    /**
+     * Gets one tip from the backend database.
+     * @param responseListener The function that is called upon success, the argument for this function will be the ArrayList of quizzes
+     * @param errorListener The function that is called upon error, Possible errors:
+     *                      * 'database' Something went wrong with the database
+     *                      * 'input' Wrong input
+     */
     public void getTipByProfileIdLanguageId(int profileId, int languageId, final ResponseFunc<Tip> responseListener, final Response.ErrorListener errorListener){
         JSONObject request = new JSONObject();
         try {
@@ -947,7 +960,13 @@ public class ServerHelper {
         }, errorListener);
         VolleyQueue.getInstance().addToRequestQueue(getTipByProfileIdLanguageId);
     }
-
+    /**
+     * Increment the tip in the database that has been seen
+     * @param responseListener The function that is called upon success, the argument for this function will be the ArrayList of quizzes
+     * @param errorListener The function that is called upon error, Possible errors:
+     *                      * 'database' Something went wrong with the database
+     *                      * 'input' Wrong input
+     */
     public void incrementTipsByProfileIdLanguageId(int profileId, int languageId,  final ResponseFunc<JSONObject> responseListener, final Response.ErrorListener errorListener){
         JSONObject request = new JSONObject();
         try {
@@ -971,7 +990,13 @@ public class ServerHelper {
         }, errorListener);
         VolleyQueue.getInstance().addToRequestQueue(incrementTipsByProfileIdLanguageId);
     }
-
+    /**
+     * Checks if the tutorial for that user has been seen.
+     * @param responseListener The function that is called upon success, the argument for this function will be the ArrayList of quizzes
+     * @param errorListener The function that is called upon error, Possible errors:
+     *                      * 'database' Something went wrong with the database
+     *                      * 'input' Wrong input
+     */
     public void isTutorialOfViewOn(int profileId, final String viewSelector, final ResponseFunc<Boolean> responseListener, final Response.ErrorListener errorListener){
         JSONObject request = new JSONObject();
         try{

@@ -25,14 +25,20 @@
     <string name="login_profile_loaded">Het profiel wordt opgehaald.</string>
 
     <string name="tutorial_profile_view_title">Profiel</string>
-    <string name="tutorial_profile_view">Deze tutorial zal je gidsen doorheen de applicatie. Beginnende met dit scherm, het profiel.</string>
+    <string name="tutorial_profile_view_one">Deze tutorial zal je gidsen doorheen de applicatie. Beginnende met dit scherm, het profiel.</string>
+    <string name="tutorial_profile_view_two">Deze applicatie heeft een internet connectie nodig om goed te werken!</string>
     <string name="tutorial_profile_view_ranking_title">Ranking en experience punten</string>
     <string name="tutorial_profile_view_ranking_one">Midden in de kroon is je ranking.</string>
     <string name="tutorial_profile_view_ranking_two">Experience punten verdien je door goed sta gedrag te tonen of door solo opgaven of uitdagingen te spelen.</string>
     <string name="tutorial_profile_view_sensor_title">Sensor</string>
-    <string name="tutorial_profile_view_sensor_one">Deze applicatie maakt gebruik van een Shimmer sensor. Druk start om te connecteren met een sensor. Als je bent geconnecteerd dan zal een groen mannetje je sta/zit status duidelijk maken. Veranderen van sensor kan in de instellingen van de app.</string>
-    <string name="tutorial_profile_view_sensor_two">Deze applicatie maakt gebruik van een Shimmer sensor. Druk start om te connecteren met een sensor. Als je bent geconnecteerd dan zal een groen mannetje je sta/zit status duidelijk maken. Veranderen van sensor kan in de instellingen van de app.</string>
-    <string name="tutorial_profile_view_tips_title">Tips</string>.
+    <string name="tutorial_profile_view_sensor_one">Deze applicatie heeft een Shimmer sensor nodig.</string>
+    <string name="tutorial_profile_view_sensor_two">Eerst moet je koppelen met de Shimmer sensor via Bluetooth instellingen van het apparaat.</string>
+    <string name="tutorial_profile_view_sensor_three">Om te connecteren met de sensor moet je op start klikken.</string>
+    <string name="tutorial_profile_view_sensor_four">Als je geconnecteerd bent zal een groen mannetje je status aangeven</string>
+    <string name="tutorial_profile_view_sensor_five">Als de kleur van dit mannetje verandert dan betekent dit dat je sedentair gedrag verandert is!</string>
+    <string name="tutorial_profile_view_sensor_six">Zit je langer dan 30 minuten? Dan betekent dat dat het mannetje rood wordt!</string>
+    <string name="tutorial_profile_view_sensor_seven">Wil je veranderen van sensor? Doe dit in de instellingen van de applicatie</string>
+   <string name="tutorial_profile_view_tips_title">Tips</string>.
     <string name="tutorial_profile_view_tips">Aan de onderkant zie je de tips. Deze tips geven je een mogelijkheid om door een makkelijke manier je sedentair gedrag te verbteren.</string>
     <string name="tutorial_home_button_title">Thuis knop</string>
     <string name="tutorial_home_button">Druk of schuif van links naar rechts om het menu te openen. Druk op "Sluit" om de tutorial van het profiel te beëindigen.</string>
@@ -82,6 +88,8 @@
     <string name="profile_pick_sensor">Selecteer een sensor, later kan je deze weizigen in de instellingen van de app.</string>
     <string name="profile_pick_sensor_title">Selecteerd een sensor</string>
     <string name="profile_bluetooth_not_enabled">Bluetooth staat niet aan\nAan het verlaten&#8230;</string>
+    <string name="profile_to_graph">Naar grafieken</string>
+    <string name="profile_open_challenges">Open uitdagingen</string>
 
     <string name="stranger_active">%1$s heeft een gemiddelde dagelijkse score van %2$d behaald de laatste twee weken.</string>
     <string name="stranger_not_active">%1$s is niet actief geweest de vorige twee weken.</string>

@@ -34,6 +34,7 @@ public class Solo extends Quest{
     private List<Quiz> questions;
     private double multiplier;
     private int answersCorrect;
+    private boolean started;
 
     public Solo(int id,int kind, int xp,int xpNeeded, int duration, Difficulty difficulty, Processor processor){
         super(id, Type.SOLO);
@@ -47,6 +48,7 @@ public class Solo extends Quest{
         this.answersCorrect = 0;
         this.processor = processor;
         questions = new ArrayList<>();
+        started = false;
     }
 
     public int getKind() {
@@ -57,6 +59,9 @@ public class Solo extends Quest{
         return xp;
     }
 
+    public boolean isSoloStarted(){
+        return this.started;
+    }
 
     public int getXpNeeded() {
         return xpNeeded;
@@ -113,6 +118,7 @@ public class Solo extends Quest{
     }
 
     public void start() {
+        this.started = true;
         handler = new Handler(StApp.getChallengeLooper());
         handler.post(new Runnable() {
             @Override
@@ -147,6 +153,7 @@ public class Solo extends Quest{
 
     private void stop() {
         this.answersCorrect = 0;
+        this.started = false;
         handler.removeCallbacksAndMessages(null);
         handler = null;
         this.multiplier = 0.8;

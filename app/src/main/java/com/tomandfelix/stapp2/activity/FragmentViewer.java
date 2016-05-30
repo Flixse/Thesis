@@ -134,6 +134,7 @@ public class FragmentViewer extends FragmentActivity implements FragmentProvider
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
+                    Log.d("in error when logging","true");
                     if (error != null && error.getMessage() != null && error.getMessage().equals("wrong")) {
                         txtView.setText(R.string.login_error);
                         password.setText(null);
