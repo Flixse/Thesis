@@ -39,7 +39,7 @@
     <string name="tutorial_profile_view_sensor_six">Zit je langer dan 30 minuten? Dan betekent dat dat het mannetje rood wordt!</string>
     <string name="tutorial_profile_view_sensor_seven">Wil je veranderen van sensor? Doe dit in de instellingen van de applicatie</string>
    <string name="tutorial_profile_view_tips_title">Tips</string>.
-    <string name="tutorial_profile_view_tips">Aan de onderkant zie je de tips. Deze tips geven je een mogelijkheid om door een makkelijke manier je sedentair gedrag te verbteren.</string>
+    <string name="tutorial_profile_view_tips">Aan de onderkant zie je de tips. Deze tips geven je een mogelijkheid om door een makkelijke manier je sedentair gedrag te verbeteren.</string>
     <string name="tutorial_home_button_title">Thuis knop</string>
     <string name="tutorial_home_button">Druk of schuif van links naar rechts om het menu te openen. Druk op "Sluit" om de tutorial van het profiel te beëindigen.</string>
     <string name="tutorial_leaderboard_view_title">Leaderboard</string>
@@ -47,7 +47,7 @@
     <string name="tutorial_graph_view_title">Grafieken</string>
     <string name="tutorial_graph_view">Hier zie je je vooruitgang in grafiek vorm. Twee grafieken zijn geïmplementeerd. De ene met de vorige actieve dag en de andere een vooruitgang van de vorige 2 weken.</string>
     <string name="tutorial_solo_quest_view_title">Solo opgaven</string>
-    <string name="tutorial_solo_quest_view">Hier zie je een lijst met solo opgaven. Deze zijn wel anders dan de "uitdagingen". Solo opgaven speel je met jezelf, wanneer uitdagingen tegen andere spelers is. De moeilijkheid is zichtbaar door de de bolletjes aan de linker kant. Groen is makkelijk, oranje gemiddel en rood moeilijk. De kleur van het bolletje verandert naar blauw als je een solo opgave start. Druk op een opgave die je wilt doen! </string>
+    <string name="tutorial_solo_quest_view">Hier zie je een lijst met solo opgaven. Deze zijn wel anders dan de "uitdagingen". Solo opgaven speel je met jezelf, wanneer uitdagingen tegen andere spelers is. De moeilijkheid is zichtbaar door de bolletjes aan de linker kant. Groen is makkelijk, oranje gemiddel en rood moeilijk. De kleur van het bolletje verandert naar blauw als je een solo opgave start. Druk op een opgave die je wilt starten! </string>
     <string name="tutorial_open_solo_quest_view_title">Open solo opgave</string>
     <string name="tutorial_open_solo_quest_view">Je hebt nu op een solo opgave geklikt.</string>
     <string name="tutorial_open_solo_quest_view_description_title">Beschrijving</string>
