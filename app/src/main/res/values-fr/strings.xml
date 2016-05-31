@@ -85,8 +85,8 @@
     <string name="stranger_not_active">%1$s is niet actief geweest de vorige twee weken.</string>
     <string name="stranger_no_internet_connection">Pas du connection d\'\internet</string>
 
-    <string name="graph_daily_error">Il n\'\y a pas encore de l'informations pour aujourd\'\hui,\nconnecter un capteur et essayer encore un fois</string>
-    <string name="graph_2week_error">Il n\'\y a pas encore de l'informations pour les deux dernières semaines,\nessayer encore un fois demain</string>
+    <string name="graph_daily_error">Il n\'\y a pas encore de l\'\information pour aujourd\'\hui,\nconnecter un capteur et essayer encore un fois</string>
+    <string name="graph_2week_error">Il n\'\y a pas encore de l\'\information pour les deux dernières semaines,essayer encore un fois demain</string>
     <string name="graph_good_time">Le temps de bonne conduite</string>
     <string name="graph_bad_time">Le temps de mauvais conduite</string>
     <string name="graph_score">Le score obtenu</string>

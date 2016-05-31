@@ -86,12 +86,14 @@ public class GraphView extends DrawerActivity {
         ServerHelper.getInstance().isTutorialOfViewOn(profile.getId(), GRAPH_VIEW_TUTORIAL, new ServerHelper.ResponseFunc<Boolean>() {
             @Override
             public void onResponse(Boolean response) {
-                mShowcaseView = new ShowcaseView.Builder(GraphView.this)
-                        .setStyle(R.style.CustomShowcaseTheme2)
-                        .setContentTitle(getString(R.string.tutorial_graph_view_title))
-                        .setContentText(getString(R.string.tutorial_graph_view))
-                        .build();
-                mShowcaseView.setButtonText(getString(R.string.tutorial_close));
+                if(response) {
+                    mShowcaseView = new ShowcaseView.Builder(GraphView.this)
+                            .setStyle(R.style.CustomShowcaseTheme2)
+                            .setContentTitle(getString(R.string.tutorial_graph_view_title))
+                            .setContentText(getString(R.string.tutorial_graph_view))
+                            .build();
+                    mShowcaseView.setButtonText(getString(R.string.tutorial_close));
+                }
             }
         }, new Response.ErrorListener() {
             @Override

@@ -237,7 +237,7 @@ public class Logging {
             ServerHelper.getInstance().updateMoneyAndExperience(0, newXp, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError volleyError) {
-                    if(volleyError != null) {
+                    if(volleyError != null && volleyError.getMessage() != null) {
                         Log.d("logAchievedScore error", volleyError.getMessage());
                     }
                 }
